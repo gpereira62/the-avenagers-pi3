@@ -231,9 +231,10 @@
                     <td>TODO</td>
                     <td>
                       <!-- Editar -->
-                      <form class="d-inline" action="<c:url value="/produto/update"/>" method="post">
+                      <c:url value="/produto/update" var="updateUrl" />
+                      <form class="d-inline" action="${updateUrl}" method="post">
                         <input type="hidden" name="prodId" value="${produto.idProduto}">
-                        <a onclick="form.submit();" value="Update" href="" class="mr-2">
+                        <button type="submit" class="btn btn-link p-0 border-0 mr-2" value="Update">
                           <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>Editar</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -242,13 +243,14 @@
                               <rect fill="#000000" opacity="0.3" x="5" y="20" width="15" height="2" rx="1"></rect>
                             </g>
                           </svg>
-                        </a>
+                        </button>
                       </form>
                       
                       <!-- Excluir -->
-                      <form class="d-inline" action="<c:url value="/produto/delete"/>" method="post">
+                      <c:url value="/produto/delete" var="deleteUrl" />
+                      <form class="d-inline" action="${deleteUrl}" method="post">
                         <input type="hidden" name="prodId" value="${produto.idProduto}">
-                        <a onclick="form.submit();" value="Delete" href="" class="">
+                        <button type="submit" class="btn btn-link p-0 border-0" value="Delete">
                           <svg class="icon bg-primary-2" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>Excluir</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -257,7 +259,7 @@
                               <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"></path>
                             </g>
                           </svg>
-                        </a>
+                        </button>
                       </form>
                     </td>
                   </tr>
