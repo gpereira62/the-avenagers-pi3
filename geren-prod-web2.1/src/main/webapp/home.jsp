@@ -5,7 +5,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Leap Bootstrap Theme and HTML Template</title>
+    <title>TADES Ltda.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A corporate Bootstrap theme by Medium Rare">
     <link href="https://brubsduarte.github.io/assets/css/loaders/loader-typing.css" rel="stylesheet" type="text/css" media="all" />
@@ -339,6 +339,17 @@
     <script type="text/javascript">
       window.addEventListener("load", function () {
         document.querySelector('body').classList.add('loaded');
+      });
+    </script>
+
+    <script>
+      $(document).ready(function () {
+          $("#carro-cadastro-search").on("keyup", function () {
+              var value = $(this).val().toLowerCase();
+              $("#tb-produto tr").filter(function () {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+              });
+          });
       });
     </script>
   </body>
