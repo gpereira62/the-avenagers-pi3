@@ -68,9 +68,9 @@
 
     <script>
       $(document).ready(function () {
-          $("#carro-cadastro-search").on("keyup", function () {
+          $("#pesquisa-input").on("keyup", function () {
               var value = $(this).val().toLowerCase();
-              $("#tb-produto tr").filter(function () {
+              $("#tb-lista tr").filter(function () {
                   $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
               });
           });

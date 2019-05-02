@@ -45,27 +45,27 @@
           </c:if>
           <div class="form-group">
             <label for="nomeProduto">Nome:</label>
-            <input type="text" class="form-control" id="nomeProduto" name="nomeProduto" value="${produto.nomeProduto}" required="true" placeholder="Nome do produto">
+            <input type="text" class="form-control" id="nomeProduto" name="nomeProduto" value="${produto.nomeProduto}" required="true" placeholder="Ex: HB20">
           </div>
           <div class="form-group">
             <label for="ano">Ano:</label>
-            <input type="text" class="form-control" id="ano" name="ano" value="${produto.ano}" required="true" placeholder="Ano do veículo">
+            <input type="text" class="form-control" id="ano" name="ano" value="${produto.ano}" required="true" placeholder="Ex: 2019">
           </div>
           <div class="form-group">
             <label for="modelo">Modelo:</label>
-            <input type="text" class="form-control" id="modelo" name="modelo" value="${produto.modelo}" required="true" placeholder="Modelo do veículo">
+            <input type="text" class="form-control" id="modelo" name="modelo" value="${produto.modelo}" required="true" placeholder="Ex: 2018">
           </div>
           <div class="form-group">
             <label for="marca">Marca:</label>
-            <input type="text" class="form-control" id="marca" name="marca" value="${produto.marca}" required="true" placeholder="Marca do veículo">
+            <input type="text" class="form-control" id="marca" name="marca" value="${produto.marca}" required="true" placeholder="Ex: Hyundai">
           </div>
           <div class="form-group">
             <label for="placa">Placa:</label>
-            <input type="text" class="form-control" name="placa" id="placa" value="${produto.placa}" aria-describedby="input-group-example" required="true" placeholder="Placa do veículo">
+            <input type="text" class="form-control" name="placa" id="placa" value="${produto.placa}" aria-describedby="input-group-example" required="true" placeholder="Ex: GAT0556">
           </div>
           <div class="form-group">
             <label for="precoDiaria">Valor da diária:</label>
-            <input type="text" class="form-control" name="precoDiaria" id="precoDiaria" value="${produto.precoDiaria}" aria-describedby="input-group-example" required="true" placeholder="Valor da diária do veículo">
+            <input type="text" class="form-control" name="precoDiaria" id="precoDiaria" value="${produto.precoDiaria}" aria-describedby="input-group-example" required="true" placeholder="Ex: 70.00">
           </div>
           <c:if test="${produto.idProduto ne null}">
             <div class="form-group mt-5">
@@ -106,7 +106,7 @@
                 </svg>
               </span>
             </div>
-            <input type="search" class="form-control form-control-lg" placeholder="Digite a sua pesquisa" id="carro-cadastro-search" >
+            <input type="search" class="form-control form-control-lg" placeholder="Digite a sua pesquisa" id="pesquisa-input" >
           </div>
 
       </div>
@@ -128,7 +128,7 @@
               <th scope="col"></th>
             </tr>
           </thead>
-          <tbody id="tb-produto">
+          <tbody id="tb-lista">
             <c:forEach items="${produtos}" var="produto">
               <tr>
                 <th scope="row">${produto.idProduto}</th>
