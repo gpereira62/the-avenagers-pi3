@@ -33,7 +33,7 @@
                   <a class="nav-link btn active btn-primary-2">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'produto'}">
-                  <a class="nav-link btn btn-light text-light" href="#">
+                  <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/produto">
                 </c:if>
                   <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>Produto</title>
@@ -50,7 +50,7 @@
                   <a class="nav-link btn active btn-primary-2">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'cliente'}">
-                  <a class="nav-link btn btn-light text-light" href="#">
+                  <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/cliente">
                 </c:if>
                   <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>Cliente</title>
@@ -67,7 +67,7 @@
                   <a class="nav-link btn active btn-primary-2">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'aluguel'}">
-                  <a class="nav-link btn btn-light text-light" href="#">
+                  <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/aluguel">
                 </c:if>
                   <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>Aluguel</title>
@@ -84,7 +84,7 @@
                   <a class="nav-link btn active btn-primary-2">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'relatorio'}">
-                  <a class="nav-link btn btn-light text-light" href="#">
+                  <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/relatorio">
                 </c:if>
                   <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>Relatório</title>
@@ -101,7 +101,7 @@
                   <a class="nav-link btn active btn-primary-2">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'ti'}">
-                  <a class="nav-link btn btn-light text-light" href="#">
+                  <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/ti">
                 </c:if>
                   <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>TI</title>
@@ -118,7 +118,7 @@
                   <a class="nav-link btn active btn-primary-2">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'administracao'}">
-                  <a class="nav-link btn btn-light text-light" href="#">
+                  <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/administracao">
                 </c:if>
                   <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>Administração</title>
