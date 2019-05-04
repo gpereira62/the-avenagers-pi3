@@ -59,6 +59,8 @@
     <script type="text/javascript" src="https://brubsduarte.github.io/assets/js/typed.min.js"></script>
     <!-- Required theme scripts (Do not remove) -->
     <script type="text/javascript" src="https://brubsduarte.github.io/assets/js/theme.js"></script>
+    <!-- Date picker -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <!-- Removes page load animation when window is finished loading -->
     <script type="text/javascript">
       window.addEventListener("load", function () {
@@ -74,6 +76,29 @@
                   $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
               });
           });
+      });
+      
+      $(document).ready(function () {
+          $("#pesquisa-input-2").on("keyup", function () {
+              var value = $(this).val().toLowerCase();
+              $("#tb-lista-2 tr").filter(function () {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+              });
+          });
+      });
+    </script>
+    
+    <script>
+      $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        var options={
+          format: 'dd/mm/yyyy',
+          container: container,
+          todayHighlight: true,
+          autoclose: true
+        };
+        date_input.datepicker(options);
       });
     </script>
   </body>

@@ -12,6 +12,7 @@
     <link href="https://brubsduarte.github.io/assets/css/theme-course.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="preload" as="font" href="https://brubsduarte.github.io/assets/fonts/Inter-UI-upright.var.woff2" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" as="font" href="https://brubsduarte.github.io/assets/fonts/Inter-UI.var.woff2" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
   </head>
 
   <body>
