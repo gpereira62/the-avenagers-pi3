@@ -62,6 +62,30 @@
     <!-- Date picker -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <!-- Removes page load animation when window is finished loading -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    
+    <script type="text/javascript">
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var chart = new Chart(ctx, {
+          // The type of chart we want to create
+          type: 'line',
+
+          // The data for our dataset
+          data: {
+              labels: ['01/02', '02/02', '03/02', '04/02', '05/02', '06/02', '07/02'],
+              datasets: [{
+                  label: 'Valor total de aluguel por dia (em R$)',
+                  backgroundColor: 'rgb(0, 0, 0, 0)',
+                  borderColor: '#379d6a',
+                  data: [0, 10, 5, 2, 50, 30, 10]
+              }]
+          },
+
+          // Configuration options go here
+          options: {}
+      });
+    </script>
+    
     <script type="text/javascript">
       window.addEventListener("load", function () {
         document.querySelector('body').classList.add('loaded');
