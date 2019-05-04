@@ -9,20 +9,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A corporate Bootstrap theme by Medium Rare">
     <link href="https://brubsduarte.github.io/assets/css/loaders/loader-typing.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="https://brubsduarte.github.io/assets/css/theme-event.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://brubsduarte.github.io/assets/css/theme-course.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="preload" as="font" href="https://brubsduarte.github.io/assets/fonts/Inter-UI-upright.var.woff2" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" as="font" href="https://brubsduarte.github.io/assets/fonts/Inter-UI.var.woff2" type="font/woff2" crossorigin="anonymous">
   </head>
 
   <body>
 
-    <section class="bg-primary-3 text-light pt-4 pb-0">
+    <section class="bg-primary-2 text-light pt-4 pb-0">
       <div class="container pb-3">
 
-        <div class="row justify-content-center text-center">
-          <div class="col">
-            <h3>TADES Ltda.</h3>
+        <div class="row mb-3">
+          <div class="col-4">
           </div>
+          <div class="col-4 text-center">
+            <img src="https://brubsduarte.github.io/assets/img/logo.png" style="height: 150px; width: auto;" class="mb-">
+          </div>
+          <div class="col-4">
+            <ul class="nav justify-content-end text-light">
+              <li class="nav-item mx-1">
+                <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/sair">Sair</a>
+              </li> 
+            </ul>
+          </div>
+        </div>
+        
+        <div class="row justify-content-center text-center">
+          
         </div>
 
         <div class="row justify-content-center">
@@ -30,7 +43,7 @@
             <ul class="nav justify-content-center text-light">
               <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'produto'}">
-                  <a class="nav-link btn active btn-primary-2">
+                  <a class="nav-link btn active btn-primary">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'produto'}">
                   <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/produto">
@@ -47,7 +60,7 @@
               </li>
               <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'cliente'}">
-                  <a class="nav-link btn active btn-primary-2">
+                  <a class="nav-link btn active btn-primary">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'cliente'}">
                   <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/cliente">
@@ -64,7 +77,7 @@
               </li>
               <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'aluguel'}">
-                  <a class="nav-link btn active btn-primary-2">
+                  <a class="nav-link btn active btn-primary">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'aluguel'}">
                   <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/aluguel">
@@ -80,8 +93,25 @@
                   Aluguel</a>
               </li>
               <li class="nav-item mx-1">
+                <c:if test="${param.paginaAtual == 'devolucao'}">
+                  <a class="nav-link btn active btn-primary">
+                </c:if>
+                <c:if test="${param.paginaAtual != 'devolucao'}">
+                  <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/devolucao">
+                </c:if>
+                  <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>Aluguel</title>
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <rect opacity="0" x="0" y="0" width="24" height="24"></rect>
+                      <path d="M18.1446364,11.84388 L17.4471627,16.0287218 C17.4463569,16.0335568 17.4455155,16.0383857 17.4446387,16.0432083 C17.345843,16.5865846 16.8252597,16.9469884 16.2818833,16.8481927 L4.91303792,14.7811299 C4.53842737,14.7130189 4.23500006,14.4380834 4.13039941,14.0719812 L2.30560137,7.68518803 C2.28007524,7.59584656 2.26712532,7.50338343 2.26712532,7.4104669 C2.26712532,6.85818215 2.71484057,6.4104669 3.26712532,6.4104669 L16.9929851,6.4104669 L17.606173,3.78251876 C17.7307772,3.24850086 18.2068633,2.87071314 18.7552257,2.87071314 L20.8200821,2.87071314 C21.4717328,2.87071314 22,3.39898039 22,4.05063106 C22,4.70228173 21.4717328,5.23054898 20.8200821,5.23054898 L19.6915238,5.23054898 L18.1446364,11.84388 Z" fill="#000000" opacity="0.3"></path>
+                      <path d="M6.5,21 C5.67157288,21 5,20.3284271 5,19.5 C5,18.6715729 5.67157288,18 6.5,18 C7.32842712,18 8,18.6715729 8,19.5 C8,20.3284271 7.32842712,21 6.5,21 Z M15.5,21 C14.6715729,21 14,20.3284271 14,19.5 C14,18.6715729 14.6715729,18 15.5,18 C16.3284271,18 17,18.6715729 17,19.5 C17,20.3284271 16.3284271,21 15.5,21 Z" fill="#000000"></path>
+                    </g>
+                  </svg>
+                  Devolução</a>
+              </li>
+              <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'relatorio'}">
-                  <a class="nav-link btn active btn-primary-2">
+                  <a class="nav-link btn active btn-primary">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'relatorio'}">
                   <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/relatorio">
@@ -98,7 +128,7 @@
               </li>
               <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'ti'}">
-                  <a class="nav-link btn active btn-primary-2">
+                  <a class="nav-link btn active btn-primary">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'ti'}">
                   <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/ti">
