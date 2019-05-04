@@ -146,7 +146,7 @@
               </li>
               <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'administracao'}">
-                  <a class="nav-link btn active btn-primary-2">
+                  <a class="nav-link btn active btn-primary">
                 </c:if>
                 <c:if test="${param.paginaAtual != 'administracao'}">
                   <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/administracao">
