@@ -28,7 +28,7 @@ public class ClienteServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    ArrayList<ClienteServlet> cliente = clienteDAO.listar(1);
+    ArrayList<Cliente> cliente = clienteDAO.listar(1);
     
     request.setAttribute("cliente", cliente);
     request.getRequestDispatcher("/cliente.jsp").forward(request, response);
