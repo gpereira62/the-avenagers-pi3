@@ -39,6 +39,8 @@ public class UsuarioDAO implements CrudInterface<Usuario> {
         usuario.setAtivo(rs.getBoolean("Ativo"));
         usuario.setIdDepartamento(rs.getInt("idDepartamento"));
         usuario.setIdFilial(rs.getInt("idFilial"));
+        usuario.setNomeDepartamento(rs.getString("NomeDepartamento"));
+        usuario.setNomeFilial(rs.getString("NomeFilial"));
       }
       db.close();
       
