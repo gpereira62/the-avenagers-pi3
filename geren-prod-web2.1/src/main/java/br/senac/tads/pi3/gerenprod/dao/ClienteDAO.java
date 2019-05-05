@@ -57,8 +57,8 @@ public class ClienteDAO implements CrudInterface<Cliente> {
             ResultSet rs = db.executarConsulta(sql);
             Cliente c = new Cliente();
             while (rs.next()) {
-                c.setIdCliente(rs.getInt("IdCliente"));
-                c.setNomeCliente(rs.getString("nomeCliente"));
+                c.setIdCliente(rs.getInt("idCliente"));
+                c.setNomeCliente(rs.getString("Nome"));
                 c.setCpf(rs.getString("CPF"));
                 c.setEmail(rs.getString("Email"));
                 c.setCnh(rs.getString("CNH"));
