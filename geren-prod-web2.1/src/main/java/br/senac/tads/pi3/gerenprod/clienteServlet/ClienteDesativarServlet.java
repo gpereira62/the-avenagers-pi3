@@ -2,6 +2,7 @@ package br.senac.tads.pi3.gerenprod.clienteServlet;
 
 import br.senac.tads.pi3.gerenprod.dao.ClienteDAO;
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
+import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -22,6 +23,13 @@ public class ClienteDesativarServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
+    Usuario u = new Usuario(request);
+    
+    if(!u.acessaProduto()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
     String id = request.getParameter("idCliente");
     
     if (id != null) {
@@ -33,16 +41,16 @@ public class ClienteDesativarServlet extends HttpServlet {
       if (sucesso) {
         request.setAttribute("mensagem", "Cliente desativado com sucesso!");
       } else {
-        request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel desativar o Cliente. Por favor, tente novamente!");
+        request.setAttribute("mensagem", "Não foi possível desativar o Cliente. Por favor, tente novamente!");
       }
     } else {
       request.setAttribute("sucesso", false);
-      request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel desativar o Cliente. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possível desativar o Cliente. Por favor, tente novamente!");
     }
     
-    ArrayList<ClienteServlet> cliente = clienteDAO.listar(1);
+    ArrayList<ClienteServlet> clientes = clienteDAO.listar(1);
     
-    request.setAttribute("cliente", cliente);
+    request.setAttribute("clientes", clientes);
     request.getRequestDispatcher("/cliente.jsp").forward(request, response);
   }
 }

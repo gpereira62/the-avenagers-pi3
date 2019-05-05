@@ -64,11 +64,12 @@ public class ClienteServlet extends HttpServlet {
     if (sucesso) {
       request.setAttribute("mensagem", "Cliente cadastrado com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel cadastrar o Cliente. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possível cadastrar o Cliente. Por favor, tente novamente!");
     }
     
-    ArrayList<ClienteServlet> cliente = clienteDAO.listar(1);
-    request.setAttribute("cliente", cliente);
+    ArrayList<Cliente> clientes = clienteDAO.listar(1);
+    
+    request.setAttribute("clientes", clientes);
     request.getRequestDispatcher("/cliente.jsp").forward(request, response);
   }
 }

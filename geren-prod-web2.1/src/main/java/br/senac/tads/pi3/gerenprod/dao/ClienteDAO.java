@@ -99,6 +99,8 @@ public class ClienteDAO implements CrudInterface<Cliente> {
                     + "Estado = '" + c.getEstado() + "' "
                     + "Where idCliente = " + c.getIdCliente() + "; ";
 
+            System.out.println(sql);
+            
             if (!db.executarAlteracao(sql)) {
                 throw new Exception("Não foi possível atualizar o produto.");
             }
@@ -129,6 +131,7 @@ public class ClienteDAO implements CrudInterface<Cliente> {
                     + "'" + c.getCpf() + "', "
                     + "'" + c.getEmail() + "', "
                     + "'" + c.getCnh() + "', "
+                    + "'" + c.getTelefone()+ "', "
                     + "'" + c.getCep() + "', "
                     + "'" + c.getRua() + "', "
                     + "'" + c.getBairro() + "', "
