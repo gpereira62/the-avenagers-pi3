@@ -51,21 +51,30 @@
                   <th scope="col">CNH</th>
                   <th scope="col">Telefone</th>
                   <th scope="col">CEP</th>
+                  <th scope="col">Rua</th>
+                  <th scope="col">Bairro</th>
+                  <th scope="col">Cidade</th>
+                  <th scope="col">Estado</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
               <tbody id="tb-lista">
                 <c:forEach items="${clientes}" var="cliente">
                   <tr>
+                    <tr>
                     <th scope="row">${cliente.idCliente}</th>
-                    <td>${produto.nomeCliente}</td>
-                    <td>${produto.cpf}</td>
-                    <td>${produto.email}</td>
-                    <td>${produto.cnh}</td>
-                    <td>${produto.telefone}</td>
-                    <td>${produto.cep}</td>
+                    <td>${cliente.nomeCliente}</td>
+                    <td>${cliente.cpf}</td>
+                    <td>${cliente.email}</td>
+                    <td>${cliente.cnh}</td>
+                    <td>${cliente.telefone}</td>
+                    <td>${cliente.cep}</td>
+                    <td>${cliente.rua}</td>
+                    <td>${cliente.bairro}</td>
+                    <td>${cliente.cidade}</td>
+                    <td>${cliente.estado}</td>
                     <td>
-                      <a href="${pageContext.request.contextPath}/aluguel/selecionar?idCliente=${produto.idCliente}" class="m-1 btn-sm btn-primary">selecionar</a>
+                      <a href="${pageContext.request.contextPath}/aluguel/selecionar?idCliente=${cliente.idCliente}" class="m-1 btn-sm btn-primary">selecionar</a>
                     </td>
                   </tr>
                 </c:forEach>
@@ -125,7 +134,7 @@
                     <td>${produto.placa}</td>
                     <td>${produto.precoDiaria}</td>
                     <td>
-                      <a href="${pageContext.request.contextPath}/aluguel/selecionar?idCliente=${produto.idCliente}" class="m-1 btn-sm btn-primary">selecionar</a>
+                      <a href="${pageContext.request.contextPath}/aluguel/selecionar?idProduto=${produto.idProduto}" class="m-1 btn-sm btn-primary">selecionar</a>
                     </td>
                   </tr>
                 </c:forEach>
