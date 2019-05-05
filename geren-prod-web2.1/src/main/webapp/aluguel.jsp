@@ -51,21 +51,30 @@
                   <th scope="col">CNH</th>
                   <th scope="col">Telefone</th>
                   <th scope="col">CEP</th>
+                  <th scope="col">Rua</th>
+                  <th scope="col">Bairro</th>
+                  <th scope="col">Cidade</th>
+                  <th scope="col">Estado</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
               <tbody id="tb-lista">
                 <c:forEach items="${clientes}" var="cliente">
                   <tr>
+                    <tr>
                     <th scope="row">${cliente.idCliente}</th>
-                    <td>${produto.nomeCliente}</td>
-                    <td>${produto.cpf}</td>
-                    <td>${produto.email}</td>
-                    <td>${produto.cnh}</td>
-                    <td>${produto.telefone}</td>
-                    <td>${produto.cep}</td>
+                    <td>${cliente.nomeCliente}</td>
+                    <td>${cliente.cpf}</td>
+                    <td>${cliente.email}</td>
+                    <td>${cliente.cnh}</td>
+                    <td>${cliente.telefone}</td>
+                    <td>${cliente.cep}</td>
+                    <td>${cliente.rua}</td>
+                    <td>${cliente.bairro}</td>
+                    <td>${cliente.cidade}</td>
+                    <td>${cliente.estado}</td>
                     <td>
-                      <a href="${pageContext.request.contextPath}/aluguel/selecionar?idCliente=${produto.idCliente}" class="m-1 btn-sm btn-primary">selecionar</a>
+                      <a href="${pageContext.request.contextPath}/aluguel/selecionar?idCliente=${cliente.idCliente}&idProduto=${produtoSelecionado.idProduto}" class="m-1 btn-sm btn-primary">selecionar</a>
                     </td>
                   </tr>
                 </c:forEach>
@@ -125,7 +134,7 @@
                     <td>${produto.placa}</td>
                     <td>${produto.precoDiaria}</td>
                     <td>
-                      <a href="${pageContext.request.contextPath}/aluguel/selecionar?idCliente=${produto.idCliente}" class="m-1 btn-sm btn-primary">selecionar</a>
+                      <a href="${pageContext.request.contextPath}/aluguel/selecionar?idProduto=${produto.idProduto}&idCliente=${clienteSelecionado.idCliente}" class="m-1 btn-sm btn-primary">selecionar</a>
                     </td>
                   </tr>
                 </c:forEach>
@@ -148,40 +157,39 @@
     <div class="row justify-content-center bootstrap-iso">
       <div class="col-xl-8 col-lg-9">
         <h1 class="text-center">Resumo do aluguel</h1>
-        <c:url value="/aluguel" var="aluguelUrl" />
+        <c:url value="/aluguel/selecionar" var="aluguelUrl" />
         <form action="${aluguelUrl}" method="post">
           
           <div class="row">
             <div class="form-group col-6"> <!-- Date input -->
               <label class="control-label" for="date">Data de retirada</label>
               <input class="form-control" id="date" name="date" placeholder="dd/mm/yyyy" type="text"/>
+              <input name="idProdutoSelecionado" value="${produtoSelecionado.idProduto}" type="hidden">
+              <input name="idClienteSelecionado" value="${clienteSelecionado.idCliente}" type="hidden">
             </div>
           </div>
-          
           <div class="card">
             <div class="card-body p-3">
               <ul class="list-unstyled">
                 <dl class="row">
                   <dt class="col-sm-3"><b>Nome:</b></dt>
-                  <dd class="col-sm-9">Paola Bracho</dd>
+                  <dd class="col-sm-9">${clienteSelecionado.nomeCliente}</dd>
                   <dt class="col-sm-3"><b>CPF:</b></dt>
-                  <dd class="col-sm-9">000.000.000-00</dd>
+                  <dd class="col-sm-9">${clienteSelecionado.cpf}</dd>
                   <dt class="col-sm-3"><b>Carro:</b></dt>
-                  <dd class="col-sm-9">HB20 Confort Plus</dd>
+                  <dd class="col-sm-9">${produtoSelecionado.nomeProduto}</dd>
                   <dt class="col-sm-3"><b>Placa:</b></dt>
-                  <dd class="col-sm-9">AAA 0000</dd>
+                  <dd class="col-sm-9">${produtoSelecionado.placa}</dd>
                   <dt class="col-sm-3"><b>Valor da diária:</b></dt>
-                  <dd class="col-sm-9">R$ 70,00</dd>
+                  <dd class="col-sm-9">${produtoSelecionado.precoDiaria}</dd>
                 <dl />
               </ul>
-              
               <div class="mt-3 text-right">
                 <button class="btn btn-primary-2 mr-2" value="Save" type="submit">Cancelar</button>
                 <button class="btn btn-primary" value="Save" type="submit">Alugar</button>
               </div>
             </div>
           </div>
-          
         </form>
       </div>
     </div>
