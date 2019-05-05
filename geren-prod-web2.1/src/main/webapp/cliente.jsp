@@ -32,7 +32,7 @@
         <c:if test="${cliente.idCliente == null}">
           <c:url value="/cliente" var="registerUrl" />
         </c:if>
-        <c:if test="${cliente.idProduto != null}">
+        <c:if test="${cliente.idCliente != null}">
           <c:url value="/cliente/editar" var="registerUrl" />
         </c:if>
         
@@ -40,51 +40,51 @@
           <c:if test="${cliente.idCliente ne null}">
             <div class="form-group">
               <label for="idCliente">ID:</label>
-              <input type="text" class="form-control" id="idCliente" name="idCliente" value="${produto.idCliente}" placeholder="0000" readonly>
+              <input type="text" class="form-control" id="idCliente" name="idCliente" value="${cliente.idCliente}" placeholder="0000" readonly>
             </div>
           </c:if>
           <div class="form-group">
             <label for="nomeCliente">Nome:</label>
-            <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" value="${produto.nomeCliente}" required="true" placeholder="Ex: Paola Bracho">
+            <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" value="${cliente.nomeCliente}" required="true" placeholder="Ex: Paola Bracho">
           </div>
           <div class="form-group">
             <label for="cpf">CPF:</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" value="${produto.cpf}" required="true" placeholder="Ex: 419.759.388.xx">
+            <input type="text" class="form-control" id="cpf" name="cpf" value="${cliente.cpf}" required="true" placeholder="Ex: 419.759.388.xx">
           </div>
           <div class="form-group">
             <label for="email">E-mail:</label>
-            <input type="text" class="form-control" id="email" name="email" value="${produto.email}" required="email" placeholder="Ex: paola.bracho@gmail.com">
+            <input type="text" class="form-control" id="email" name="email" value="${cliente.email}" required="email" placeholder="Ex: paola.bracho@gmail.com">
           </div>
           <div class="form-group">
             <label for="cnh">CNH:</label>
-            <input type="text" class="form-control" id="cnh" name="cnh" value="${produto.cnh}" required="true" placeholder="Ex: 00123456789">
+            <input type="text" class="form-control" id="cnh" name="cnh" value="${cliente.cnh}" required="true" placeholder="Ex: 00123456789">
           </div>
           <div class="form-group">
             <label for="telefone">Telefone:</label>
-            <input type="text" class="form-control" name="telefone" id="telefone" value="${produto.telefone}" aria-describedby="input-group-example" required="true" placeholder="Ex: 9 6000-9005">
+            <input type="text" class="form-control" name="telefone" id="telefone" value="${cliente.telefone}" aria-describedby="input-group-example" required="true" placeholder="Ex: 9 6000-9005">
           </div>
           <div class="form-group">
             <label for="cep">Cep:</label>
-            <input type="text" class="form-control" name="cep" id="cep" value="${produto.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 04409-00">
+            <input type="text" class="form-control" name="cep" id="cep" value="${cliente.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 04409-00">
           </div>
           <div class="form-group">
             <label for="rua">Rua:</label>
-            <input type="text" class="form-control" name="rua" id="rua" value="${produto.rua}" aria-describedby="input-group-example" required="true" placeholder="Ex: Rua mario santana, 50">
+            <input type="text" class="form-control" name="rua" id="rua" value="${cliente.rua}" aria-describedby="input-group-example" required="true" placeholder="Ex: Rua mario santana, 50">
           </div>
           <div class="form-group">
             <label for="bairro">Bairro:</label>
-            <input type="text" class="form-control" name="bairro" id="bairro" value="${produto.bairro}" aria-describedby="input-group-example" required="true" placeholder="Ex: Santo Amaro">
+            <input type="text" class="form-control" name="bairro" id="bairro" value="${cliente.bairro}" aria-describedby="input-group-example" required="true" placeholder="Ex: Santo Amaro">
           </div>
           <div class="form-group">
             <label for="cidade">Cidade:</label>
-            <input type="text" class="form-control" name="cidade" id="cidade" value="${produto.cidade}" aria-describedby="input-group-example" required="true" placeholder="Ex: São Paulo">
+            <input type="text" class="form-control" name="cidade" id="cidade" value="${cliente.cidade}" aria-describedby="input-group-example" required="true" placeholder="Ex: São Paulo">
           </div>
           <div class="form-group">
             <label for="estado">Estado:</label>
-            <input type="text" class="form-control" name="estado" id="estado" value="${produto.estado}" aria-describedby="input-group-example" required="true" placeholder="Ex: SP">
+            <input type="text" class="form-control" name="estado" id="estado" value="${cliente.estado}" aria-describedby="input-group-example" required="true" placeholder="Ex: SP">
           </div>
           
-          <c:if test="${produto.idCliente ne null}">
+          <c:if test="${cliente.idCliente ne null}">
             <div class="form-group mt-5">
               <button class="btn-block btn btn-primary-2" value="Update" type="submit">Editar</button>
             </div>
@@ -132,7 +132,7 @@
     <!-- Tabela de produtos -->
     <div class="row justify-content-center">
       <div class="col">
-        <table class="table table-hover" id="table-cadastro-produto">
+        <table class="table table-hover" id="table-cadastro-cliente">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -149,14 +149,14 @@
             <c:forEach items="${clientes}" var="cliente">
               <tr>
                 <th scope="row">${cliente.idCliente}</th>
-                <td>${produto.nomeCliente}</td>
-                <td>${produto.cpf}</td>
-                <td>${produto.email}</td>
-                <td>${produto.cnh}</td>
-                <td>${produto.telefone}</td>
-                <td>${produto.cep}</td>
+                <td>${cliente.nomeCliente}</td>
+                <td>${cliente.cpf}</td>
+                <td>${cliente.email}</td>
+                <td>${cliente.cnh}</td>
+                <td>${cliente.telefone}</td>
+                <td>${cliente.cep}</td>
                 <td>
-                  <a href="${pageContext.request.contextPath}/cliente/editar?idCliente=${produto.idCliente}" class="mr-2">
+                  <a href="${pageContext.request.contextPath}/cliente/editar?idCliente=${cliente.idCliente}" class="mr-2">
                     <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>Icon For Edit</title>
                       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -166,7 +166,7 @@
                       </g>
                     </svg>
                   </a>
-                  <a href="${pageContext.request.contextPath}/cliente/desativar?idCliente=${produto.idCliente}" onclick="return confirm('Tem certeza que deseja desativar este produto?');" class="">
+                  <a href="${pageContext.request.contextPath}/cliente/desativar?idCliente=${cliente.idCliente}" onclick="return confirm('Tem certeza que deseja desativar este cliente?');" class="">
                     <svg class="icon bg-primary-2" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>Icon For Trash</title>
                       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
