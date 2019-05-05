@@ -87,7 +87,7 @@ public class ClienteDAO implements CrudInterface<Cliente> {
 
             String sql
                     = "UPDATE cliente SET "
-                    + "nomeCliente = '" + c.getNomeCliente() + "', "
+                    + "Nome = '" + c.getNomeCliente() + "', "
                     + "CPF = '" + c.getCpf() + "', "
                     + "Email = '" + c.getEmail() + "', "
                     + "CNH = '" + c.getCnh() + "', "
@@ -97,10 +97,10 @@ public class ClienteDAO implements CrudInterface<Cliente> {
                     + "Bairro = '" + c.getBairro() + "', "
                     + "Cidade = '" + c.getCidade() + "', "
                     + "Estado = '" + c.getEstado() + "' "
-                    + "Where idProduto = " + c.getIdCliente() + "; ";
+                    + "Where idCliente = " + c.getIdCliente() + "; ";
 
             if (!db.executarAlteracao(sql)) {
-                throw new Exception("Nï¿½o foi possï¿½vel atualizar o produto.");
+                throw new Exception("Não foi possível atualizar o produto.");
             }
 
             db.commit();
@@ -123,7 +123,7 @@ public class ClienteDAO implements CrudInterface<Cliente> {
 
             String sql
                     = "INSERT INTO cliente "
-                    + "(nomeCliente, CPF, Email, CNH, Telefone, CEP, Rua, Bairro, Cidade, Estado, Ativo)"
+                    + "(Nome, CPF, Email, CNH, Telefone, CEP, Rua, Bairro, Cidade, Estado, Ativo)"
                     + "VALUES ("
                     + "'" + c.getNomeCliente() + "', "
                     + "'" + c.getCpf() + "', "
@@ -137,7 +137,7 @@ public class ClienteDAO implements CrudInterface<Cliente> {
                     + "true );";
 
             if (!db.executarAlteracao(sql)) {
-                throw new Exception("Nï¿½o foi possï¿½vel cadastrar o produto.");
+                throw new Exception("Não foi possível cadastrar o produto.");
             }
 
             db.commit();
@@ -161,10 +161,10 @@ public class ClienteDAO implements CrudInterface<Cliente> {
             String sql
                     = "UPDATE cliente SET "
                     + "Ativo = false "
-                    + "Where idProduto = " + clienteID + "; ";
+                    + "Where idCliente = " + clienteID + "; ";
 
             if (!db.executarAlteracao(sql)) {
-                throw new Exception("Nï¿½o foi possï¿½vel desativar o produto.");
+                throw new Exception("Não foi possível desativar o produto.");
             }
 
             db.commit();

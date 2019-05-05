@@ -36,9 +36,9 @@ public class ClienteServlet extends HttpServlet {
       return;
     }
 
-    ArrayList<Cliente> cliente = clienteDAO.listar(1);
+    ArrayList<Cliente> clientes = clienteDAO.listar(1);
     
-    request.setAttribute("cliente", cliente);
+    request.setAttribute("clientes", clientes);
     request.getRequestDispatcher("/cliente.jsp").forward(request, response);
   }
 
