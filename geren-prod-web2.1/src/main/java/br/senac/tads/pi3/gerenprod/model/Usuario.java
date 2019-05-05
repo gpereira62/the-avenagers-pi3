@@ -19,18 +19,18 @@ public final class Usuario {
   private static String D = "Diretoria";
   private static String GGR = "Gerencia global retaguarda";
   private static String GRR = "Gerencia regional retaguarda";
-  private static String FM = "Funcion·rio matriz";
-  private static String FRR = "Funcion·rio regional retaguarda";
+  private static String FM = "Funcion√°rio matriz";
+  private static String FRR = "Funcion√°rio regional retaguarda";
   private static String GGV = "Gerencia global vendas";
   private static String GRV = "Gerencia regional vendas";
   private static String VR = "Vendedor regional";
   private static String GGT = "Gerencia global ti";
   private static String GRT = "Gerencia regional ti";
-  private static String EST = "Equipe de suporte tÈcnico";
+  private static String EST = "Equipe de suporte t√©cnico";
   private static String GGA = "Gerencia global adm";
-  private static String FA = "Funcion·rio adm";
+  private static String FA = "Funcion√°rio adm";
   
-    // Acesso ‡s p·ginas
+    // Acesso √†s p√°ginas
   private boolean acessaProduto = false;
   private boolean acessaCliente = false;
   private boolean acessaAluguel = false;

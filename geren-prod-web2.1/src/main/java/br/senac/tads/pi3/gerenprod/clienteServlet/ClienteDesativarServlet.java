@@ -41,11 +41,11 @@ public class ClienteDesativarServlet extends HttpServlet {
       if (sucesso) {
         request.setAttribute("mensagem", "Cliente desativado com sucesso!");
       } else {
-        request.setAttribute("mensagem", "Não foi possível desativar o Cliente. Por favor, tente novamente!");
+        request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel desativar o Cliente. Por favor, tente novamente!");
       }
     } else {
       request.setAttribute("sucesso", false);
-      request.setAttribute("mensagem", "Não foi possível desativar o Cliente. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel desativar o Cliente. Por favor, tente novamente!");
     }
     
     ArrayList<ClienteServlet> clientes = clienteDAO.listar(1);
