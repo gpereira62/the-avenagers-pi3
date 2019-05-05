@@ -5,6 +5,7 @@
  */
 package br.senac.tads.pi3.gerenprod.model;
 
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +14,20 @@ import javax.servlet.http.HttpSession;
  * @author Bruna
  */
 public class Usuario {
+  
+  private static String D = "Diretoria";
+  private static String GGR = "Gerencia global retaguarda";
+  private static String GRR = "Gerencia regional retaguarda";
+  private static String FM = "Funcionário matriz";
+  private static String FRR = "Funcionário regional retaguarda";
+  private static String GGV = "Gerencia global vendas";
+  private static String GRV = "Gerencia regional vendas";
+  private static String VR = "Vendedor regional";
+  private static String GGT = "Gerencia global ti";
+  private static String GRT = "Gerencia regional ti";
+  private static String EST = "Equipe de suporte técnico";
+  private static String GGA = "Gerencia global adm";
+  private static String FA = "Funcionário adm";
   
   private int idUsuario, idDepartamento, idFilial;
   private String nome, email, senha, nomeFilial, nomeDepartamento;
@@ -70,6 +85,46 @@ public class Usuario {
     this.ativo = (boolean) sessao.getAttribute("usuario.ativo");
     this.nomeFilial = (String) sessao.getAttribute("usuario.nomeFilial");
     this.nomeDepartamento = (String) sessao.getAttribute("usuario.nomeDepartamento");
+  }
+  
+  public boolean temAcesso(String pagina) {
+    
+    if (pagina.equals("produto")) {
+      String[] departamentos = {D, GGR, GRR, FM, FRR};
+      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+    }
+    
+    if (pagina.equals("cliente")) {
+      String[] departamentos = {D, GGV, GRV, VR};
+      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+    }
+    
+    if (pagina.equals("aluguel")) {
+      String[] departamentos = {D, GGV, GRV, VR};
+      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+    }
+    
+    if (pagina.equals("devolucao")) {
+      String[] departamentos = {D, GGV, GRV, VR};
+      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+    }
+    
+    if (pagina.equals("relatorio")) {
+      String[] departamentos = {D, GGR, GRR, FM, GGV, GRV, GGT, GRT, GGA, FA};
+      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+    }
+    
+    if (pagina.equals("ti")) {
+      String[] departamentos = {D, GGT, GRT, EST};
+      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+    }
+    
+    if (pagina.equals("administracao")) {
+      String[] departamentos = {D, GGA, FA};
+      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+    }
+    
+    return false;
   }
   
   public int getIdUsuario() {

@@ -5,6 +5,7 @@
  */
 package br.senac.tads.pi3.gerenprod.devolucaoServlet;
 
+import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,15 @@ public class DevolucaoServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    Usuario u = new Usuario();
+    u.getSession(request);
+    boolean acesso = u.temAcesso("cliente");
+    
+    if(!acesso) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
     request.getRequestDispatcher("/devolucao.jsp").forward(request, response);
   }
 }

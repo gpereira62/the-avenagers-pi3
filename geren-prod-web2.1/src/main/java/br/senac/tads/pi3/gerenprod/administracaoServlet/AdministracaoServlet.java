@@ -5,8 +5,8 @@
  */
 package br.senac.tads.pi3.gerenprod.administracaoServlet;
 
+import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +23,15 @@ public class AdministracaoServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    Usuario u = new Usuario();
+    u.getSession(request);
+    boolean acesso = u.temAcesso("administracao");
+    
+    if(!acesso) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
     request.getRequestDispatcher("/administracao.jsp").forward(request, response);
 
   }
