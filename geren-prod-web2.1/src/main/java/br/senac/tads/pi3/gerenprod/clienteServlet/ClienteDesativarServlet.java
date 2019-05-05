@@ -4,6 +4,7 @@ import br.senac.tads.pi3.gerenprod.dao.ClienteDAO;
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
