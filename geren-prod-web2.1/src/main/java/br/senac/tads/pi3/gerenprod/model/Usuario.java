@@ -14,7 +14,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author Bruna
  */
-public class Usuario {
+public final class Usuario {
   
   private static String D = "Diretoria";
   private static String GGR = "Gerencia global retaguarda";
@@ -29,6 +29,15 @@ public class Usuario {
   private static String EST = "Equipe de suporte técnico";
   private static String GGA = "Gerencia global adm";
   private static String FA = "Funcionário adm";
+  
+    // Acesso às páginas
+  private boolean acessaProduto = false;
+  private boolean acessaCliente = false;
+  private boolean acessaAluguel = false;
+  private boolean acessaDevolucao = false;
+  private boolean acessaRelatorio = false;
+  private boolean acessaTi = false;
+  private boolean acessaAdministracao = false;
   
   private int idUsuario, idDepartamento, idFilial;
   private String nome, email, senha, nomeFilial, nomeDepartamento;
@@ -56,8 +65,14 @@ public class Usuario {
     this.ativo = ativo;
     this.nomeFilial = nomeFilial;
     this.nomeDepartamento = nomeDepartamento;
+    
+    validaAcessos();
   }
 
+  public Usuario(HttpServletRequest request) {
+    this.getSession(request);
+  }
+  
   public void setSession(HttpServletRequest request) {
     
     HttpSession sessao = request.getSession();
@@ -77,7 +92,7 @@ public class Usuario {
     
     HttpSession sessao = request.getSession();
     
-    this.idUsuario = (int) sessao.getAttribute("usuario.idUsuario");
+    this.idUsuario = sessao.getAttribute("usuario.idUsuario") == null ? (int) sessao.getAttribute("usuario.idUsuario") : 0;
     this.idDepartamento = (int) sessao.getAttribute("usuario.idDepartamento");
     this.idFilial = (int) sessao.getAttribute("usuario.idFilial");
     this.nome = (String) sessao.getAttribute("usuario.nome");
@@ -86,46 +101,35 @@ public class Usuario {
     this.ativo = (boolean) sessao.getAttribute("usuario.ativo");
     this.nomeFilial = (String) sessao.getAttribute("usuario.nomeFilial");
     this.nomeDepartamento = (String) sessao.getAttribute("usuario.nomeDepartamento");
+    
+    validaAcessos();
+    
+    request.setAttribute("usuarioSessao", this);
   }
   
-  public boolean temAcesso(String pagina) {
-    
-    if (pagina.equals("produto")) {
-      String[] departamentos = {D, GGR, GRR, FM, FRR};
-      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+  private void validaAcessos() {
+  
+    if (Arrays.asList(D, GGR, GRR, FM, FRR).contains(this.nomeDepartamento)) {
+      acessaProduto = true;
     }
     
-    if (pagina.equals("cliente")) {
-      String[] departamentos = {D, GGV, GRV, VR};
-      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+    if (Arrays.asList(D, GGV, GRV, VR).contains(this.nomeDepartamento)) {
+      acessaCliente = true;
+      acessaAluguel = true;
+      acessaDevolucao = true;
     }
     
-    if (pagina.equals("aluguel")) {
-      String[] departamentos = {D, GGV, GRV, VR};
-      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+    if (Arrays.asList(D, GGR, GRR, FM, GGV, GRV, GGT, GRT, GGA, FA).contains(this.nomeDepartamento)) {
+      acessaRelatorio = true;
     }
     
-    if (pagina.equals("devolucao")) {
-      String[] departamentos = {D, GGV, GRV, VR};
-      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+    if (Arrays.asList(D, GGT, GRT, EST).contains(this.nomeDepartamento)) {
+      acessaTi = true;
     }
     
-    if (pagina.equals("relatorio")) {
-      String[] departamentos = {D, GGR, GRR, FM, GGV, GRV, GGT, GRT, GGA, FA};
-      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
+    if (Arrays.asList(D, GGA, FA).contains(this.nomeDepartamento)) {
+      acessaAdministracao = true;
     }
-    
-    if (pagina.equals("ti")) {
-      String[] departamentos = {D, GGT, GRT, EST};
-      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
-    }
-    
-    if (pagina.equals("administracao")) {
-      String[] departamentos = {D, GGA, FA};
-      return Arrays.asList(departamentos).contains(this.getNomeDepartamento());
-    }
-    
-    return false;
   }
   
   public void criptografarSenha() {
@@ -202,5 +206,33 @@ public class Usuario {
 
   public void setNomeDepartamento(String nomeDepartamento) {
     this.nomeDepartamento = nomeDepartamento;
+  }
+  
+  public boolean acessaProduto() {
+    return acessaProduto;
+  }
+
+  public boolean acessaCliente() {
+    return acessaCliente;
+  }
+
+  public boolean acessaAluguel() {
+    return acessaAluguel;
+  }
+
+  public boolean acessaDevolucao() {
+    return acessaDevolucao;
+  }
+
+  public boolean acessaRelatorio() {
+    return acessaRelatorio;
+  }
+
+  public boolean acessaTi() {
+    return acessaTi;
+  }
+
+  public boolean acessaAdministracao() {
+    return acessaAdministracao;
   }
 }

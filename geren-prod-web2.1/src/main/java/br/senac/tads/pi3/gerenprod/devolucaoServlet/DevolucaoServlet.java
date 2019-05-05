@@ -23,11 +23,9 @@ public class DevolucaoServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    Usuario u = new Usuario();
-    u.getSession(request);
-    boolean acesso = u.temAcesso("cliente");
+    Usuario u = new Usuario(request);
     
-    if(!acesso) {
+    if(!u.acessaDevolucao()) {
       response.sendRedirect(request.getContextPath() + "/");
       return;
     }

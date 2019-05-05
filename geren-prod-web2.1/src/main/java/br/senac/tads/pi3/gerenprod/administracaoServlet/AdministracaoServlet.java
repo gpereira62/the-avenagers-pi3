@@ -23,11 +23,9 @@ public class AdministracaoServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    Usuario u = new Usuario();
-    u.getSession(request);
-    boolean acesso = u.temAcesso("administracao");
+    Usuario u = new Usuario(request);
     
-    if(!acesso) {
+    if(!u.acessaAdministracao()) {
       response.sendRedirect(request.getContextPath() + "/");
       return;
     }
