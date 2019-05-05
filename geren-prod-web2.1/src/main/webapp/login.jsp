@@ -25,14 +25,23 @@
           </div>
           <div class="col">
             <div class="row justify-content-center">
-              <div class="col-xl-8 col-md-10">
-                <form class="text-center">
-                  <h1>Login</h1>
+              <div class="col-xl-8 col-md-10 text-center">
+                <h1>Login</h1>
+                <c:if test="${mensagem != null}">
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${mensagem}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                </c:if>
+                <c:url value="/" var="loginUrl" />
+                <form action="${loginUrl}" method="post">
                   <div class="form-group">
-                    <input name="course-email" id="course-email-1" type="email" class="form-control form-control-lg" placeholder="you@yoursite.com">
+                    <input name="email" id="email" type="email" class="form-control form-control-lg" placeholder="you@yoursite.com">
                   </div>
                   <div class="form-group">
-                    <input name="course-name" id="course-name-1" type="password" class="form-control form-control-lg" placeholder="Digite a senha">
+                    <input name="senha" id="senha" type="password" class="form-control form-control-lg" placeholder="Digite a senha">
                   </div>
                   <div class="form-group text-center">
                     <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">Entrar</button>
