@@ -32,11 +32,9 @@ public class AluguelServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
-    Usuario u = new Usuario();
-    u.getSession(request);
-    boolean acesso = u.temAcesso("aluguel");
+    Usuario u = new Usuario(request);
     
-    if(!acesso) {
+    if(!u.acessaAluguel()) {
       response.sendRedirect(request.getContextPath() + "/");
       return;
     }

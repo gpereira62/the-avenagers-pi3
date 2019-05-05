@@ -26,6 +26,17 @@ public class LoginServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    Usuario u = new Usuario(request);
+    
+    System.out.println("");
+    System.out.println(u.getIdUsuario() + " " + u.getNomeDepartamento());
+    System.out.println("");
+    
+    if(u.getIdUsuario() != 0) {
+      response.sendRedirect(request.getContextPath() + "/bemvindo");
+      return;
+    }
+    
     request.getRequestDispatcher("/login.jsp").forward(request, response);
   }
   
@@ -42,7 +53,7 @@ public class LoginServlet extends HttpServlet {
     if (usuario.getIdUsuario() != 0){
       
       usuario.setSession(request);
-      response.sendRedirect(request.getContextPath() + "/produto");
+      response.sendRedirect(request.getContextPath() + "/bemvindo");
       
     } else {
       

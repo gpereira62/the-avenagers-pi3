@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.pi3.gerenprod.tiServlet;
+package br.senac.tads.pi3.gerenprod.loginServlet;
 
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,21 +18,23 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-@WebServlet(name = "TiServlet", urlPatterns = {"/ti"})
-public class TiServlet extends HttpServlet {
+@WebServlet(name = "BemVindoServlet", urlPatterns = {"/bemvindo"})
+public class BemVindoServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    
     Usuario u = new Usuario(request);
     
-    if(!u.acessaTi()) {
+    System.out.println("");
+    System.out.println(u.getIdUsuario() + " " + u.getNomeDepartamento());
+    System.out.println("");
+    
+    if(u.getIdUsuario() == 0) {
       response.sendRedirect(request.getContextPath() + "/");
       return;
     }
     
-    request.getRequestDispatcher("/ti.jsp").forward(request, response);
+    request.getRequestDispatcher("/bemvindo.jsp").forward(request, response);
   }
 }
-
-
