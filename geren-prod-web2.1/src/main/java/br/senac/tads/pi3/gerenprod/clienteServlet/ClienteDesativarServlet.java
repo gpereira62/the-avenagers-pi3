@@ -4,6 +4,7 @@ import br.senac.tads.pi3.gerenprod.dao.ClienteDAO;
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,11 +33,11 @@ public class ClienteDesativarServlet extends HttpServlet {
       if (sucesso) {
         request.setAttribute("mensagem", "Cliente desativado com sucesso!");
       } else {
-        request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel desativar o Cliente. Por favor, tente novamente!");
+        request.setAttribute("mensagem", "Não foi possível desativar o Cliente. Por favor, tente novamente!");
       }
     } else {
       request.setAttribute("sucesso", false);
-      request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel desativar o Cliente. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possível desativar o Cliente. Por favor, tente novamente!");
     }
     
     ArrayList<ClienteServlet> cliente = clienteDAO.listar(1);
