@@ -35,8 +35,8 @@ public class ClienteServlet extends HttpServlet {
       response.sendRedirect(request.getContextPath() + "/");
       return;
     }
-    
-    ArrayList<ClienteServlet> cliente = clienteDAO.listar(1);
+
+    ArrayList<Cliente> cliente = clienteDAO.listar(1);
     
     request.setAttribute("cliente", cliente);
     request.getRequestDispatcher("/cliente.jsp").forward(request, response);

@@ -14,7 +14,7 @@
     <!-- Formuário de cadastro -->
     <div class="row justify-content-center">
       <div class="col-xl-8 col-lg-9">
-        <h1 class="text-center">Cadastro de cliente</h1>
+        <h1 class="text-center">Cadastro de produto</h1>
         
         <c:if test="${sucesso != null}">
           <c:if test="${sucesso == true}">
@@ -30,67 +30,50 @@
             </div>
         </c:if>
         
-        <c:if test="${cliente.idCliente == null}">
-          <c:url value="/cliente" var="registerUrl" />
+        <c:if test="${produto.idProduto == null}">
+          <c:url value="/produto" var="registerUrl" />
         </c:if>
-        <c:if test="${cliente.idCliente != null}">
-          <c:url value="/cliente/editar" var="registerUrl" />
+        <c:if test="${produto.idProduto != null}">
+          <c:url value="/produto/editar" var="registerUrl" />
         </c:if>
         
         <form action="${registerUrl}" method="post">
-          <c:if test="${cliente.idCliente ne null}">
+          <c:if test="${produto.idProduto ne null}">
             <div class="form-group">
-              <label for="idCliente">ID:</label>
-              <input type="text" class="form-control" id="idCliente" name="idCliente" value="${cliente.idCliente}" placeholder="0000" readonly>
+              <label for="idProduto">ID:</label>
+              <input type="text" class="form-control" id="idProduto" name="idProduto" value="${produto.idProduto}" placeholder="0000" readonly>
             </div>
           </c:if>
           <div class="form-group">
-            <label for="nomeCliente">Nome:</label>
-            <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" value="${cliente.nomeCliente}" required="true" placeholder="Ex: Paola Bracho">
+            <label for="nomeProduto">Nome:</label>
+            <input type="text" class="form-control" id="nomeProduto" name="nomeProduto" value="${produto.nomeProduto}" required="true" placeholder="Ex: HB20">
           </div>
           <div class="form-group">
-            <label for="cpf">CPF:</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" value="${cliente.cpf}" required="true" placeholder="Ex: 419.759.388.xx">
+            <label for="ano">Ano:</label>
+            <input type="text" class="form-control" id="ano" name="ano" value="${produto.ano}" required="true" placeholder="Ex: 2019">
           </div>
           <div class="form-group">
-            <label for="email">E-mail:</label>
-            <input type="text" class="form-control" id="email" name="email" value="${cliente.email}" required="email" placeholder="Ex: paola.bracho@gmail.com">
+            <label for="modelo">Modelo:</label>
+            <input type="text" class="form-control" id="modelo" name="modelo" value="${produto.modelo}" required="true" placeholder="Ex: 2018">
           </div>
           <div class="form-group">
-            <label for="cnh">CNH:</label>
-            <input type="text" class="form-control" id="cnh" name="cnh" value="${cliente.cnh}" required="true" placeholder="Ex: 00123456789">
+            <label for="marca">Marca:</label>
+            <input type="text" class="form-control" id="marca" name="marca" value="${produto.marca}" required="true" placeholder="Ex: Hyundai">
           </div>
           <div class="form-group">
-            <label for="telefone">Telefone:</label>
-            <input type="text" class="form-control" name="telefone" id="telefone" value="${cliente.telefone}" aria-describedby="input-group-example" required="true" placeholder="Ex: 9 6000-9005">
+            <label for="placa">Placa:</label>
+            <input type="text" class="form-control" name="placa" id="placa" value="${produto.placa}" aria-describedby="input-group-example" required="true" placeholder="Ex: GAT0556">
           </div>
           <div class="form-group">
-            <label for="cep">Cep:</label>
-            <input type="text" class="form-control" name="cep" id="cep" value="${cliente.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 04409-00">
+            <label for="precoDiaria">Valor da diária:</label>
+            <input type="text" class="form-control" name="precoDiaria" id="precoDiaria" value="${produto.precoDiaria}" aria-describedby="input-group-example" required="true" placeholder="Ex: 70.00">
           </div>
-          <div class="form-group">
-            <label for="rua">Rua:</label>
-            <input type="text" class="form-control" name="rua" id="rua" value="${cliente.rua}" aria-describedby="input-group-example" required="true" placeholder="Ex: Rua mario santana, 50">
-          </div>
-          <div class="form-group">
-            <label for="bairro">Bairro:</label>
-            <input type="text" class="form-control" name="bairro" id="bairro" value="${cliente.bairro}" aria-describedby="input-group-example" required="true" placeholder="Ex: Santo Amaro">
-          </div>
-          <div class="form-group">
-            <label for="cidade">Cidade:</label>
-            <input type="text" class="form-control" name="cidade" id="cidade" value="${cliente.cidade}" aria-describedby="input-group-example" required="true" placeholder="Ex: São Paulo">
-          </div>
-          <div class="form-group">
-            <label for="estado">Estado:</label>
-            <input type="text" class="form-control" name="estado" id="estado" value="${cliente.estado}" aria-describedby="input-group-example" required="true" placeholder="Ex: SP">
-          </div>
-          
-          <c:if test="${cliente.idCliente ne null}">
+          <c:if test="${produto.idProduto ne null}">
             <div class="form-group mt-5">
               <button class="btn-block btn btn-primary-2" value="Update" type="submit">Editar</button>
             </div>
           </c:if>
-          <c:if test="${cliente.idCliente eq null}">
+          <c:if test="${produto.idProduto eq null}">
             <div class="form-group mt-5">
               <button class="btn-block btn btn-primary" value="Save" type="submit">Salvar</button>
             </div>
@@ -109,7 +92,7 @@
     <!-- Formuário de pesquisa -->
     <div class="row justify-content-center mb-5">
       <div class="col-xl-8 col-lg-9 text-center">
-        <h1>Lista de clientes</h1>
+        <h1>Lista de produtos</h1>
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -131,59 +114,49 @@
     </div>
 
     <!-- Tabela de produtos -->
-    <div class="row justify-content-center">
-      <div class="col">
-        <table class="table table-hover" id="table-cadastro-cliente">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nome</th>
-              <th scope="col">CPF</th>
-              <th scope="col">E-mail</th>
-              <th scope="col">CNH</th>
-              <th scope="col">Telefone</th>
-              <th scope="col">CEP</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody id="tb-lista">
-            <c:forEach items="${clientes}" var="cliente">
-              <tr>
-                <th scope="row">${cliente.idCliente}</th>
-                <td>${cliente.nomeCliente}</td>
-                <td>${cliente.cpf}</td>
-                <td>${cliente.email}</td>
-                <td>${cliente.cnh}</td>
-                <td>${cliente.telefone}</td>
-                <td>${cliente.cep}</td>
-                <td>
-                  <a href="${pageContext.request.contextPath}/cliente/editar?idCliente=${cliente.idCliente}" class="mr-2">
-                    <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <title>Icon For Edit</title>
-                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect opacity="0" x="0" y="0" width="24" height="24"></rect>
-                        <path d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "></path>
-                        <rect fill="#000000" opacity="0.3" x="5" y="20" width="15" height="2" rx="1"></rect>
-                      </g>
-                    </svg>
-                  </a>
-                  <a href="${pageContext.request.contextPath}/cliente/desativar?idCliente=${cliente.idCliente}" onclick="return confirm('Tem certeza que deseja desativar este cliente?');" class="">
-                    <svg class="icon bg-primary-2" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <title>Icon For Trash</title>
-                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect opacity="0" x="0" y="0" width="24" height="24"></rect>
-                        <path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"></path>
-                        <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"></path>
-                      </g>
-                    </svg>
-                  </a>
-                </td>
-              </tr>
-            </c:forEach>
-          </tbody>
-        </table>
-      </div>
-    </div>
+            <div class="row justify-content-center mb-3">
+          <div class="col">
+            <table class="table table-hover" id="table-cadastro-produto">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">CPF</th>
+                  <th scope="col">E-mail</th>
+                  <th scope="col">CNH</th>
+                  <th scope="col">Telefone</th>
+                  <th scope="col">CEP</th>
+                  <th scope="col">Rua</th>
+                  <th scope="col">Bairro</th>
+                  <th scope="col">Cidade</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody id="tb-lista">
+                <c:forEach items="${clientes}" var="cliente">
+                  <tr>
+                    <tr>
+                    <th scope="row">${cliente.idCliente}</th>
+                    <td>${cliente.nomeCliente}</td>
+                    <td>${cliente.cpf}</td>
+                    <td>${cliente.email}</td>
+                    <td>${cliente.cnh}</td>
+                    <td>${cliente.telefone}</td>
+                    <td>${cliente.cep}</td>
+                    <td>${cliente.rua}</td>
+                    <td>${cliente.bairro}</td>
+                    <td>${cliente.cidade}</td>
+                    <td>${cliente.estado}</td>
+                    <td>
+                      <a href="${pageContext.request.contextPath}/aluguel/selecionar?idCliente=${cliente.idCliente}" class="m-1 btn-sm btn-primary">selecionar</a>
+                    </td>
+                  </tr>
+                </c:forEach>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
   </div>
 </section>
