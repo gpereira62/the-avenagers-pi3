@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.senac.tads.pi3.gerenprod.clienteServlet;
 
 import br.senac.tads.pi3.gerenprod.dao.ClienteDAO;
@@ -20,24 +15,32 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author felip
  */
-@WebServlet(name = "ClienteServlet", urlPatterns = {"/cliente"})
-public class ClienteServlet extends HttpServlet {
+@WebServlet(name = "ClienteEditarServlet", urlPatterns = {"/cliente/editar"})
+public class ClienteEditarServlet extends HttpServlet {
 
   private final CrudInterface clienteDAO = new ClienteDAO();
   
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    
+    String id = request.getParameter("idCliente");
+    
+    if (id != null) {
+      int idProduto = Integer.parseInt(id);
+      Cliente cliente = (Cliente) clienteDAO.mostrar(1);
+      request.setAttribute("cliente", cliente);
+    }
+    
     ArrayList<ClienteServlet> cliente = clienteDAO.listar(1);
     
     request.setAttribute("cliente", cliente);
     request.getRequestDispatcher("/cliente.jsp").forward(request, response);
   }
-
+  
   @Override
-  protected void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException {
-
-    Cliente c = new Cliente();
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+      Cliente c = new Cliente();
     
     c.setNomeCliente(request.getParameter("nomeCliente"));
     c.setCpf(request.getParameter("cpf"));
@@ -49,17 +52,18 @@ public class ClienteServlet extends HttpServlet {
     c.setBairro(request.getParameter("bairro"));
     c.setCidade(request.getParameter("cidade"));
     c.setEstado(request.getParameter("estado"));
+    
 
-    boolean sucesso = clienteDAO.salvar(c);
+    boolean sucesso = clienteDAO.editar(c);
     request.setAttribute("sucesso", sucesso);
     
     if (sucesso) {
-      request.setAttribute("mensagem", "Cliente cadastrado com sucesso!");
+      request.setAttribute("mensagem", "Cliente alterado com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Não foi possível cadastrar o Cliente. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possível alterar o Cliente. Por favor, tente novamente!");
     }
     
-    ArrayList<ClienteServlet> cliente = clienteDAO.listar(1);
+    ArrayList<Cliente> cliente = clienteDAO.listar(1);
     request.setAttribute("cliente", cliente);
     request.getRequestDispatcher("/cliente.jsp").forward(request, response);
   }
