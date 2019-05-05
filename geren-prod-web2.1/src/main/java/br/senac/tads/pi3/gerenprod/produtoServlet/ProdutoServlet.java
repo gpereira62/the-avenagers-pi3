@@ -53,7 +53,7 @@ public class ProdutoServlet extends HttpServlet {
     if (sucesso) {
       request.setAttribute("mensagem", "Produto cadastrado com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Não foi possível cadastrar o produto. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel cadastrar o produto. Por favor, tente novamente!");
     }
     
     ArrayList<ProdutoServlet> produtos = produtoDAO.listar(1);
