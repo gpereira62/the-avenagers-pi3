@@ -44,6 +44,10 @@ public final class Usuario {
   private boolean ativo;
 
   public Usuario() {
+    iniciaVazio();
+  }
+  
+  private void iniciaVazio() {
     this.idUsuario = 0;
     this.idDepartamento = 0;
     this.idFilial = 0;
@@ -54,7 +58,7 @@ public final class Usuario {
     this.nomeFilial = "";
     this.nomeDepartamento = "";
   }
-
+ 
   public Usuario(int idUsuario, int idDepartamento, int idFilial, String nome, String email, String senha, boolean ativo, String nomeFilial, String nomeDepartamento) {
     this.idUsuario = idUsuario;
     this.idDepartamento = idDepartamento;
@@ -92,7 +96,12 @@ public final class Usuario {
     
     HttpSession sessao = request.getSession();
     
-    this.idUsuario = sessao.getAttribute("usuario.idUsuario") != "" ? (int) sessao.getAttribute("usuario.idUsuario") : 0;
+    if (sessao.getAttribute("usuario.idUsuario") == "" || sessao.getAttribute("usuario.idUsuario") == null) {
+      iniciaVazio();
+      return;
+    }
+    
+    this.idUsuario = (int) sessao.getAttribute("usuario.idUsuario");
     this.idDepartamento = (int) sessao.getAttribute("usuario.idDepartamento");
     this.idFilial = (int) sessao.getAttribute("usuario.idFilial");
     this.nome = (String) sessao.getAttribute("usuario.nome");
