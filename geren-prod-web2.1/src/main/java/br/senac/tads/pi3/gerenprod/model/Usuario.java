@@ -8,6 +8,7 @@ package br.senac.tads.pi3.gerenprod.model;
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -125,6 +126,10 @@ public class Usuario {
     }
     
     return false;
+  }
+  
+  public void criptografarSenha() {
+    this.senha = BCrypt.hashpw(this.senha, BCrypt.gensalt());
   }
   
   public int getIdUsuario() {
