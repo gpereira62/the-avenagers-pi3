@@ -23,6 +23,13 @@ public class UsuarioServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    Usuario u = new Usuario(request);
+    
+    if(!u.acessaProduto()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
     ArrayList<UsuarioServlet> usuario = usuarioDAO.listar(1);
     
     request.setAttribute("usuario", usuario);
@@ -32,14 +39,20 @@ public class UsuarioServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException {
 
-    Usuario u = new Usuario();
+    Usuario u = new Usuario(request);
     
-    u.setNome(request.getParameter("nomeCliente"));
-    u.setEmail(request.getParameter("cpf"));
-    u.setSenha(request.getParameter("email"));
-    u.setDepartamento(request.getParameter("cnh"));
+    if(!u.acessaProduto()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
+    Usuario usuario = new Usuario();
+    
+    usuario.setNome(request.getParameter("nomeCliente"));
+    usuario.setEmail(request.getParameter("cpf"));
+    usuario.setSenha(request.getParameter("email"));
 
-    boolean sucesso = usuarioDAO.salvar(u);
+    boolean sucesso = usuarioDAO.salvar(usuario);
     request.setAttribute("sucesso", sucesso);
     
     if (sucesso) {
