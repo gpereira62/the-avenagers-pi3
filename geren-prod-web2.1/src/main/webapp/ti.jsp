@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="utilidades/cabecalho.jsp">
   <jsp:param name="paginaAtual" value="${'ti'}"/>
+  <jsp:param name="usuarioSessao" value="${usuarioSessao}"/>
 </jsp:include>
 
 <!-- Não mudar ACIMA -->

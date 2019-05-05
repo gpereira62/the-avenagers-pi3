@@ -92,7 +92,7 @@ public final class Usuario {
     
     HttpSession sessao = request.getSession();
     
-    this.idUsuario = sessao.getAttribute("usuario.idUsuario") == null ? (int) sessao.getAttribute("usuario.idUsuario") : 0;
+    this.idUsuario = sessao.getAttribute("usuario.idUsuario") != "" ? (int) sessao.getAttribute("usuario.idUsuario") : 0;
     this.idDepartamento = (int) sessao.getAttribute("usuario.idDepartamento");
     this.idFilial = (int) sessao.getAttribute("usuario.idFilial");
     this.nome = (String) sessao.getAttribute("usuario.nome");

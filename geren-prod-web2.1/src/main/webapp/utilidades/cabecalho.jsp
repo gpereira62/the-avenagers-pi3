@@ -22,14 +22,17 @@
 
         <div class="row mb-3">
           <div class="col-4">
+            <p>${usuarioSessao.getNome()}</p>
           </div>
           <div class="col-4 text-center">
-            <img src="https://brubsduarte.github.io/assets/img/logo.png" style="height: 150px; width: auto;" class="mb-">
+            <a href="${pageContext.request.contextPath}/bemvindo">
+              <img src="https://brubsduarte.github.io/assets/img/logo.png" style="height: 150px; width: auto;" class="mb-">
+            </a>
           </div>
           <div class="col-4">
             <ul class="nav justify-content-end text-light">
               <li class="nav-item mx-1">
-                <a class="nav-link btn btn-light text-light" href="${pageContext.request.contextPath}/sair">Sair</a>
+                <a class="nav-link btn btn-light text-light p-0" href="${pageContext.request.contextPath}/sair">Sair</a>
               </li> 
             </ul>
           </div>
@@ -42,7 +45,8 @@
         <div class="row justify-content-center">
           <div class="col">
             <ul class="nav justify-content-center text-light">
-              <li class="nav-item mx-1">
+              <c:if test="${usuarioSessao.acessaProduto()}">
+                <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'produto'}">
                   <a class="nav-link btn active btn-primary">
                 </c:if>
@@ -59,7 +63,9 @@
                   </svg>
                   Produto</a>
               </li>
-              <li class="nav-item mx-1">
+              </c:if>
+              <c:if test="${usuarioSessao.acessaCliente()}">
+                <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'cliente'}">
                   <a class="nav-link btn active btn-primary">
                 </c:if>
@@ -76,7 +82,9 @@
                   </svg>
                   Cliente</a>
               </li>
-              <li class="nav-item mx-1">
+              </c:if>
+              <c:if test="${usuarioSessao.acessaAluguel()}">
+                <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'aluguel'}">
                   <a class="nav-link btn active btn-primary">
                 </c:if>
@@ -93,7 +101,9 @@
                   </svg>
                   Aluguel</a>
               </li>
-              <li class="nav-item mx-1">
+              </c:if>
+              <c:if test="${usuarioSessao.acessaDevolucao()}">
+                <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'devolucao'}">
                   <a class="nav-link btn active btn-primary">
                 </c:if>
@@ -110,7 +120,9 @@
                   </svg>
                   Devolução</a>
               </li>
-              <li class="nav-item mx-1">
+              </c:if>
+              <c:if test="${usuarioSessao.acessaRelatorio()}">
+                <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'relatorio'}">
                   <a class="nav-link btn active btn-primary">
                 </c:if>
@@ -127,7 +139,9 @@
                   </svg>
                   Relatório</a>
               </li>
-              <li class="nav-item mx-1">
+              </c:if>
+              <c:if test="${usuarioSessao.acessaTi()}">
+                <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'ti'}">
                   <a class="nav-link btn active btn-primary">
                 </c:if>
@@ -144,7 +158,9 @@
                   </svg>
                   TI</a>
               </li>
-              <li class="nav-item mx-1">
+              </c:if>
+              <c:if test="${usuarioSessao.acessaAdministracao()}">
+                <li class="nav-item mx-1">
                 <c:if test="${param.paginaAtual == 'administracao'}">
                   <a class="nav-link btn active btn-primary">
                 </c:if>
@@ -162,6 +178,7 @@
                   </svg>
                   Administração</a>
               </li>
+              </c:if>
             </ul>
           </div>
         </div>
