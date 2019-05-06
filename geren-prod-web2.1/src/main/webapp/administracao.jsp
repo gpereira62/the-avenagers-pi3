@@ -134,7 +134,7 @@
                 <td>${administracao.cidade}</td>
                 <td>${administracao.cep}</td>
                 <td>
-                  <a href="${pageContext.request.contextPath}/filial/editar?idFilial=${administracao.idFilial}" class="mr-2">
+                  <a href="${pageContext.request.contextPath}/administracao/editar?idFilial=${administracao.idFilial}" class="mr-2">
                     <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>Icon For Edit</title>
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -144,7 +144,7 @@
                     </g>
                     </svg>
                   </a>
-                  <a href="${pageContext.request.contextPath}/filial/desativar?idFilial=${administracao.idFilial}" onclick="return confirm('Tem certeza que deseja desativar este filial?');" class="">
+                  <a href="${pageContext.request.contextPath}/administracao/desativar?idFilial=${administracao.idFilial}" onclick="return confirm('Tem certeza que deseja desativar este filial?');" class="">
                     <svg class="icon bg-primary-2" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>Icon For Trash</title>
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
