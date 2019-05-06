@@ -8,6 +8,7 @@ package br.senac.tads.pi3.gerenprod.produtoServlet;
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
 import br.senac.tads.pi3.gerenprod.dao.ProdutoDAO;
 import br.senac.tads.pi3.gerenprod.model.Produto;
+import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -28,6 +29,13 @@ public class ProdutoServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    Usuario u = new Usuario(request);
+    
+    if(!u.acessaProduto()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
     ArrayList<ProdutoServlet> produtos = produtoDAO.listar(1);
     
     request.setAttribute("produtos", produtos);

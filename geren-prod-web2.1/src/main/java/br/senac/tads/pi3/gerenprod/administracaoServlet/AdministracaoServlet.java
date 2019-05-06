@@ -5,8 +5,12 @@
  */
 package br.senac.tads.pi3.gerenprod.administracaoServlet;
 
+import br.senac.tads.pi3.gerenprod.model.Usuario;
+import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
+import br.senac.tads.pi3.gerenprod.dao.AdministracaoDAO;
+import br.senac.tads.pi3.gerenprod.model.Administracao;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,14 +21,52 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-@WebServlet(name = "AdministracaoServlet", urlPatterns = {"/administracao"})
+@WebServlet(name = "AdmnistracaoServlet", urlPatterns = {"/administracao"})
 public class AdministracaoServlet extends HttpServlet {
 
+  private final CrudInterface administracaoDAO = new AdministracaoDAO();
+  
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    request.getRequestDispatcher("/administracao.jsp").forward(request, response);
+    Usuario u = new Usuario(request);
+    
+    if(!u.acessaAdministracao()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
 
+    ArrayList<Administracao> administracaos = administracaoDAO.listar(1);
+    
+    request.setAttribute("administracaos", administracaos);
+    request.getRequestDispatcher("/administracao.jsp").forward(request, response);
   }
 
+  @Override
+  protected void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException {
+
+    Administracao p = new Administracao();
+    
+    p.setNomeFilial(request.getParameter("nomeFilial"));
+    p.setCnpj(request.getParameter("cnpj"));
+    p.setEstado(request.getParameter("estado"));
+    p.setCidade(request.getParameter("cidade"));
+    p.setCep(request.getParameter("cep"));
+
+    boolean sucesso = administracaoDAO.salvar(p);
+    request.setAttribute("sucesso", sucesso);
+    
+    if (sucesso) {
+      request.setAttribute("mensagem", "Filial cadastrado com sucesso!");
+    } else {
+      request.setAttribute("mensagem", "N�o foi poss�vel cadastrar o Filial. Por favor, tente novamente!");
+    }
+    
+    ArrayList<AdministracaoServlet> administracao = administracaoDAO.listar(1);
+    request.setAttribute("administracao", administracao);
+    request.getRequestDispatcher("/administracao.jsp").forward(request, response);
+  }
 }
+
+
+

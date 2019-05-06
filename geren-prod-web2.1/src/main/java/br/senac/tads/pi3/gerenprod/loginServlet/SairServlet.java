@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.pi3.gerenprod.login.logoutServlet;
+package br.senac.tads.pi3.gerenprod.loginServlet;
 
+import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,12 +17,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "SairServlet", urlPatterns = {"/sair"})
+public class SairServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    request.getRequestDispatcher("/login.jsp").forward(request, response);
+    Usuario usuario = new Usuario();
+    usuario.setSession(request);
+    response.sendRedirect(request.getContextPath() + "/");
   }
 }

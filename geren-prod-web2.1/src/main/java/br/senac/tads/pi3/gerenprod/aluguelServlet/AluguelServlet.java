@@ -10,6 +10,7 @@ import br.senac.tads.pi3.gerenprod.dao.ProdutoDAO;
 import br.senac.tads.pi3.gerenprod.dao.ClienteDAO;
 import br.senac.tads.pi3.gerenprod.model.Cliente;
 import br.senac.tads.pi3.gerenprod.model.Produto;
+import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -31,6 +32,13 @@ public class AluguelServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
+    Usuario u = new Usuario(request);
+    
+    if(!u.acessaAluguel()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
       ArrayList<Produto> produtos = ProdutoDAO.listar(1);
       request.setAttribute("produtos", produtos);
       ArrayList<Cliente> clientes = ClienteDAO.listar(1);
