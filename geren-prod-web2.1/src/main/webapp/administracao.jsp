@@ -50,7 +50,7 @@
           </div>
           <div class="form-group">
             <label for="ano">CNPJ</label>
-            <input type="text" class="form-control" id="ano" name="ano" value="${administracao.cnpj}" required="true" placeholder="Ex: 12.345.678/9012-87">
+            <input type="text" class="form-control" id="cnpj" name="cnpj" value="${administracao.cnpj}" required="true" placeholder="Ex: 12.345.678/9012-87">
           </div>
           <div class="form-group">
             <label for="modelo">Estado</label>
