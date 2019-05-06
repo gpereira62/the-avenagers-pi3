@@ -126,7 +126,7 @@ public class ProdutoDAO implements CrudInterface<Produto> {
               + "true );";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Nï¿½o foi possï¿½vel cadastrar o produto.");
+        throw new Exception("Não foi possï¿½vel cadastrar o produto.");
       }
 
       db.commit();
