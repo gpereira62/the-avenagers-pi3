@@ -7,6 +7,8 @@ package br.senac.tads.pi3.gerenprod.dao;
 
 import br.senac.tads.pi3.gerenprod.db.DB;
 import br.senac.tads.pi3.gerenprod.model.Aluguel;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -33,22 +35,31 @@ public class AluguelDAO implements CrudInterface<Aluguel>{
 
         try {
 
+            String pattern = "yyyy-MM-dd";
+            DateFormat df = new SimpleDateFormat(pattern);
+
             String sql
                     = "INSERT INTO aluguel "
                     + "(DataInicial, idCliente, idFilial, idProduto)"
                     + "VALUES ("
-                    + "'" + a.getDataInicial()+ "', "
+                    + "'" + df.format(a.getDataInicial())+ "', "
                     + a.getIdCliente()+ ", "
                     + a.getIdFilial()+ ", "
-                    + a.getIdProduto()+ ");"
-                    + "UPDATE produto SET "
-                    + "Alugado = 1 "
-                    + "Where idProduto = " + a.getIdProduto() + "; ";
+                    + a.getIdProduto()+ ");";
 
             if (!db.executarAlteracao(sql)) {
-                throw new Exception("Não foi possivel cadastrar o aluguel.");
+                throw new Exception("Nï¿½o foi possivel cadastrar o aluguel.");
             }
+            
+            sql
+                    = "UPDATE produto SET "
+                    + "Alugado = 1 "
+                    + "Where idProduto = " + a.getIdProduto() + ";";
 
+            if (!db.executarAlteracao(sql)) {
+                throw new Exception("Nï¿½o foi possivel cadastrar o aluguel.");
+            }
+            
             db.commit();
             db.close();
             return true;

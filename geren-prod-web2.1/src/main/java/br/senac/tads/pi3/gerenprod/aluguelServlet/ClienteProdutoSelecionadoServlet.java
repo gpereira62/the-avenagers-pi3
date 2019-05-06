@@ -12,6 +12,7 @@ import br.senac.tads.pi3.gerenprod.dao.ProdutoDAO;
 import br.senac.tads.pi3.gerenprod.model.Aluguel;
 import br.senac.tads.pi3.gerenprod.model.Cliente;
 import br.senac.tads.pi3.gerenprod.model.Produto;
+import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,6 +40,13 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
+        Usuario u = new Usuario(request);
+    
+        if(!u.acessaAluguel()) {
+          response.sendRedirect(request.getContextPath() + "/");
+          return;
+        }
+        
         ArrayList<Produto> produtos = ProdutoDAO.listar(1);
         request.setAttribute("produtos", produtos);
         ArrayList<Cliente> clientes = ClienteDAO.listar(1);
@@ -46,7 +54,7 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
         
         String idClienteTela = request.getParameter("idCliente");
 
-        if (idClienteTela != "") {
+        if (!idClienteTela.equals("")) {
             int idCliente = Integer.parseInt(idClienteTela);
             Cliente clienteSelecionado = (Cliente) ClienteDAO.mostrar(idCliente);
             request.setAttribute("clienteSelecionado", clienteSelecionado);
@@ -54,7 +62,7 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
         
         String idProdutoTela = request.getParameter("idProduto");
         
-        if (idProdutoTela != "") {
+        if (!idProdutoTela.equals("")) {
             int idProduto = Integer.parseInt(idProdutoTela);
             Produto produtoSelecionado = (Produto) ProdutoDAO.mostrar(idProduto);
             request.setAttribute("produtoSelecionado", produtoSelecionado);
@@ -65,6 +73,14 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
     
     @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    Usuario u = new Usuario(request);
+    
+    if(!u.acessaAluguel()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+      
     Aluguel a = new Aluguel();
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
     
@@ -75,7 +91,7 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
     }
     
     a.setIdCliente(Integer.parseInt(request.getParameter("idClienteSelecionado")));
-    a.setIdFilial(1);
+    a.setIdFilial(u.getIdFilial());
     a.setIdProduto(Integer.parseInt(request.getParameter("idProdutoSelecionado")));
 
     boolean sucesso = AluguelDAO.salvar(a);
@@ -84,10 +100,15 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
     if (sucesso) {
       request.setAttribute("mensagem", "Aluguel feito com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Não foi possível fazer o aluguel. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel fazer o aluguel. Por favor, tente novamente!");
     }
     
-    request.getRequestDispatcher("/produto.jsp").forward(request, response);
+    ArrayList<Produto> produtos = ProdutoDAO.listar(1);
+    request.setAttribute("produtos", produtos);
+    ArrayList<Cliente> clientes = ClienteDAO.listar(1);
+    request.setAttribute("clientes", clientes);
+    
+    request.getRequestDispatcher("/aluguel.jsp").forward(request, response);
   }
 
 }

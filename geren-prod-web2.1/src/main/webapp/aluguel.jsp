@@ -17,6 +17,19 @@
         <h1 class="text-center">Aluguel de veículos</h1>
         
         <!-- Pesqusia de clientes -->
+        <c:if test="${sucesso != null}">
+          <c:if test="${sucesso == true}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+          </c:if>
+          <c:if test="${sucesso == false}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          </c:if>
+              ${mensagem}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+        </c:if>
         
         <!-- Formuário de pesquisa -->
         <div class="row justify-content-center mb-3">
@@ -147,6 +160,7 @@
       </div>
     </div>
 
+  </div>
   </div>
 </section>
 
