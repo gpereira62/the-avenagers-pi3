@@ -30,8 +30,6 @@ public class Cliente extends Object {
         this.ativo = ativo;
     }
 
-
-
     public Cliente() {
         this.idCliente = 0;
         this.nomeCliente = "";
