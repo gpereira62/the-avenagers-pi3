@@ -45,6 +45,13 @@ public class ProdutoServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException {
 
+    Usuario u = new Usuario(request);
+    
+    if(!u.acessaProduto()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
     Produto p = new Produto();
     
     p.setNomeProduto(request.getParameter("nomeProduto"));
@@ -61,7 +68,11 @@ public class ProdutoServlet extends HttpServlet {
     if (sucesso) {
       request.setAttribute("mensagem", "Produto cadastrado com sucesso!");
     } else {
+<<<<<<< HEAD
       request.setAttribute("mensagem", "N�o foi poss�vel cadastrar o produto. Por favor, tente novamente!");
+=======
+      request.setAttribute("mensagem", "Não foi possível cadastrar o produto. Por favor, tente novamente!");
+>>>>>>> 21f14c9b22a1fde38efe95004a0df6b26898abc6
     }
     
     ArrayList<ProdutoServlet> produtos = produtoDAO.listar(1);

@@ -112,7 +112,7 @@ public class UsuarioDAO implements CrudInterface<Usuario> {
               + "Where idUsuario = " + u.getIdUsuario() + "; ";
       
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Nï¿½o foi possï¿½vel atualizar o usuario.");
+        throw new Exception("Não foi ponsável atualizar o usuario.");
       }
 
       db.commit();
@@ -144,7 +144,7 @@ public class UsuarioDAO implements CrudInterface<Usuario> {
               + "true );";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Nï¿½o foi possï¿½vel cadastrar o produto.");
+        throw new Exception("Não foi possível cadastrar o produto.");
       }
 
       db.commit();
@@ -171,7 +171,7 @@ public class UsuarioDAO implements CrudInterface<Usuario> {
               + "Where idProduto = " + usuarioID + "; ";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Nï¿½o foi possï¿½vel desativar o usuï¿½rio.");
+        throw new Exception("Não foi possï¿½vel desativar o usuário.");
       }
 
       db.commit();

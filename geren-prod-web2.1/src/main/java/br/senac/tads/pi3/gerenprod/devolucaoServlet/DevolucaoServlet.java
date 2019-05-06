@@ -5,8 +5,11 @@
  */
 package br.senac.tads.pi3.gerenprod.devolucaoServlet;
 
+import br.senac.tads.pi3.gerenprod.dao.ClienteDAO;
+import br.senac.tads.pi3.gerenprod.model.Cliente;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "DevolucaoServlet", urlPatterns = {"/devolucao"})
 public class DevolucaoServlet extends HttpServlet {
 
+  private final ClienteDAO clienteDAO = new ClienteDAO();
+  
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -30,6 +35,9 @@ public class DevolucaoServlet extends HttpServlet {
       return;
     }
     
+    ArrayList<Cliente> clientes = clienteDAO.listarAlugando(u.getIdFilial());
+    
+    request.setAttribute("clientes", clientes);
     request.getRequestDispatcher("/devolucao.jsp").forward(request, response);
   }
 }

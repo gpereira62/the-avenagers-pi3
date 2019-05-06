@@ -48,6 +48,13 @@ public class ClienteEditarServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    Usuario u = new Usuario(request);
+    
+    if(!u.acessaCliente()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
     Cliente c = new Cliente();
 
     c.setIdCliente(Integer.parseInt(request.getParameter("idCliente")));
@@ -68,7 +75,7 @@ public class ClienteEditarServlet extends HttpServlet {
     if (sucesso) {
       request.setAttribute("mensagem", "Cliente alterado com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Não foi possível alterar o Cliente. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "NÃ£o foi possÃ­vel alterar o Cliente. Por favor, tente novamente!");
     }
 
     ArrayList<Cliente> clientes = clienteDAO.listar(1);

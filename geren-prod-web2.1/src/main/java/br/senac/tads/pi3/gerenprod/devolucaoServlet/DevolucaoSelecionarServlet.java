@@ -3,73 +3,68 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.pi3.gerenprod.aluguelServlet;
+package br.senac.tads.pi3.gerenprod.devolucaoServlet;
 
 import br.senac.tads.pi3.gerenprod.dao.AluguelDAO;
-import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
 import br.senac.tads.pi3.gerenprod.dao.ClienteDAO;
-import br.senac.tads.pi3.gerenprod.dao.ProdutoDAO;
 import br.senac.tads.pi3.gerenprod.model.Aluguel;
 import br.senac.tads.pi3.gerenprod.model.Cliente;
-import br.senac.tads.pi3.gerenprod.model.Produto;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  *
- * @author Gustavo
+ * @author Bruna
  */
-@WebServlet(name = "ClienteProdutoSelecionadoServlet", urlPatterns = {"/aluguel/selecionar"})
-public class ClienteProdutoSelecionadoServlet extends HttpServlet {
+@WebServlet(name = "DevolucaoSelecionarServlet", urlPatterns = {"/devolucao/selecionar"})
+public class DevolucaoSelecionarServlet extends HttpServlet {
 
-  private final ProdutoDAO produtoDAO = new ProdutoDAO();
   private final ClienteDAO clienteDAO = new ClienteDAO();
-  private final CrudInterface aluguelDAO = new AluguelDAO();
-
+  private final AluguelDAO aluguelDAO = new AluguelDAO();
+  
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     Usuario u = new Usuario(request);
-
-    if (!u.acessaAluguel()) {
+    
+    if(!u.acessaDevolucao()) {
       response.sendRedirect(request.getContextPath() + "/");
       return;
     }
-
-    ArrayList<Produto> produtos = produtoDAO.listarNaoAlugado(u.getIdFilial());
-    request.setAttribute("produtos", produtos);
-    ArrayList<Cliente> clientes = clienteDAO.listarNaoAlugando(u.getIdFilial());
-    request.setAttribute("clientes", clientes);
-
+    
     String idClienteTela = request.getParameter("idCliente");
 
     if (!idClienteTela.equals("")) {
       int idCliente = Integer.parseInt(idClienteTela);
-      Cliente clienteSelecionado = (Cliente) clienteDAO.mostrar(idCliente);
-      request.setAttribute("clienteSelecionado", clienteSelecionado);
+      Aluguel aluguel = aluguelDAO.mostrar(idCliente);
+      
+      request.setAttribute("clienteSelecionado", aluguel.getCliente());
+      request.setAttribute("produtoSelecionado", aluguel.getProduto());
+      request.setAttribute("aluguel", aluguel);
+      
+      String pattern = "dd/MM/yyyy";
+      DateFormat df = new SimpleDateFormat(pattern);
+      
+      request.setAttribute("dataRetirada", df.format(aluguel.getDataInicial()));
     }
-
-    String idProdutoTela = request.getParameter("idProduto");
-
-    if (!idProdutoTela.equals("")) {
-      int idProduto = Integer.parseInt(idProdutoTela);
-      Produto produtoSelecionado = (Produto) produtoDAO.mostrar(idProduto);
-      request.setAttribute("produtoSelecionado", produtoSelecionado);
-    }
-
-    request.getRequestDispatcher("/aluguel.jsp").forward(request, response);
+    
+    ArrayList<Cliente> clientes = clienteDAO.listarAlugando(u.getIdFilial());
+    
+    request.setAttribute("clientes", clientes);
+    request.getRequestDispatcher("/devolucao.jsp").forward(request, response);
   }
-
+  
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -84,29 +79,35 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
     try {
-      a.setDataInicial(formato.parse(request.getParameter("date")));
+      a.setDataInicial(formato.parse(request.getParameter("dataRetirada")));
+      a.setDataFinal(formato.parse(request.getParameter("date")));
     } catch (ParseException ex) {
-      Logger.getLogger(ClienteProdutoSelecionadoServlet.class.getName()).log(Level.SEVERE, null, ex);
+      request.setAttribute("mensagem", "Não foi possível fazer o aluguel. Por favor, tente novamente!");
     }
 
+    a.setIdAluguel(Integer.parseInt(request.getParameter("idAluguel")));
     a.setIdCliente(Integer.parseInt(request.getParameter("idClienteSelecionado")));
-    a.setIdFilial(u.getIdFilial());
     a.setIdProduto(Integer.parseInt(request.getParameter("idProdutoSelecionado")));
-
+    
+    double precoDiaria = Double.parseDouble(request.getParameter("precoDiaria"));
+    long quantidadeDias = DAYS.between(LocalDate.parse(request.getParameter("dataRetirada")), LocalDate.parse(request.getParameter("date")));
+    
+    double total = (double)quantidadeDias * precoDiaria;
+    
+    a.setPrecoTotal(total);
+    
     boolean sucesso = aluguelDAO.salvar(a);
     request.setAttribute("sucesso", sucesso);
 
     if (sucesso) {
-      request.setAttribute("mensagem", "Aluguel feito com sucesso!");
+      request.setAttribute("mensagem", "Devolução realizada com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Não foi poss�vel fazer o aluguel. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possível realizar a devolução. Por favor, tente novamente!");
     }
 
-    ArrayList<Produto> produtos = produtoDAO.listarNaoAlugado(u.getIdFilial());
-    request.setAttribute("produtos", produtos);
-    ArrayList<Cliente> clientes = clienteDAO.listarNaoAlugando(u.getIdFilial());
+    ArrayList<Cliente> clientes = clienteDAO.listarAlugando(u.getIdFilial());
+    
     request.setAttribute("clientes", clientes);
-
     request.getRequestDispatcher("/aluguel.jsp").forward(request, response);
   }
 }

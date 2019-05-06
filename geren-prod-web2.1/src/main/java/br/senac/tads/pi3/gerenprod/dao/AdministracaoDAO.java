@@ -7,7 +7,6 @@ package br.senac.tads.pi3.gerenprod.dao;
 
 import br.senac.tads.pi3.gerenprod.db.DB;
 import br.senac.tads.pi3.gerenprod.model.Administracao;
-import br.senac.tads.pi3.gerenprod.model.Produto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
       while (rs.next()) {
         Administracao p = new Administracao();
         p.setIdFilial(rs.getInt("idFilial"));
+        p.setNomeFilial(rs.getString("nomeFilial"));
         p.setCnpj(rs.getString("CNPJ"));
         p.setEstado(rs.getString("Estado"));
         p.setCidade(rs.getString("Cidade"));
@@ -53,11 +53,12 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
       Administracao p = new Administracao();
       while (rs.next()) {
         p.setIdFilial(rs.getInt("idFilial"));
+        p.setNomeFilial(rs.getString("nomeFilial"));
         p.setCnpj(rs.getString("CNPJ"));
         p.setEstado(rs.getString("Estado"));
         p.setCidade(rs.getString("Cidade"));
         p.setCep(rs.getString("CEP"));
-        p.setAtivo(rs.getBoolean("Ativo"));;
+        p.setAtivo(rs.getBoolean("Ativo"));
       }
       db.close();
       return p;
@@ -80,11 +81,11 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
               + "CNPJ = '" + p.getCnpj() + "', "
               + "Estado = '" + p.getEstado() + "', "
               + "Cidade = '" + p.getCidade()+ "', "
-              + "CEP = '" + p.getCep() + "', "
+              + "CEP = '" + p.getCep() + "' "
               + "Where idFilial = " + p.getIdFilial() + "; ";
-      
+              
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("N�o foi poss�vel atualizar o produto.");
+        throw new Exception("Não foi possivel atualizar o produto.");
       }
 
       db.commit();
@@ -113,10 +114,11 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
               + "'" + p.getCnpj() + "', "
               + "'" + p.getEstado() + "', "
               + "'" + p.getCidade() + "', "
-              + "'" + p.getCep() + "', ";
+              + "'" + p.getCep() + "', "
+              + "true );";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("N�o foi poss�vel cadastrar o produto.");
+        throw new Exception("Não foi possivel cadastrar o produto.");
       }
 
       db.commit();
@@ -143,7 +145,7 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
               + "Where idFilial = " + filialID + "; ";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("N�o foi possivel desativar o produto.");
+        throw new Exception("Não foi possivel desativar o produto.");
       }
 
       db.commit();

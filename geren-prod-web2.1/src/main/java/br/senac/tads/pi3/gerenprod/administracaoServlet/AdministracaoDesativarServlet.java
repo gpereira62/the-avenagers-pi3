@@ -5,10 +5,15 @@
  */
 package br.senac.tads.pi3.gerenprod.administracaoServlet;
 
-import br.senac.tads.pi3.gerenprod.model.Usuario;
+/**
+ *
+ * @author caio.araujo
+ */
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
 import br.senac.tads.pi3.gerenprod.dao.AdministracaoDAO;
 import br.senac.tads.pi3.gerenprod.model.Administracao;
+import br.senac.tads.pi3.gerenprod.administracaoServlet.AdministracaoServlet;
+import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -21,60 +26,42 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-@WebServlet(name = "AdmnistracaoServlet", urlPatterns = {"/administracao"})
-public class AdministracaoServlet extends HttpServlet {
+@WebServlet(name = "AdministracaoDesativarServlet", urlPatterns = {"/administracao/desativar"})
+public class AdministracaoDesativarServlet extends HttpServlet {
 
   private final CrudInterface administracaoDAO = new AdministracaoDAO();
   
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    
     Usuario u = new Usuario(request);
     
     if(!u.acessaAdministracao()) {
       response.sendRedirect(request.getContextPath() + "/");
       return;
     }
-
-    ArrayList<Administracao> administracaos = administracaoDAO.listar(1);
     
-    request.setAttribute("administracaos", administracaos);
-    request.getRequestDispatcher("/administracao.jsp").forward(request, response);
-  }
-
-  @Override
-  protected void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException {
+    String id = request.getParameter("idFilial");
+    
+    if (id != null) {
+      int idFilial = Integer.parseInt(id);
       
-    Usuario u = new Usuario(request);
-    
-    if(!u.acessaAdministracao()) {
-      response.sendRedirect(request.getContextPath() + "/");
-      return;
-    }
-    
+      boolean sucesso = administracaoDAO.desativar(idFilial);
+      request.setAttribute("sucesso", sucesso);
 
-    Administracao p = new Administracao();
-    
-    p.setNomeFilial(request.getParameter("nomeFilial"));
-    p.setCnpj(request.getParameter("cnpj"));
-    p.setEstado(request.getParameter("estado"));
-    p.setCidade(request.getParameter("cidade"));
-    p.setCep(request.getParameter("cep"));
-
-    boolean sucesso = administracaoDAO.salvar(p);
-    request.setAttribute("sucesso", sucesso);
-    
-    if (sucesso) {
-      request.setAttribute("mensagem", "Filial cadastrado com sucesso!");
+      if (sucesso) {
+        request.setAttribute("mensagem", "Filial desativado com sucesso!");
+      } else {
+        request.setAttribute("mensagem", "Não foi possível desativar o Filial. Por favor, tente novamente!");
+      }
     } else {
-      request.setAttribute("mensagem", "Não foi possivel cadastrar o Filial. Por favor, tente novamente!");
+      request.setAttribute("sucesso", false);
+      request.setAttribute("mensagem", "Não foi possível desativar a Filial. Por favor, tente novamente!");
     }
     
     ArrayList<AdministracaoServlet> administracaos = administracaoDAO.listar(1);
+    
     request.setAttribute("administracaos", administracaos);
     request.getRequestDispatcher("/administracao.jsp").forward(request, response);
   }
 }
-
-
-

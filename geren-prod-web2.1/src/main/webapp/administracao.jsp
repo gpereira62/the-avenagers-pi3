@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="utilidades/cabecalho.jsp">
   <jsp:param name="paginaAtual" value="${'administracao'}"/>
@@ -7,7 +7,7 @@
 
 <!-- Não mudar ACIMA -->
 
-<!-- Cadastro de produtos -->
+<!-- Cadastro de filiais -->
 <section class="">
   <div class="container">
 
@@ -40,12 +40,12 @@
           <form action="${registerUrl}" method="post">
             <c:if test="${administracao.idFilial ne null}">
               <div class="form-group">
-                <label for="idProduto">ID:</label>
+                <label for="idFilial">ID:</label>
                 <input type="text" class="form-control" id="idFilial" name="idFilial" value="${administracao.idFilial}" placeholder="0000" readonly>
               </div>
             </c:if>
             <div class="form-group">
-              <label for="nomeProduto">Nome:</label>
+              <label for="nomeFilial">Nome:</label>
               <input type="text" class="form-control" id="nomeFilial" name="nomeFilial" value="${administracao.nomeFilial}" required="true" placeholder="Ex: Matriz">
             </div>
             <div class="form-group">
@@ -82,7 +82,7 @@
   </div>
 </section>
 
-<!-- Lista de produtos -->
+<!-- Lista de Filiais -->
 <section class="bg-primary-alt">
   <div class="container">
 
@@ -110,10 +110,10 @@
       </div>
     </div>
 
-    <!-- Tabela de produtos -->
+    <!-- Tabela de Filiaiss -->
     <div class="row justify-content-center">
       <div class="col">
-        <table class="table table-hover" id="table-cadastro-produto">
+        <table class="table table-hover" id="table-cadastro-filial">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -134,7 +134,7 @@
                 <td>${administracao.cidade}</td>
                 <td>${administracao.cep}</td>
                 <td>
-                  <a href="${pageContext.request.contextPath}/produto/editar?idProduto=${administracao.idFilial}" class="mr-2">
+                  <a href="${pageContext.request.contextPath}/administracao/editar?idFilial=${administracao.idFilial}" class="mr-2">
                     <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>Icon For Edit</title>
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -144,7 +144,7 @@
                     </g>
                     </svg>
                   </a>
-                  <a href="${pageContext.request.contextPath}/produto/desativar?idProduto=${administracao.idFilial}" onclick="return confirm('Tem certeza que deseja desativar este produto?');" class="">
+                  <a href="${pageContext.request.contextPath}/administracao/desativar?idFilial=${administracao.idFilial}" onclick="return confirm('Tem certeza que deseja desativar este filial?');" class="">
                     <svg class="icon bg-primary-2" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <title>Icon For Trash</title>
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

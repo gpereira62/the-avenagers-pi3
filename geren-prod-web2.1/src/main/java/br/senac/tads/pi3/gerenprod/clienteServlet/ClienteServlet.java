@@ -45,6 +45,13 @@ public class ClienteServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException {
 
+    Usuario u = new Usuario(request);
+    
+    if(!u.acessaCliente()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
     Cliente c = new Cliente();
     
     c.setNomeCliente(request.getParameter("nomeCliente"));
@@ -64,7 +71,7 @@ public class ClienteServlet extends HttpServlet {
     if (sucesso) {
       request.setAttribute("mensagem", "Cliente cadastrado com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Não foi possível cadastrar o Cliente. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "NÃ£o foi possÃ­vel cadastrar o Cliente. Por favor, tente novamente!");
     }
     
     ArrayList<Cliente> clientes = clienteDAO.listar(1);
