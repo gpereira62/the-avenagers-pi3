@@ -12,26 +12,26 @@ package br.senac.tads.pi3.gerenprod.model;
 public class Administracao extends Object {
     
     private int idFilial;
-    private String nomeFilial, CNPJ, Estado, Cidade, CEP;
+    private String nomeFilial, cnpj, Estado, Cidade, cep;
     private boolean ativo;
 
     public Administracao() {
         this.idFilial = 0;
         this.nomeFilial = "";
-        this.CNPJ = "";
+        this.cnpj = "";
         this.Estado = "";
         this.Cidade = "";
-        this.CEP = "";
+        this.cep = "";
         this.ativo = true;
     }
     
     public Administracao(int idFilial, String nomeFilial, String CNPJ, String Estado, String Cidade, String CEP, boolean ativo) {
         this.idFilial = idFilial;
         this.nomeFilial = nomeFilial;
-        this.CNPJ = CNPJ;
+        this.cnpj = CNPJ;
         this.Estado = Estado;
         this.Cidade = Cidade;
-        this.CEP = CEP;
+        this.cep = CEP;
         this.ativo = ativo;
     }
 
@@ -52,12 +52,12 @@ public class Administracao extends Object {
         this.nomeFilial = nomeFilial;
     }
 
-    public String getCNPJ() {
-        return CNPJ;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void setCNPJ(String CNPJ) {
-        this.CNPJ = CNPJ;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getEstado() {
@@ -76,12 +76,12 @@ public class Administracao extends Object {
         this.Cidade = Cidade;
     }
 
-    public String getCEP() {
-        return CEP;
+    public String getCep() {
+        return cep;
     }
 
-   public void setCEP(String CEP) {
-        this.CEP = CEP;
+   public void setCep(String cep) {
+        this.cep = cep;
     }
 
 

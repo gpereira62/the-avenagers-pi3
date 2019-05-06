@@ -6,7 +6,6 @@
 package br.senac.tads.pi3.gerenprod.administracaoServlet;
 
 import br.senac.tads.pi3.gerenprod.model.Usuario;
-import java.io.IOException;
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
 import br.senac.tads.pi3.gerenprod.dao.AdministracaoDAO;
 import br.senac.tads.pi3.gerenprod.model.Administracao;
@@ -37,9 +36,9 @@ public class AdministracaoServlet extends HttpServlet {
       return;
     }
 
-    ArrayList<AdministracaoServlet> administracao = administracaoDAO.listar(1);
+    ArrayList<Administracao> administracaos = administracaoDAO.listar(1);
     
-    request.setAttribute("administracao", administracao);
+    request.setAttribute("administracaos", administracaos);
     request.getRequestDispatcher("/administracao.jsp").forward(request, response);
   }
 
@@ -49,10 +48,10 @@ public class AdministracaoServlet extends HttpServlet {
     Administracao p = new Administracao();
     
     p.setNomeFilial(request.getParameter("nomeFilial"));
-    p.setCNPJ(request.getParameter("cnpj"));
+    p.setCnpj(request.getParameter("cnpj"));
     p.setEstado(request.getParameter("estado"));
     p.setCidade(request.getParameter("cidade"));
-    p.setCEP(request.getParameter("cep"));
+    p.setCep(request.getParameter("cep"));
 
     boolean sucesso = administracaoDAO.salvar(p);
     request.setAttribute("sucesso", sucesso);

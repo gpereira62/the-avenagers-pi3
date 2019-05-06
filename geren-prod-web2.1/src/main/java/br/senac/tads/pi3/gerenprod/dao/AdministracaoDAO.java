@@ -28,10 +28,10 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
       while (rs.next()) {
         Administracao p = new Administracao();
         p.setIdFilial(rs.getInt("idFilial"));
-        p.setCNPJ(rs.getString("CNPJ"));
+        p.setCnpj(rs.getString("CNPJ"));
         p.setEstado(rs.getString("Estado"));
         p.setCidade(rs.getString("Cidade"));
-        p.setCEP(rs.getString("CEP"));
+        p.setCep(rs.getString("CEP"));
         p.setAtivo(rs.getBoolean("Ativo"));
         administracao.add(p);
       }
@@ -53,10 +53,10 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
       Administracao p = new Administracao();
       while (rs.next()) {
         p.setIdFilial(rs.getInt("idFilial"));
-        p.setCNPJ(rs.getString("CNPJ"));
+        p.setCnpj(rs.getString("CNPJ"));
         p.setEstado(rs.getString("Estado"));
         p.setCidade(rs.getString("Cidade"));
-        p.setCEP(rs.getString("CEP"));
+        p.setCep(rs.getString("CEP"));
         p.setAtivo(rs.getBoolean("Ativo"));;
       }
       db.close();
@@ -77,10 +77,10 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
       String sql
               = "UPDATE filial SET "
               + "NomeFilial = '" + p.getNomeFilial() + "', "
-              + "CNPJ = '" + p.getCNPJ() + "', "
+              + "CNPJ = '" + p.getCnpj() + "', "
               + "Estado = '" + p.getEstado() + "', "
               + "Cidade = '" + p.getCidade()+ "', "
-              + "CEP = '" + p.getCEP() + "', "
+              + "CEP = '" + p.getCep() + "', "
               + "Where idFilial = " + p.getIdFilial() + "; ";
       
       if (!db.executarAlteracao(sql)) {
@@ -110,10 +110,10 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
               + "(NomeFilial, CNPJ, Estado, Cidade, CEP, Ativo)"
               + "VALUES ("
               + "'" + p.getNomeFilial() + "', "
-              + "'" + p.getCNPJ() + "', "
+              + "'" + p.getCnpj() + "', "
               + "'" + p.getEstado() + "', "
               + "'" + p.getCidade() + "', "
-              + "'" + p.getCEP() + "', ";
+              + "'" + p.getCep() + "', ";
 
       if (!db.executarAlteracao(sql)) {
         throw new Exception("N�o foi poss�vel cadastrar o produto.");
