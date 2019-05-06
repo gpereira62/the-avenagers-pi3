@@ -16,6 +16,8 @@ public class Aluguel {
     private int idAluguel, idProduto, idCliente, idFilial;
     private Date dataInicial, dataFinal;
     private double precoTotal;
+    private Produto produto;
+    private Cliente cliente;
 
     public Aluguel(int idAluguel, int idProduto, int idCliente, int idFilial, Date dataInicial, Date dataFinal, Double precoTotal) {
         this.idAluguel = idAluguel;
@@ -85,12 +87,27 @@ public class Aluguel {
         this.dataFinal = dataFinal;
     }
     
-    public Double getPrecoTotal() {
+    public double getPrecoTotal() {
         return precoTotal;
     }
 
-    public void setPrecoTotal(Double precoTotal) {
+    public void setPrecoTotal(double precoTotal) {
         this.precoTotal = precoTotal;
     }
+    
+    public Produto getProduto() {
+      return produto;
+    }
 
+    public void setProduto(Produto produto) {
+      this.produto = produto;
+    }
+
+    public Cliente getCliente() {
+      return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+      this.cliente = cliente;
+    }
 }

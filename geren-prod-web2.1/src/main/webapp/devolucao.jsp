@@ -77,48 +77,50 @@
 
       </div>
     </div>
-
-    <div class="row justify-content-center">
+    
+    <div class="row justify-content-center bootstrap-iso">
       <div class="col-xl-8 col-lg-9">
-        <c:url value="/aluguel" var="aluguelUrl" />
+        <c:url value="/devolucao/selecionar" var="aluguelUrl" />
         <form action="${aluguelUrl}" method="post">
           
-          <div class="row bootstrap-iso">
+          <div class="row">
             <div class="form-group col-6"> <!-- Date input -->
               <div class="form-group">
-                <label for="nomeCliente">Data de retirada</label>
-                <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" value="10/10/2019" required="true" readonly>
+                <label for="dataRetirada">Data de retirada</label>
+                <input type="text" class="form-control" id="dataRetirada" name="dataRetirada" value="${dataRetirada}" readonly>
               </div>
             </div>
             <div class="form-group col-6"> <!-- Date input -->
               <label class="control-label" for="date">Data de devolução</label>
               <input class="form-control" id="date" name="date" placeholder="dd/mm/yyyy" type="text"/>
+              <input name="idAluguel" value="${aluguel.idAluguel}" type="hidden">
+              <input name="idProdutoSelecionado" value="${produtoSelecionado.idProduto}" type="hidden">
+              <input name="precoDiaria" value="${produtoSelecionado.precoDiaria}" type="hidden">
+              <input name="idClienteSelecionado" value="${clienteSelecionado.idCliente}" type="hidden">
             </div>
           </div>
-          
+            
           <div class="card">
             <div class="card-body p-3">
               <ul class="list-unstyled">
                 <dl class="row">
                   <dt class="col-sm-3"><b>Nome:</b></dt>
-                  <dd class="col-sm-9">Paola Bracho</dd>
+                  <dd class="col-sm-9">${clienteSelecionado.nomeCliente}</dd>
                   <dt class="col-sm-3"><b>CPF:</b></dt>
-                  <dd class="col-sm-9">000.000.000-00</dd>
+                  <dd class="col-sm-9">${clienteSelecionado.cpf}</dd>
                   <dt class="col-sm-3"><b>Carro:</b></dt>
-                  <dd class="col-sm-9">HB20 Confort Plus</dd>
+                  <dd class="col-sm-9">${produtoSelecionado.nomeProduto}</dd>
                   <dt class="col-sm-3"><b>Placa:</b></dt>
-                  <dd class="col-sm-9">AAA 0000</dd>
+                  <dd class="col-sm-9">${produtoSelecionado.placa}</dd>
                   <dt class="col-sm-3"><b>Valor da diária:</b></dt>
-                  <dd class="col-sm-9">R$ 70,00</dd>
+                  <dd class="col-sm-9">${produtoSelecionado.precoDiaria}</dd>
                 <dl />
               </ul>
-              
               <div class="mt-3 text-right">
-                <button class="btn btn-primary" value="Save" type="submit">Calcular valor total</button>
+                <button class="btn btn-primary" value="Save" type="submit">Calcular total devolução</button>
               </div>
             </div>
           </div>
-          
         </form>
       </div>
     </div>
