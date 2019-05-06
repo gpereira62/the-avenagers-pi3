@@ -28,6 +28,7 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
       while (rs.next()) {
         Administracao p = new Administracao();
         p.setIdFilial(rs.getInt("idFilial"));
+        p.setNomeFilial(rs.getString("nomeFilial"));
         p.setCnpj(rs.getString("CNPJ"));
         p.setEstado(rs.getString("Estado"));
         p.setCidade(rs.getString("Cidade"));
@@ -53,6 +54,7 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
       Administracao p = new Administracao();
       while (rs.next()) {
         p.setIdFilial(rs.getInt("idFilial"));
+        p.setNomeFilial(rs.getString("nomeFilial"));
         p.setCnpj(rs.getString("CNPJ"));
         p.setEstado(rs.getString("Estado"));
         p.setCidade(rs.getString("Cidade"));

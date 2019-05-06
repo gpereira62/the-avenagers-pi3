@@ -44,6 +44,14 @@ public class AdministracaoServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException {
+      
+    Usuario u = new Usuario(request);
+    
+    if(!u.acessaAdministracao()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
 
     Administracao p = new Administracao();
     
@@ -59,7 +67,7 @@ public class AdministracaoServlet extends HttpServlet {
     if (sucesso) {
       request.setAttribute("mensagem", "Filial cadastrado com sucesso!");
     } else {
-      request.setAttribute("mensagem", "N�o foi poss�vel cadastrar o Filial. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel cadastrar o Filial. Por favor, tente novamente!");
     }
     
     ArrayList<AdministracaoServlet> administracao = administracaoDAO.listar(1);
