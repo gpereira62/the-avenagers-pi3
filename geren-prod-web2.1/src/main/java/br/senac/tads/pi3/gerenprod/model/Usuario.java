@@ -30,7 +30,7 @@ public final class Usuario {
   private static String GGA = "Gerencia global adm";
   private static String FA = "Funcionário adm";
   
-    // Acesso às páginas
+    // Acesso Ã s pÃ¡ginas
   private boolean acessaProduto = false;
   private boolean acessaCliente = false;
   private boolean acessaAluguel = false;
@@ -97,7 +97,6 @@ public final class Usuario {
     HttpSession sessao = request.getSession();
     
     if (sessao.getAttribute("usuario.idUsuario") == "" || sessao.getAttribute("usuario.idUsuario") == null) {
-      iniciaVazio();
       return;
     }
     

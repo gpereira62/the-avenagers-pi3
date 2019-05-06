@@ -7,7 +7,6 @@ package br.senac.tads.pi3.gerenprod.dao;
 
 import br.senac.tads.pi3.gerenprod.db.DB;
 import br.senac.tads.pi3.gerenprod.model.Administracao;
-import br.senac.tads.pi3.gerenprod.model.Produto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -59,7 +58,7 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
         p.setEstado(rs.getString("Estado"));
         p.setCidade(rs.getString("Cidade"));
         p.setCep(rs.getString("CEP"));
-        p.setAtivo(rs.getBoolean("Ativo"));;
+        p.setAtivo(rs.getBoolean("Ativo"));
       }
       db.close();
       return p;
@@ -86,7 +85,7 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
               + "Where idFilial = " + p.getIdFilial() + "; ";
       
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Nï¿½o foi possï¿½vel atualizar o produto.");
+        throw new Exception("Nï¿½o foi possível atualizar o produto.");
       }
 
       db.commit();

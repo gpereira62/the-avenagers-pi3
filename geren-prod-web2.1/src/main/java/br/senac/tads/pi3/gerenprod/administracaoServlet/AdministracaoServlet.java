@@ -67,7 +67,7 @@ public class AdministracaoServlet extends HttpServlet {
     if (sucesso) {
       request.setAttribute("mensagem", "Filial cadastrado com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel cadastrar o Filial. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possivel cadastrar o Filial. Por favor, tente novamente!");
     }
     
     ArrayList<AdministracaoServlet> administracao = administracaoDAO.listar(1);
