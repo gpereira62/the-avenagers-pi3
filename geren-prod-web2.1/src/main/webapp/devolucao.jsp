@@ -40,7 +40,7 @@
         </div>
 
         <!-- Tabela de produtos -->
-        <div class="row justify-content-center mb-5">
+        <div class="row justify-content-center mb-3">
           <div class="col">
             <table class="table table-hover" id="table-cadastro-produto">
               <thead>
@@ -59,14 +59,14 @@
                 <c:forEach items="${clientes}" var="cliente">
                   <tr>
                     <th scope="row">${cliente.idCliente}</th>
-                    <td>${produto.nomeCliente}</td>
-                    <td>${produto.cpf}</td>
-                    <td>${produto.email}</td>
-                    <td>${produto.cnh}</td>
-                    <td>${produto.telefone}</td>
-                    <td>${produto.cep}</td>
+                    <td>${cliente.nomeCliente}</td>
+                    <td>${cliente.cpf}</td>
+                    <td>${cliente.email}</td>
+                    <td>${cliente.cnh}</td>
+                    <td>${cliente.telefone}</td>
+                    <td>${cliente.cep}</td>
                     <td>
-                      <a href="${pageContext.request.contextPath}/aluguel/selecionar?idCliente=${produto.idCliente}" class="m-1 btn-sm btn-primary">selecionar</a>
+                      <a href="${pageContext.request.contextPath}/devolucao/selecionar?idCliente=${cliente.idCliente}" class="m-1 btn-sm btn-primary">selecionar</a>
                     </td>
                   </tr>
                 </c:forEach>

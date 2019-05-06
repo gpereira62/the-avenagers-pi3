@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-@WebServlet(name = "DevolucaoServlet", urlPatterns = {"/devolucao"})
-public class DevolucaoServlet extends HttpServlet {
+@WebServlet(name = "DevolucaoSelecionarServlet", urlPatterns = {"/devolucao/selecionar"})
+public class DevolucaoSelecionarServlet extends HttpServlet {
 
   private final ClienteDAO clienteDAO = new ClienteDAO();
   

@@ -65,10 +65,6 @@
                   <th scope="col">CNH</th>
                   <th scope="col">Telefone</th>
                   <th scope="col">CEP</th>
-                  <th scope="col">Rua</th>
-                  <th scope="col">Bairro</th>
-                  <th scope="col">Cidade</th>
-                  <th scope="col">Estado</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -83,10 +79,6 @@
                     <td>${cliente.cnh}</td>
                     <td>${cliente.telefone}</td>
                     <td>${cliente.cep}</td>
-                    <td>${cliente.rua}</td>
-                    <td>${cliente.bairro}</td>
-                    <td>${cliente.cidade}</td>
-                    <td>${cliente.estado}</td>
                     <td>
                       <a href="${pageContext.request.contextPath}/aluguel/selecionar?idCliente=${cliente.idCliente}&idProduto=${produtoSelecionado.idProduto}" class="m-1 btn-sm btn-primary">selecionar</a>
                     </td>
