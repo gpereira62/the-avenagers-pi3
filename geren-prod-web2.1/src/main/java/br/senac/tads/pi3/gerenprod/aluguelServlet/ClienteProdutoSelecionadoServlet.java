@@ -29,86 +29,84 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gustavo
  */
-
 @WebServlet(name = "ClienteProdutoSelecionadoServlet", urlPatterns = {"/aluguel/selecionar"})
 public class ClienteProdutoSelecionadoServlet extends HttpServlet {
 
-    private final CrudInterface ClienteDAO = new ClienteDAO();
-    private final CrudInterface ProdutoDAO = new ProdutoDAO();
-    private final CrudInterface AluguelDAO = new AluguelDAO();
+  private final ProdutoDAO produtoDAO = new ProdutoDAO();
+  private final ClienteDAO clienteDAO = new ClienteDAO();
+  private final CrudInterface aluguelDAO = new AluguelDAO();
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        Usuario u = new Usuario(request);
-    
-        if(!u.acessaAluguel()) {
-          response.sendRedirect(request.getContextPath() + "/");
-          return;
-        }
-        
-        ArrayList<Produto> produtos = ProdutoDAO.listar(1);
-        request.setAttribute("produtos", produtos);
-        ArrayList<Cliente> clientes = ClienteDAO.listar(1);
-        request.setAttribute("clientes", clientes);
-        
-        String idClienteTela = request.getParameter("idCliente");
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (!idClienteTela.equals("")) {
-            int idCliente = Integer.parseInt(idClienteTela);
-            Cliente clienteSelecionado = (Cliente) ClienteDAO.mostrar(idCliente);
-            request.setAttribute("clienteSelecionado", clienteSelecionado);
-        }
-        
-        String idProdutoTela = request.getParameter("idProduto");
-        
-        if (!idProdutoTela.equals("")) {
-            int idProduto = Integer.parseInt(idProdutoTela);
-            Produto produtoSelecionado = (Produto) ProdutoDAO.mostrar(idProduto);
-            request.setAttribute("produtoSelecionado", produtoSelecionado);
-        }
-
-        request.getRequestDispatcher("/aluguel.jsp").forward(request, response);
-    }
-    
-    @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
     Usuario u = new Usuario(request);
-    
-    if(!u.acessaAluguel()) {
+
+    if (!u.acessaAluguel()) {
       response.sendRedirect(request.getContextPath() + "/");
       return;
     }
-      
+
+    ArrayList<Produto> produtos = produtoDAO.listarNaoAlugado(u.getIdFilial());
+    request.setAttribute("produtos", produtos);
+    ArrayList<Cliente> clientes = clienteDAO.listarNaoAlugando(u.getIdFilial());
+    request.setAttribute("clientes", clientes);
+
+    String idClienteTela = request.getParameter("idCliente");
+
+    if (!idClienteTela.equals("")) {
+      int idCliente = Integer.parseInt(idClienteTela);
+      Cliente clienteSelecionado = (Cliente) clienteDAO.mostrar(idCliente);
+      request.setAttribute("clienteSelecionado", clienteSelecionado);
+    }
+
+    String idProdutoTela = request.getParameter("idProduto");
+
+    if (!idProdutoTela.equals("")) {
+      int idProduto = Integer.parseInt(idProdutoTela);
+      Produto produtoSelecionado = (Produto) produtoDAO.mostrar(idProduto);
+      request.setAttribute("produtoSelecionado", produtoSelecionado);
+    }
+
+    request.getRequestDispatcher("/aluguel.jsp").forward(request, response);
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    Usuario u = new Usuario(request);
+
+    if (!u.acessaAluguel()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+
     Aluguel a = new Aluguel();
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-    
+
     try {
-        a.setDataInicial(formato.parse(request.getParameter("date")));
+      a.setDataInicial(formato.parse(request.getParameter("date")));
     } catch (ParseException ex) {
-        Logger.getLogger(ClienteProdutoSelecionadoServlet.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(ClienteProdutoSelecionadoServlet.class.getName()).log(Level.SEVERE, null, ex);
     }
-    
+
     a.setIdCliente(Integer.parseInt(request.getParameter("idClienteSelecionado")));
     a.setIdFilial(u.getIdFilial());
     a.setIdProduto(Integer.parseInt(request.getParameter("idProdutoSelecionado")));
 
-    boolean sucesso = AluguelDAO.salvar(a);
+    boolean sucesso = aluguelDAO.salvar(a);
     request.setAttribute("sucesso", sucesso);
-    
+
     if (sucesso) {
       request.setAttribute("mensagem", "Aluguel feito com sucesso!");
     } else {
-      request.setAttribute("mensagem", "N�o foi poss�vel fazer o aluguel. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi poss�vel fazer o aluguel. Por favor, tente novamente!");
     }
-    
-    ArrayList<Produto> produtos = ProdutoDAO.listar(1);
+
+    ArrayList<Produto> produtos = produtoDAO.listarNaoAlugado(u.getIdFilial());
     request.setAttribute("produtos", produtos);
-    ArrayList<Cliente> clientes = ClienteDAO.listar(1);
+    ArrayList<Cliente> clientes = clienteDAO.listarNaoAlugando(u.getIdFilial());
     request.setAttribute("clientes", clientes);
-    
+
     request.getRequestDispatcher("/aluguel.jsp").forward(request, response);
   }
-
 }

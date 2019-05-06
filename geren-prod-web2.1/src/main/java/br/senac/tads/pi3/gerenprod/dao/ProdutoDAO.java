@@ -46,6 +46,62 @@ public class ProdutoDAO implements CrudInterface<Produto> {
     }
   }
   
+  public ArrayList<Produto> listarAlugando(int idFilial) {
+    DB db = new DB(true);
+    try {
+      String sql = "SELECT * FROM produto WHERE idFilial = " + idFilial + " AND Alugado = true AND Ativo = true;";
+      ResultSet rs = db.executarConsulta(sql);
+      ArrayList<Produto> produtos = new ArrayList<>();
+      while (rs.next()) {
+        Produto p = new Produto();
+        p.setIdProduto(rs.getInt("idProduto"));
+        p.setNomeProduto(rs.getString("NomeProduto"));
+        p.setAno(rs.getString("Ano"));
+        p.setModelo(rs.getString("Modelo"));
+        p.setMarca(rs.getString("Marca"));
+        p.setPlaca(rs.getString("Placa"));
+        p.setPrecoDiaria(rs.getDouble("PrecoDiaria"));
+        p.setAlugado(rs.getBoolean("Alugado"));
+        p.setAtivo(rs.getBoolean("Ativo"));
+        produtos.add(p);
+      }
+      db.close();
+      return produtos;
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+      db.close();
+      return null;
+    }
+  }
+  
+  public ArrayList<Produto> listarNaoAlugado(int idFilial) {
+    DB db = new DB(true);
+    try {
+      String sql = "SELECT * FROM produto WHERE idFilial = " + idFilial + " AND Alugado = false AND Ativo = true;";
+      ResultSet rs = db.executarConsulta(sql);
+      ArrayList<Produto> produtos = new ArrayList<>();
+      while (rs.next()) {
+        Produto p = new Produto();
+        p.setIdProduto(rs.getInt("idProduto"));
+        p.setNomeProduto(rs.getString("NomeProduto"));
+        p.setAno(rs.getString("Ano"));
+        p.setModelo(rs.getString("Modelo"));
+        p.setMarca(rs.getString("Marca"));
+        p.setPlaca(rs.getString("Placa"));
+        p.setPrecoDiaria(rs.getDouble("PrecoDiaria"));
+        p.setAlugado(rs.getBoolean("Alugado"));
+        p.setAtivo(rs.getBoolean("Ativo"));
+        produtos.add(p);
+      }
+      db.close();
+      return produtos;
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+      db.close();
+      return null;
+    }
+  }
+  
   @Override
   public Produto mostrar(int idProduto) {
     DB db = new DB(true);

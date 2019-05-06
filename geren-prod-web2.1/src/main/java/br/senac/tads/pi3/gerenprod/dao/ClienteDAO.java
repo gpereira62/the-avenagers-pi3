@@ -48,7 +48,69 @@ public class ClienteDAO implements CrudInterface<Cliente> {
             return null;
         }
     }
+    
+    public ArrayList<Cliente> listarAlugando(int idFilial) {
+        DB db = new DB(true);
+        try {
+            String sql = "SELECT * FROM cliente WHERE Ativo = true AND alugando is true;";
+            ResultSet rs = db.executarConsulta(sql);
+            ArrayList<Cliente> clientes = new ArrayList();
+            while (rs.next()) {
+                Cliente c = new Cliente();
+                c.setIdCliente(rs.getInt("idCliente"));
+                c.setNomeCliente(rs.getString("Nome"));
+                c.setCpf(rs.getString("CPF"));
+                c.setEmail(rs.getString("Email"));
+                c.setCnh(rs.getString("CNH"));
+                c.setTelefone(rs.getString("Telefone"));
+                c.setCep(rs.getString("CEP"));
+                c.setRua(rs.getString("Rua"));
+                c.setBairro(rs.getString("Bairro"));
+                c.setCidade(rs.getString("Cidade"));
+                c.setEstado(rs.getString("Estado"));
+                c.setAtivo(rs.getBoolean("Ativo"));
+                clientes.add(c);
+            }
+            db.close();
+            return clientes;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            db.close();
+            return null;
+        }
+    }
 
+    public ArrayList<Cliente> listarNaoAlugando(int idFilial) {
+        DB db = new DB(true);
+        try {
+            String sql = "SELECT * FROM cliente WHERE Ativo = true AND alugando is false;";
+            ResultSet rs = db.executarConsulta(sql);
+            ArrayList<Cliente> clientes = new ArrayList();
+            while (rs.next()) {
+                Cliente c = new Cliente();
+                c.setIdCliente(rs.getInt("idCliente"));
+                c.setNomeCliente(rs.getString("Nome"));
+                c.setCpf(rs.getString("CPF"));
+                c.setEmail(rs.getString("Email"));
+                c.setCnh(rs.getString("CNH"));
+                c.setTelefone(rs.getString("Telefone"));
+                c.setCep(rs.getString("CEP"));
+                c.setRua(rs.getString("Rua"));
+                c.setBairro(rs.getString("Bairro"));
+                c.setCidade(rs.getString("Cidade"));
+                c.setEstado(rs.getString("Estado"));
+                c.setAtivo(rs.getBoolean("Ativo"));
+                clientes.add(c);
+            }
+            db.close();
+            return clientes;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            db.close();
+            return null;
+        }
+    }
+    
     @Override
     public Cliente mostrar(int idCliente) {
         DB db = new DB(true);
@@ -102,7 +164,7 @@ public class ClienteDAO implements CrudInterface<Cliente> {
             System.out.println(sql);
             
             if (!db.executarAlteracao(sql)) {
-                throw new Exception("Não foi possível atualizar o produto.");
+                throw new Exception("Nï¿½o foi possï¿½vel atualizar o produto.");
             }
 
             db.commit();
@@ -140,7 +202,7 @@ public class ClienteDAO implements CrudInterface<Cliente> {
                     + "true );";
 
             if (!db.executarAlteracao(sql)) {
-                throw new Exception("Não foi possível cadastrar o produto.");
+                throw new Exception("Nï¿½o foi possï¿½vel cadastrar o produto.");
             }
 
             db.commit();
@@ -167,7 +229,7 @@ public class ClienteDAO implements CrudInterface<Cliente> {
                     + "Where idCliente = " + clienteID + "; ";
 
             if (!db.executarAlteracao(sql)) {
-                throw new Exception("Não foi possível desativar o produto.");
+                throw new Exception("Nï¿½o foi possï¿½vel desativar o produto.");
             }
 
             db.commit();

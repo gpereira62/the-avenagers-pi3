@@ -46,7 +46,7 @@ public class AluguelDAO implements CrudInterface<Aluguel> {
         + a.getIdProduto() + ");";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("N�o foi possivel cadastrar o aluguel.");
+        throw new Exception("Não foi possivel cadastrar o aluguel.");
       }
 
       sql
@@ -55,7 +55,16 @@ public class AluguelDAO implements CrudInterface<Aluguel> {
         + "Where idProduto = " + a.getIdProduto() + ";";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("N�o foi possivel cadastrar o aluguel.");
+        throw new Exception("Não foi possivel cadastrar o aluguel.");
+      }
+      
+      sql
+        = "UPDATE cliente SET "
+        + "Alugando = 1 "
+        + "Where idCliente = " + a.getIdCliente()+ ";";
+
+      if (!db.executarAlteracao(sql)) {
+        throw new Exception("Não foi possivel cadastrar o aluguel.");
       }
 
       db.commit();
