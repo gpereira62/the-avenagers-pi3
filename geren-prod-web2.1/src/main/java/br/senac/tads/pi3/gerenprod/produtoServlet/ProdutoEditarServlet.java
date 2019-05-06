@@ -52,6 +52,14 @@ public class ProdutoEditarServlet extends HttpServlet {
   
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    Usuario u = new Usuario(request);
+    
+    if(!u.acessaProduto()) {
+      response.sendRedirect(request.getContextPath() + "/");
+      return;
+    }
+    
     Produto p = new Produto();
     
     p.setIdProduto(Integer.parseInt(request.getParameter("idProduto")));
@@ -68,7 +76,7 @@ public class ProdutoEditarServlet extends HttpServlet {
     if (sucesso) {
       request.setAttribute("mensagem", "Produto editado com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Não foi possível editar o produto. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Nï¿½o foi possï¿½vel editar o produto. Por favor, tente novamente!");
     }
     
     ArrayList<ProdutoServlet> produtos = produtoDAO.listar(1);

@@ -153,7 +153,7 @@ public class ProdutoDAO implements CrudInterface<Produto> {
               + "Where idProduto = " + produtoID + "; ";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Nï¿½o foi possï¿½vel desativar o produto.");
+        throw new Exception("Não foi possível desativar o produto.");
       }
 
       db.commit();
