@@ -85,7 +85,7 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
               + "Where idFilial = " + p.getIdFilial() + "; ";
       
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Nï¿½o foi possível atualizar o produto.");
+        throw new Exception("NÃ£o foi possivel atualizar o produto.");
       }
 
       db.commit();
@@ -114,10 +114,11 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
               + "'" + p.getCnpj() + "', "
               + "'" + p.getEstado() + "', "
               + "'" + p.getCidade() + "', "
-              + "'" + p.getCep() + "', ";
+              + "'" + p.getCep() + "', "
+              + "true );";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Nï¿½o foi possï¿½vel cadastrar o produto.");
+        throw new Exception("NÃ£o foi possivel cadastrar o produto.");
       }
 
       db.commit();
@@ -144,7 +145,7 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
               + "Where idFilial = " + filialID + "; ";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Não foi possivel desativar o produto.");
+        throw new Exception("NÃ£o foi possivel desativar o produto.");
       }
 
       db.commit();

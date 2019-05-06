@@ -5,10 +5,15 @@
  */
 package br.senac.tads.pi3.gerenprod.administracaoServlet;
 
-import br.senac.tads.pi3.gerenprod.model.Usuario;
+/**
+ *
+ * @author caio.araujo
+ */
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
 import br.senac.tads.pi3.gerenprod.dao.AdministracaoDAO;
 import br.senac.tads.pi3.gerenprod.model.Administracao;
+import br.senac.tads.pi3.gerenprod.model.Usuario;
+import br.senac.tads.pi3.gerenprod.administracaoServlet.AdministracaoServlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -21,30 +26,38 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-@WebServlet(name = "AdmnistracaoServlet", urlPatterns = {"/administracao"})
-public class AdministracaoServlet extends HttpServlet {
+@WebServlet(name = "AdministracaoEditarServlet", urlPatterns = {"/administracao/editar"})
+public class AdministracaoEditarServlet extends HttpServlet {
 
-  private final CrudInterface administracaoDAO = new AdministracaoDAO();
+  private final CrudInterface AdministracaoDAO = new AdministracaoDAO();
   
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    
     Usuario u = new Usuario(request);
     
     if(!u.acessaAdministracao()) {
       response.sendRedirect(request.getContextPath() + "/");
       return;
     }
-
-    ArrayList<Administracao> administracaos = administracaoDAO.listar(1);
+    
+    String id = request.getParameter("idFilial");
+    
+    if (id != null) {
+      int idFilial = Integer.parseInt(id);
+      Administracao administracao = (Administracao) AdministracaoDAO.mostrar(idFilial);
+      request.setAttribute("administracao", administracao);
+    }
+    
+    ArrayList<AdministracaoServlet> administracaos = AdministracaoDAO.listar(1);
     
     request.setAttribute("administracaos", administracaos);
     request.getRequestDispatcher("/administracao.jsp").forward(request, response);
   }
-
+  
   @Override
-  protected void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException {
-      
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
     Usuario u = new Usuario(request);
     
     if(!u.acessaAdministracao()) {
@@ -52,29 +65,27 @@ public class AdministracaoServlet extends HttpServlet {
       return;
     }
     
-
     Administracao p = new Administracao();
     
+    p.setIdFilial(Integer.parseInt(request.getParameter("idFilial")));
     p.setNomeFilial(request.getParameter("nomeFilial"));
     p.setCnpj(request.getParameter("cnpj"));
     p.setEstado(request.getParameter("estado"));
     p.setCidade(request.getParameter("cidade"));
     p.setCep(request.getParameter("cep"));
 
-    boolean sucesso = administracaoDAO.salvar(p);
+    boolean sucesso = AdministracaoDAO.editar(p);
     request.setAttribute("sucesso", sucesso);
     
     if (sucesso) {
-      request.setAttribute("mensagem", "Filial cadastrado com sucesso!");
+      request.setAttribute("mensagem", "Filial editado com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Não foi possivel cadastrar o Filial. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possivel editar o filial. Por favor, tente novamente!");
     }
     
-    ArrayList<AdministracaoServlet> administracaos = administracaoDAO.listar(1);
+    ArrayList<AdministracaoServlet> administracaos = AdministracaoDAO.listar(1);
     request.setAttribute("administracaos", administracaos);
     request.getRequestDispatcher("/administracao.jsp").forward(request, response);
   }
 }
-
-
 
