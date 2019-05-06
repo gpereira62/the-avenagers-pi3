@@ -81,9 +81,9 @@ public class AdministracaoDAO implements CrudInterface<Administracao>  {
               + "CNPJ = '" + p.getCnpj() + "', "
               + "Estado = '" + p.getEstado() + "', "
               + "Cidade = '" + p.getCidade()+ "', "
-              + "CEP = '" + p.getCep() + "', "
+              + "CEP = '" + p.getCep() + "' "
               + "Where idFilial = " + p.getIdFilial() + "; ";
-      
+              
       if (!db.executarAlteracao(sql)) {
         throw new Exception("Não foi possivel atualizar o produto.");
       }
