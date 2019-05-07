@@ -46,11 +46,11 @@ public class ProdutoDesativarServlet extends HttpServlet {
       if (sucesso) {
         request.setAttribute("mensagem", "Produto desativado com sucesso!");
       } else {
-        request.setAttribute("mensagem", "Não foi possível desativar o produto. Por favor, tente novamente!");
+        request.setAttribute("mensagem", "Nao foi possivel desativar o produto. Por favor, tente novamente!");
       }
     } else {
       request.setAttribute("sucesso", false);
-      request.setAttribute("mensagem", "Não foi possível desativar o produto. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Nao foi possivel desativar o produto. Por favor, tente novamente!");
     }
     
     ArrayList<ProdutoServlet> produtos = produtoDAO.listar(1);
