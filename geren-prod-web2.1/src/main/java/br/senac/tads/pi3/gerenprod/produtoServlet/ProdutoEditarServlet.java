@@ -76,7 +76,7 @@ public class ProdutoEditarServlet extends HttpServlet {
     if (sucesso) {
       request.setAttribute("mensagem", "Produto editado com sucesso!");
     } else {
-      request.setAttribute("mensagem", "N�o foi poss�vel editar o produto. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possível editar o produto. Por favor, tente novamente!");
     }
     
     ArrayList<ProdutoServlet> produtos = produtoDAO.listar(1);

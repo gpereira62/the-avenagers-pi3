@@ -182,7 +182,7 @@ public class ProdutoDAO implements CrudInterface<Produto> {
               + "true );";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("N�o foi poss�vel cadastrar o produto.");
+        throw new Exception("Não foi possível cadastrar o produto.");
       }
 
       db.commit();
@@ -209,7 +209,7 @@ public class ProdutoDAO implements CrudInterface<Produto> {
               + "Where idProduto = " + produtoID + "; ";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("N�o foi poss�vel desativar o produto.");
+        throw new Exception("Não foi possível desativar o produto.");
       }
 
       db.commit();
