@@ -13,7 +13,6 @@ import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
 import br.senac.tads.pi3.gerenprod.dao.AdministracaoDAO;
 import br.senac.tads.pi3.gerenprod.model.Administracao;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
-import br.senac.tads.pi3.gerenprod.administracaoServlet.AdministracaoServlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -22,10 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Bruna
- */
+
 @WebServlet(name = "AdministracaoEditarServlet", urlPatterns = {"/administracao/editar"})
 public class AdministracaoEditarServlet extends HttpServlet {
 
