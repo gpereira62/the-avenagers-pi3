@@ -92,7 +92,7 @@
             </div>
             <div class="form-group col-6"> <!-- Date input -->
               <label class="control-label" for="date">Data de devolução</label>
-              <input class="form-control" id="date" name="date" placeholder="dd/mm/yyyy" type="text"/>
+              <input class="form-control" id="date" name="date" value="${date}" placeholder="dd/mm/yyyy" type="text"/>
               <input name="idAluguel" value="${aluguel.idAluguel}" type="hidden">
               <input name="idProdutoSelecionado" value="${produtoSelecionado.idProduto}" type="hidden">
               <input name="precoDiaria" value="${produtoSelecionado.precoDiaria}" type="hidden">
@@ -128,6 +128,7 @@
   </div>
 </section>
 
+<c:if test="${valorTotal != null}">
 <section class="bg-primary-alt">
   <div class="container">
 
@@ -137,7 +138,7 @@
         <c:url value="/aluguel" var="aluguelUrl" />
         <form action="${aluguelUrl}" method="post">
           <h1 class="mb-1"><span class="text-muted">valor total</span></h1>
-          <h1 class="display-4 mb-5">R$ 350,00</h1>
+          <h1 class="display-4 mb-5">${valorTotal}</h1>
           <div>
             <button class="btn btn-primary-2 mr-2" value="Save" type="submit">Cancelar</button>
             <button class="btn btn-primary" value="Save" type="submit">Devolver veículo</button>
@@ -148,7 +149,7 @@
 
   </div>
 </section>
-
+</c:if>
 <!-- Não mudar ABAIXO -->
 
 <jsp:include page="utilidades/rodape.jsp" />
