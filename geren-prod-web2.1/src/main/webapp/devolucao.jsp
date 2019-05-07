@@ -17,6 +17,19 @@
         <h1 class="text-center">Devolução de veículos</h1>
         
         <!-- Pesqusia de clientes -->
+        <c:if test="${sucesso != null}">
+          <c:if test="${sucesso == true}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+          </c:if>
+          <c:if test="${sucesso == false}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          </c:if>
+              ${mensagem}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+        </c:if>
         
         <!-- Formuário de pesquisa -->
         <div class="row justify-content-center mb-3">
@@ -81,8 +94,9 @@
     <div class="row justify-content-center bootstrap-iso">
       <div class="col-xl-8 col-lg-9">
         <c:url value="/devolucao/selecionar" var="aluguelUrl" />
-        <form action="${aluguelUrl}" method="post">
-          
+        <form autocomplete="off" action="${aluguelUrl}" method="post">
+          <input autocomplete="false" name="hidden" type="text" style="display:none;">
+            
           <div class="row">
             <div class="form-group col-6"> <!-- Date input -->
               <div class="form-group">
@@ -135,10 +149,16 @@
     <!-- Formuário de cadastro -->
     <div class="row justify-content-center bootstrap-iso">
       <div class="col-xl-8 col-lg-9 text-center">
-        <c:url value="/aluguel" var="aluguelUrl" />
-        <form action="${aluguelUrl}" method="post">
+        <c:url value="/devolucao/devolver" var="devolucaolUrl" />
+        <form action="${devolucaolUrl}" method="post">
           <h1 class="mb-1"><span class="text-muted">valor total</span></h1>
           <h1 class="display-4 mb-5">${valorTotal}</h1>
+          
+          <input name="dataRetirada" value="${dataRetirada}" type="hidden">
+          <input name="dataDevolucao" value="${date}" type="hidden">
+          <input name="idClienteSelecionado" value="${clienteSelecionado.idCliente}" type="hidden">
+          <input name="precoDiaria" value="${produtoSelecionado.precoDiaria}" type="hidden">
+          
           <div>
             <button class="btn btn-primary-2 mr-2" value="Save" type="submit">Cancelar</button>
             <button class="btn btn-primary" value="Save" type="submit">Devolver veículo</button>

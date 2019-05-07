@@ -165,7 +165,8 @@
       <div class="col-xl-8 col-lg-9">
         <h1 class="text-center">Resumo do aluguel</h1>
         <c:url value="/aluguel/selecionar" var="aluguelUrl" />
-        <form action="${aluguelUrl}" method="post">
+        <form autocomplete="off" action="${aluguelUrl}" method="post">
+          <input autocomplete="false" name="hidden" type="text" style="display:none;">
           
           <div class="row">
             <div class="form-group col-6"> <!-- Date input -->

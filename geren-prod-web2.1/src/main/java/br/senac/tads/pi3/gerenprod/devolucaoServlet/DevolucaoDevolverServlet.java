@@ -12,11 +12,14 @@ import br.senac.tads.pi3.gerenprod.model.Cliente;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,40 +46,38 @@ public class DevolucaoDevolverServlet extends HttpServlet {
       return;
     }
 
-    Aluguel a = new Aluguel();
-    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    String idClienteTela = request.getParameter("idClienteSelecionado");
 
-    try {
-      a.setDataInicial(formato.parse(request.getParameter("dataRetirada")));
-      a.setDataFinal(formato.parse(request.getParameter("date")));
-    } catch (ParseException ex) {
-      request.setAttribute("mensagem", "Não foi possível realizar a devolução. Por favor, tente novamente!");
+    if (!idClienteTela.equals("")) {
+      int idCliente = Integer.parseInt(idClienteTela);
+      Aluguel aluguel = aluguelDAO.mostrar(idCliente);
+      
+      // Calcula a devolução
+      
+      double precoDiaria = Double.parseDouble(request.getParameter("precoDiaria"));
+      DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      long quantidadeDias = DAYS.between(
+              LocalDate.parse(request.getParameter("dataRetirada"), formatador), 
+              LocalDate.parse(request.getParameter("dataDevolucao"), formatador));
+      
+      double total = ((double)quantidadeDias + 1) * precoDiaria;
+      aluguel.setPrecoTotal(total);
+      aluguel.setDataFinal(java.sql.Date.valueOf(LocalDate.parse(request.getParameter("dataDevolucao"), formatador)));
+      
+      boolean sucesso = aluguelDAO.devolver(aluguel);
+      request.setAttribute("sucesso", sucesso);
+
+      if (sucesso) {
+        request.setAttribute("mensagem", "Devolução realizada com sucesso!");
+      } else {
+        request.setAttribute("mensagem", "Não foi possível realizar a devolução. Por favor, tente novamente!");
+      }
     }
-
-    a.setIdAluguel(Integer.parseInt(request.getParameter("idAluguel")));
-    a.setIdCliente(Integer.parseInt(request.getParameter("idClienteSelecionado")));
-    a.setIdProduto(Integer.parseInt(request.getParameter("idProdutoSelecionado")));
     
-    double precoDiaria = Double.parseDouble(request.getParameter("precoDiaria"));
-    long quantidadeDias = DAYS.between(LocalDate.parse(request.getParameter("dataRetirada")), LocalDate.parse(request.getParameter("date")));
-    
-    double total = (double)quantidadeDias * precoDiaria;
-    
-    a.setPrecoTotal(total);
-    
-    boolean sucesso = aluguelDAO.salvar(a);
-    request.setAttribute("sucesso", sucesso);
-
-    if (sucesso) {
-      request.setAttribute("mensagem", "Devolução realizada com sucesso!");
-    } else {
-      request.setAttribute("mensagem", "Não foi possível realizar a devolução. Por favor, tente novamente!");
-    }
-
     ArrayList<Cliente> clientes = clienteDAO.listarAlugando(u.getIdFilial());
     
     request.setAttribute("clientes", clientes);
-    request.getRequestDispatcher("/aluguel.jsp").forward(request, response);
+    request.getRequestDispatcher("/devolucao.jsp").forward(request, response);
   }
-
+    
 }
