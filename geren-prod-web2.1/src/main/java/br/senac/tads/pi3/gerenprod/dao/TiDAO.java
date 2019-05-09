@@ -31,6 +31,7 @@ public class TiDAO implements CrudInterface<Ti> {
         t.setNomeUsuario(rs.getString("NomeUsuario"));
         t.setEmail(rs.getString("Email"));
         t.setSenha(rs.getString("Senha")); 
+        t.setNomeDepartamento(rs.getString("NomeDepartamento")); 
         t.setIdDepartamento(rs.getInt("idDepartamento"));
         t.setAtivo(rs.getBoolean("Ativo"));
         tis.add(t);
@@ -56,7 +57,6 @@ public class TiDAO implements CrudInterface<Ti> {
         t.setIdUsuario(rs.getInt("idUsuario"));
         t.setNomeUsuario(rs.getString("NomeUsuario"));
         t.setEmail(rs.getString("Email"));
-        t.setSenha(rs.getString("Senha"));
         t.setIdDepartamento(rs.getInt("idDepartamento"));
         t.setAtivo(rs.getBoolean("Ativo"));
       }
@@ -78,11 +78,17 @@ public class TiDAO implements CrudInterface<Ti> {
       String sql
               = "UPDATE usuario SET "
               + "NomeUsuario = '" + t.getNomeUsuario() + "', "
-              + "email = '" + t.getEmail() + "', "
-              + "Senha = '" + t.getSenha() + "', "
-              + "IdDepartamento= " + t.getIdDepartamento() + ""
-              + "Where idUsuario = " + t.getIdUsuario() + "; ";
+              + "email = '" + t.getEmail() + "', ";
       
+              if (!t.getSenha().isEmpty()) {
+                sql = sql + "Senha = '" + t.getSenha() + "', ";
+              }
+              
+              sql = sql + "IdDepartamento= " + t.getIdDepartamento() + " "
+              + "Where idUsuario = " + t.getIdUsuario() + ";";
+      
+              System.out.println(sql);
+              
       if (!db.executarAlteracao(sql)) {
         throw new Exception("Não foi possivel atualizar os dados de usuário.");
       }
@@ -113,12 +119,11 @@ public class TiDAO implements CrudInterface<Ti> {
               + "'" + t.getEmail() + "', "
               + "'" + t.getSenha() + "', "
               + "true, "
-              + "'" + t.getIdDepartamento() + "', "
-              + t.getIdFilial() + ", "
-              + "true );";
+              + t.getIdDepartamento() + ", "
+              + t.getIdFilial() + ");";
 
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Não foi possível cadastrar o produto.");
+        throw new Exception("Não foi possível cadastrar o usuário.");
       }
 
       db.commit();

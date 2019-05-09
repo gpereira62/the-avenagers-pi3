@@ -6,7 +6,10 @@
 package br.senac.tads.pi3.gerenprod.tiServlet;
 
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
+import br.senac.tads.pi3.gerenprod.dao.DepartamentoDAO;
 import br.senac.tads.pi3.gerenprod.dao.TiDAO;
+import br.senac.tads.pi3.gerenprod.model.Departamento;
+import br.senac.tads.pi3.gerenprod.model.Ti;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,10 +24,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Bruna
  */
-@WebServlet(name = "TiDesativarServlet", urlPatterns = {"/TiDesativarServlet"})
+@WebServlet(name = "TiDesativarServlet", urlPatterns = {"/ti/desativar"})
 public class TiDesativarServlet extends HttpServlet {
 
- private final CrudInterface tiDAO = new TiDAO();
+  private final CrudInterface tiDAO = new TiDAO();
+  private final CrudInterface departamentoDAO = new DepartamentoDAO();
  
  @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,16 +51,18 @@ public class TiDesativarServlet extends HttpServlet {
       if (sucesso) {
         request.setAttribute("mensagem", "Usuário desativado com sucesso!");
       } else {
-        request.setAttribute("mensagem", "Não foi possível desativar o usuario. Por favor, tente novamente!");
+        request.setAttribute("mensagem", "Não foi possível desativar o usuário. Por favor, tente novamente!");
       }
     } else {
       request.setAttribute("sucesso", false);
-      request.setAttribute("mensagem", "Não foi possível desativar o produto. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possível desativar o usuário. Por favor, tente novamente!");
     }
     
-    ArrayList<TiServlet> tis = tiDAO.listar(1);
-    
-    request.setAttribute("tis", tis);
+    ArrayList<Departamento> departamentos = departamentoDAO.listar(u.getIdFilial());
+    ArrayList<Ti> tis = tiDAO.listar(u.getIdFilial());
+ 
+    request.setAttribute("tis", tis); 
+    request.setAttribute("departamentos", departamentos);
     request.getRequestDispatcher("/ti.jsp").forward(request, response);
   }
   

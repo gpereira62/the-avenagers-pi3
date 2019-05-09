@@ -6,6 +6,7 @@
 package br.senac.tads.pi3.gerenprod.tiServlet;
 
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
+import br.senac.tads.pi3.gerenprod.dao.DepartamentoDAO;
 import br.senac.tads.pi3.gerenprod.dao.TiDAO;
 import br.senac.tads.pi3.gerenprod.model.Departamento;
 import br.senac.tads.pi3.gerenprod.model.Ti;
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class TiServlet extends HttpServlet {
   
 private final CrudInterface tiDAO = new TiDAO();
+private final CrudInterface departamentoDAO = new DepartamentoDAO();
   
 @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,9 +40,11 @@ private final CrudInterface tiDAO = new TiDAO();
       return;
     }
     
-    ArrayList<TiServlet> tis = tiDAO.listar(1);
+    ArrayList<Departamento> departamentos = departamentoDAO.listar(u.getIdFilial());
+    ArrayList<Ti> tis = tiDAO.listar(u.getIdFilial());
  
     request.setAttribute("tis", tis); 
+    request.setAttribute("departamentos", departamentos); 
     request.getRequestDispatcher("/ti.jsp").forward(request, response);
   }
   
@@ -59,8 +63,10 @@ private final CrudInterface tiDAO = new TiDAO();
     t.setNomeUsuario(request.getParameter("nomeUsuario"));
     t.setEmail(request.getParameter("email"));
     t.setSenha(request.getParameter("senha"));
+    t.criptografarSenha();
+    t.setIdDepartamento(Integer.parseInt(request.getParameter("idDepartamento")));
+    t.setIdFilial(u.getIdFilial());
     
-
     boolean sucesso = tiDAO.salvar(t);
     request.setAttribute("sucesso", sucesso);
     
@@ -70,8 +76,11 @@ private final CrudInterface tiDAO = new TiDAO();
       request.setAttribute("mensagem", "Não foi possível cadastrar o Usuario. Por favor, tente novamente!");
     }
     
-    ArrayList<TiServlet> tis = tiDAO.listar(1);
-    request.setAttribute("tis", tis);
+    ArrayList<Departamento> departamentos = departamentoDAO.listar(u.getIdFilial());
+    ArrayList<Ti> tis = tiDAO.listar(u.getIdFilial());
+ 
+    request.setAttribute("tis", tis); 
+    request.setAttribute("departamentos", departamentos);
     request.getRequestDispatcher("/ti.jsp").forward(request, response);
   }
 }

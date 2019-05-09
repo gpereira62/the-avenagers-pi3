@@ -5,6 +5,8 @@
  */
 package br.senac.tads.pi3.gerenprod.model;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  *
  * @author Bruna
@@ -13,7 +15,7 @@ public class Ti extends Object {
   
   
   private int idUsuario, idFilial, idDepartamento;
-  private String nomeUsuario, email, senha;
+  private String nomeUsuario, email, senha, nomeDepartamento;
   private boolean ativo;
 
   public Ti() {
@@ -26,17 +28,21 @@ public class Ti extends Object {
     this.ativo = true;
   }
 
-  public Ti(int idUsuario, int idFilial, int idDepartamento, String nomeUsuario,
-          String email, String senha, boolean ativo) {
-    this.idUsuario = 0;
-    this.idFilial = 0;
-    this.idDepartamento = 0;
-    this.nomeUsuario = "";
-    this.email = "";
-    this.senha = "";
-    this.ativo = true;
+  public Ti(int idUsuario, int idFilial, int idDepartamento, String nomeUsuario, String email, String senha, String nomeDepartamento, boolean ativo) {
+    this.idUsuario = idUsuario;
+    this.idFilial = idFilial;
+    this.idDepartamento = idDepartamento;
+    this.nomeUsuario = nomeUsuario;
+    this.email = email;
+    this.senha = senha;
+    this.nomeDepartamento = nomeDepartamento;
+    this.ativo = ativo;
   }
 
+  public void criptografarSenha() {
+    this.senha = BCrypt.hashpw(this.senha, BCrypt.gensalt());
+  }
+  
   public void setIdUsuario(int idUsuario) {
     this.idUsuario = idUsuario;
   }
@@ -92,4 +98,12 @@ public class Ti extends Object {
   public boolean isAtivo() {
     return ativo;
   } 
+
+  public String getNomeDepartamento() {
+    return nomeDepartamento;
+  }
+
+  public void setNomeDepartamento(String nomeDepartamento) {
+    this.nomeDepartamento = nomeDepartamento;
+  }
 }

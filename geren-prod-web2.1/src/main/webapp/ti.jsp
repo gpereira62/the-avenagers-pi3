@@ -29,7 +29,7 @@
               </button>
             </div>
         </c:if>
-        <!-- Depois tem que alterar os nomes para o nome da classe e atributos do model -->
+        
         <c:if test="${ti.idUsuario == null}">
           <c:url value="/ti" var="registerUrl" />
         </c:if>
@@ -52,9 +52,9 @@
             <label for="email">E-mail:</label>
             <input type="text" class="form-control" id="email" name="email" value="${ti.email}" required="true" placeholder="Ex: mariana@gmail.com">
           </div>
-            <div class="form-group">
+           <div class="form-group">
             <label for="senha">Senha:</label>
-            <input type="text" class="form-control" id="senha" name="senha" value="${ti.senha}" required="true" placeholder="Ex: 123">
+            <input type="text" class="form-control" id="senha" name="senha" placeholder="Ex: 123">
           </div>
           <div class="form-group mb-0">
             <label for="departamento">Departamento:</label>
@@ -62,7 +62,7 @@
           <div class="form-group">
             <select name="idDepartamento" class="custom-select">
               <c:forEach items="${departamentos}" var="departamento">
-              <option value="${departamento.idDepartamento}">${departamento.nomeDepartamento}</option> 
+                <option value="${departamento.idDepartamento}" <c:if test="${ti.idDepartamento == departamento.idDepartamento}">selected</c:if> >${departamento.nomeDepartamento}</option> 
               </c:forEach>
             </select>
             <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -127,14 +127,14 @@
             </tr>
           </thead>
           <tbody id="tb-lista">
-            <c:forEach items="${ti}" var="ti">
+            <c:forEach items="${tis}" var="ti">
               <tr>
                 <th scope="row">${ti.idUsuario}</th>
                 <td>${ti.nomeUsuario}</td>
                 <td>${ti.email}</td>
-                <td>${ti.departamento}</td>             
+                <td>${ti.nomeDepartamento}</td>             
                 <td>
-                  <a href="${pageContext.request.contextPath}/produto/editar?idProduto=${ti.idUsuario}" class="mr-2">
+                  <a href="${pageContext.request.contextPath}/ti/editar?idUsuario=${ti.idUsuario}" class="mr-2">
                     <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>Icon For Edit</title>
                       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -144,7 +144,7 @@
                       </g>
                     </svg>
                   </a>
-                  <a href="${pageContext.request.contextPath}/produto/desativar?idProduto=${ti.idUsuario}" onclick="return confirm('Tem certeza que deseja desativar este produto?');" class="">
+                  <a href="${pageContext.request.contextPath}/ti/desativar?idUsuario=${ti.idUsuario}" onclick="return confirm('Tem certeza que deseja desativar este usuário?');" class="">
                     <svg class="icon bg-primary-2" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>Icon For Trash</title>
                       <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
