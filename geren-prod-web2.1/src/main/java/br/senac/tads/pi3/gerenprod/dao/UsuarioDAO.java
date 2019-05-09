@@ -22,7 +22,9 @@ public class UsuarioDAO implements CrudInterface<Usuario> {
     try {
       
       String sql = "select usuario.idUsuario, usuario.NomeUsuario, usuario.Email, usuario.Senha, usuario.Ativo, usuario.idDepartamento, departamento.NomeDepartamento, usuario.idFilial, filial.NomeFilial from usuario inner join departamento on departamento.idDepartamento = usuario.idDepartamento inner join filial on filial.idFilial = usuario.idFilial "
-                 + "where usuario.Email = '" + usuario.getEmail() + "' and usuario.Senha = '" + usuario.getSenha() + "' and usuario.Ativo = true;";
+                 + "where usuario.Email = '" + usuario.getEmail() + "' and usuario.Ativo = true;";
+      
+      System.out.println(sql);
       
       ResultSet rs = db.executarConsulta(sql) != null ? db.executarConsulta(sql) : null;
       
