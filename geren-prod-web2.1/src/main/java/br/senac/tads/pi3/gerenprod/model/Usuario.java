@@ -30,7 +30,7 @@ public final class Usuario {
   private static String GGA = "Gerencia global adm";
   private static String FA = "Funcionário adm";
   
-    // Acesso Ã s pÃ¡ginas
+    // Acesso as páginas
   private boolean acessaProduto = false;
   private boolean acessaCliente = false;
   private boolean acessaAluguel = false;

@@ -19,18 +19,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author Bruna
  */
-@WebServlet(name = "TiServlet", urlPatterns = {"/ti"})
-public class TiServlet extends HttpServlet {
+@WebServlet(name = "TiEditarServlet", urlPatterns = {"/ti/editar"})
+public class TiEditarServlet extends HttpServlet {
   
-private final CrudInterface tiDAO = new TiDAO();
-private final CrudInterface departamentoDAO = new DepartamentoDAO();
-  
-@Override
+  private final CrudInterface tiDAO = new TiDAO();
+  private final CrudInterface departamentoDAO = new DepartamentoDAO();
+
+  @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     Usuario u = new Usuario(request);
@@ -40,17 +39,25 @@ private final CrudInterface departamentoDAO = new DepartamentoDAO();
       return;
     }
     
+    String id = request.getParameter("idUsuario");
+    
+    if (id != null) {
+      int idUsuario = Integer.parseInt(id);
+      Ti ti = (Ti) tiDAO.mostrar(idUsuario);
+      request.setAttribute("ti", ti);
+    }
+    
     ArrayList<Departamento> departamentos = departamentoDAO.listar(u.getIdFilial());
     ArrayList<Ti> tis = tiDAO.listar(u.getIdFilial());
  
     request.setAttribute("tis", tis); 
-    request.setAttribute("departamentos", departamentos); 
+    request.setAttribute("departamentos", departamentos);
     request.getRequestDispatcher("/ti.jsp").forward(request, response);
   }
   
-@Override
-  protected void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException {
-      
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
     Usuario u = new Usuario(request);
     
     if(!u.acessaTi()) {
@@ -60,20 +67,22 @@ private final CrudInterface departamentoDAO = new DepartamentoDAO();
     
     Ti t = new Ti();
     
+    t.setIdUsuario(Integer.parseInt(request.getParameter("idUsuario")));
     t.setNomeUsuario(request.getParameter("nomeUsuario"));
     t.setEmail(request.getParameter("email"));
     t.setSenha(request.getParameter("senha"));
-    t.criptografarSenha();
+    if (!t.getSenha().isEmpty()) {
+      t.criptografarSenha();
+    }
     t.setIdDepartamento(Integer.parseInt(request.getParameter("idDepartamento")));
-    t.setIdFilial(u.getIdFilial());
-    
-    boolean sucesso = tiDAO.salvar(t);
+
+    boolean sucesso = tiDAO.editar(t);
     request.setAttribute("sucesso", sucesso);
     
     if (sucesso) {
-      request.setAttribute("mensagem", "Usuário cadastrado com sucesso!");
+      request.setAttribute("mensagem", "Usuário editado com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Não foi possível cadastrar o Usuario. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possível editar o usuário. Por favor, tente novamente!");
     }
     
     ArrayList<Departamento> departamentos = departamentoDAO.listar(u.getIdFilial());

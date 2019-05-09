@@ -11,63 +11,30 @@ import br.senac.tads.pi3.gerenprod.model.Aluguel;
 import br.senac.tads.pi3.gerenprod.model.Cliente;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
-import java.text.DateFormat;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static java.time.temporal.ChronoUnit.DAYS;
-import java.util.Date;
 
 /**
  *
  * @author Bruna
  */
-@WebServlet(name = "DevolucaoSelecionarServlet", urlPatterns = {"/devolucao/selecionar"})
-public class DevolucaoSelecionarServlet extends HttpServlet {
+@WebServlet(name = "DevolucaoDevolverServlet", urlPatterns = {"/devolucao/devolver"})
+public class DevolucaoDevolverServlet extends HttpServlet {
 
   private final ClienteDAO clienteDAO = new ClienteDAO();
   private final AluguelDAO aluguelDAO = new AluguelDAO();
-  
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    Usuario u = new Usuario(request);
-    
-    if(!u.acessaDevolucao()) {
-      response.sendRedirect(request.getContextPath() + "/");
-      return;
-    }
-    
-    String idClienteTela = request.getParameter("idCliente");
-
-    if (!idClienteTela.equals("")) {
-      int idCliente = Integer.parseInt(idClienteTela);
-      Aluguel aluguel = aluguelDAO.mostrar(idCliente);
-      
-      request.setAttribute("idCliente", idClienteTela);
-      request.setAttribute("clienteSelecionado", aluguel.getCliente());
-      request.setAttribute("produtoSelecionado", aluguel.getProduto());
-      request.setAttribute("aluguel", aluguel);
-      
-      String pattern = "dd/MM/yyyy";
-      DateFormat df = new SimpleDateFormat(pattern);
-      
-      request.setAttribute("dataRetirada", df.format(aluguel.getDataInicial()));
-    }
-    
-    ArrayList<Cliente> clientes = clienteDAO.listarAlugando(u.getIdFilial());
-    
-    request.setAttribute("clientes", clientes);
-    request.getRequestDispatcher("/devolucao.jsp").forward(request, response);
-  }
   
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -85,27 +52,26 @@ public class DevolucaoSelecionarServlet extends HttpServlet {
       int idCliente = Integer.parseInt(idClienteTela);
       Aluguel aluguel = aluguelDAO.mostrar(idCliente);
       
-      request.setAttribute("clienteSelecionado", aluguel.getCliente());
-      request.setAttribute("produtoSelecionado", aluguel.getProduto());
-      request.setAttribute("aluguel", aluguel);
-      
-      request.setAttribute("dataRetirada", request.getParameter("dataRetirada"));
-      
       // Calcula a devolução
       
       double precoDiaria = Double.parseDouble(request.getParameter("precoDiaria"));
       DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
       long quantidadeDias = DAYS.between(
               LocalDate.parse(request.getParameter("dataRetirada"), formatador), 
-              LocalDate.parse(request.getParameter("date"), formatador));
-
-      request.setAttribute("date", request.getParameter("date"));
+              LocalDate.parse(request.getParameter("dataDevolucao"), formatador));
       
       double total = ((double)quantidadeDias + 1) * precoDiaria;
+      aluguel.setPrecoTotal(total);
+      aluguel.setDataFinal(java.sql.Date.valueOf(LocalDate.parse(request.getParameter("dataDevolucao"), formatador)));
       
-      DecimalFormat format = new DecimalFormat("R$ ###,###.00");
-   
-      request.setAttribute("valorTotal", format.format(total));
+      boolean sucesso = aluguelDAO.devolver(aluguel);
+      request.setAttribute("sucesso", sucesso);
+
+      if (sucesso) {
+        request.setAttribute("mensagem", "Devolução realizada com sucesso!");
+      } else {
+        request.setAttribute("mensagem", "Não foi possível realizar a devolução. Por favor, tente novamente!");
+      }
     }
     
     ArrayList<Cliente> clientes = clienteDAO.listarAlugando(u.getIdFilial());
@@ -113,4 +79,5 @@ public class DevolucaoSelecionarServlet extends HttpServlet {
     request.setAttribute("clientes", clientes);
     request.getRequestDispatcher("/devolucao.jsp").forward(request, response);
   }
+    
 }

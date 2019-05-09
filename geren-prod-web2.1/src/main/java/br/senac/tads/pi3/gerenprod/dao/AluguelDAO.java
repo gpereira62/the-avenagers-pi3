@@ -56,9 +56,9 @@ public class AluguelDAO implements CrudInterface<Aluguel> {
         
         a.setIdAluguel(rs.getInt("idAluguel"));
         a.setDataInicial(rs.getDate("Datainicial"));
-        a.setIdAluguel(rs.getInt("idCliente"));
-        a.setIdAluguel(rs.getInt("idProduto"));
-        a.setIdAluguel(rs.getInt("idFilial"));
+        a.setIdCliente(rs.getInt("idCliente"));
+        a.setIdProduto(rs.getInt("idProduto"));
+        a.setIdFilial(rs.getInt("idFilial"));
         a.setCliente(c);
         a.setProduto(p);
       }
@@ -142,8 +142,10 @@ public class AluguelDAO implements CrudInterface<Aluguel> {
         + "ValorTotal = " + a.getPrecoTotal() + " "
         + "Where idAluguel = " + a.getIdAluguel()+ ";";
       
+      System.out.println(sql);
+      
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Não foi possivel cadastrar o aluguel.");
+        throw new Exception("Não foi possivel devolver o produto.");
       }
 
       sql
@@ -151,8 +153,10 @@ public class AluguelDAO implements CrudInterface<Aluguel> {
         + "Alugado = 0 "
         + "Where idProduto = " + a.getIdProduto() + ";";
 
+      System.out.println(sql);
+      
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Não foi possivel cadastrar o aluguel.");
+        throw new Exception("Não foi possivel devolver o produto.");
       }
       
       sql
@@ -160,8 +164,10 @@ public class AluguelDAO implements CrudInterface<Aluguel> {
         + "Alugando = 0 "
         + "Where idCliente = " + a.getIdCliente()+ ";";
 
+      System.out.println(sql);
+      
       if (!db.executarAlteracao(sql)) {
-        throw new Exception("Não foi possivel cadastrar o aluguel.");
+        throw new Exception("Não foi possivel devolver o produto.");
       }
 
       db.commit();

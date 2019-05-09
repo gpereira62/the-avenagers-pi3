@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -27,10 +28,6 @@ public class LoginServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     Usuario u = new Usuario(request);
-    
-    System.out.println("");
-    System.out.println(u.getIdUsuario() + " " + u.getNomeDepartamento());
-    System.out.println("");
     
     if(u.getIdUsuario() != 0) {
       response.sendRedirect(request.getContextPath() + "/bemvindo");
@@ -47,13 +44,18 @@ public class LoginServlet extends HttpServlet {
     
     usuario.setEmail(request.getParameter("email"));
     usuario.setSenha(request.getParameter("senha"));
-
+    usuario.criptografarSenha();
+    
+    String senhaAberta = request.getParameter("senha");
+    
     usuario = usuarioDAO.login(usuario);
     
     if (usuario.getIdUsuario() != 0){
       
-      usuario.setSession(request);
-      response.sendRedirect(request.getContextPath() + "/bemvindo");
+      if (BCrypt.checkpw(senhaAberta, usuario.getSenha())) {
+        usuario.setSession(request);
+        response.sendRedirect(request.getContextPath() + "/bemvindo");
+      }
       
     } else {
       
