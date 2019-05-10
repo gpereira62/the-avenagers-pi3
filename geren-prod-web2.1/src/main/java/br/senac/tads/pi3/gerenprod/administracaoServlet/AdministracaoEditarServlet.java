@@ -74,9 +74,9 @@ public class AdministracaoEditarServlet extends HttpServlet {
     request.setAttribute("sucesso", sucesso);
     
     if (sucesso) {
-      request.setAttribute("mensagem", "Filial editado com sucesso!");
+      request.setAttribute("mensagem", "Filial editada com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Não foi possivel editar o filial. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possivel editar a filial. Por favor, tente novamente!");
     }
     
     ArrayList<AdministracaoServlet> administracaos = AdministracaoDAO.listar(1);
