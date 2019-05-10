@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
 
+    @Override
     public ArrayList<Relatorio> listar(int idFilial) {
         DB db = new DB(true);
         try {
@@ -31,9 +32,10 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
                     + "INNER JOIN Produto ON Produto.idProduto = Aluguel.idProduto";
 
             ResultSet rs = db.executarConsulta(sql);
-            Relatorio relat = new Relatorio();
+            
             ArrayList<Relatorio> relatorios = new ArrayList<>();
             while (rs.next()) {
+                Relatorio relat = new Relatorio();
                 relat.setIdAluguel(rs.getInt("idAluguel"));
                 relat.setNomeCliente(rs.getString("Nome"));
                 relat.setPrecoDiaria(rs.getDouble("PrecoDiaria"));

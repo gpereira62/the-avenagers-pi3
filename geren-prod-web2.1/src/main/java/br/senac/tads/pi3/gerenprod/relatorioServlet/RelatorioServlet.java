@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RelatorioServlet", urlPatterns = {"/relatorio"})
 public class RelatorioServlet extends HttpServlet {
-    private final CrudInterface RelatorioDAO = new RelatorioDAO() {};
+  private final CrudInterface RelatorioDAO = new RelatorioDAO() {};
     
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +35,7 @@ public class RelatorioServlet extends HttpServlet {
       return;
     }
     ArrayList<Relatorio> relatorios = RelatorioDAO.listar(1);
-    
+
     request.setAttribute("relatorios", relatorios);
     request.getRequestDispatcher("/relatorio.jsp").forward(request, response);
   }

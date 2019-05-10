@@ -10,10 +10,14 @@ package br.senac.tads.pi3.gerenprod.model;
  * @author mac-ale
  */
 public class Relatorio extends Object {
-    int idAluguel;
-    String nomeCliente, NomeProduto;
-    double PrecoDiaria;
-    double ValorTotal;
+   private int idAluguel;
+   private String nomeCliente, NomeProduto;
+   private double PrecoDiaria;
+   private double ValorTotal;
+    
+    
+    public Relatorio(){
+    }
     
     public int getIdAluguel() {
         return idAluguel;
