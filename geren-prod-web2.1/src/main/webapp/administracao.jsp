@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
               <label for="ano">CNPJ</label>
-              <input type="text" class="form-control" id="cnpj" name="cnpj" value="${administracao.cnpj}" required="true" placeholder="Ex: 12.345.678/9012-87">
+              <input type="text" class="form-control" id="cnpj" name="cnpj" value="${administracao.cnpj}" required="true" placeholder="Ex: 12345678901287" maxlength="14">
             </div>
             <div class="form-group">
               <label for="modelo">Estado</label>
@@ -62,7 +62,7 @@
             </div>
             <div class="form-group">
               <label for="placa">CEP:</label>
-              <input type="number" class="form-control" name="cep" id="cep" value="${administracao.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 02203-030">
+              <input type="text" class="form-control" name="cep" id="cep" value="${administracao.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 02203030" maxlength="8">
             </div> 
             <c:if test="${administracao.idFilial ne null}">
               <div class="form-group mt-5">
