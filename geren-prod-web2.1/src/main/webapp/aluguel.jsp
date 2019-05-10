@@ -193,7 +193,7 @@
                 <dl />
               </ul>
               <div class="mt-3 text-right">
-                <button class="btn btn-primary-2 mr-2" value="Save" type="submit">Cancelar</button>
+                <a class="btn btn-primary-2 mr-2" href="${pageContext.request.contextPath}/aluguel">Cancelar</a>
                 <button class="btn btn-primary" value="Save" type="submit">Alugar</button>
               </div>
             </div>
