@@ -11,8 +11,6 @@ package br.senac.tads.pi3.gerenprod.administracaoServlet;
  */
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
 import br.senac.tads.pi3.gerenprod.dao.AdministracaoDAO;
-import br.senac.tads.pi3.gerenprod.model.Administracao;
-import br.senac.tads.pi3.gerenprod.administracaoServlet.AdministracaoServlet;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,9 +48,9 @@ public class AdministracaoDesativarServlet extends HttpServlet {
       request.setAttribute("sucesso", sucesso);
 
       if (sucesso) {
-        request.setAttribute("mensagem", "Filial desativado com sucesso!");
+        request.setAttribute("mensagem", "Filial desativada com sucesso!");
       } else {
-        request.setAttribute("mensagem", "Não foi possível desativar o Filial. Por favor, tente novamente!");
+        request.setAttribute("mensagem", "Não foi possível desativar a Filial. Por favor, tente novamente!");
       }
     } else {
       request.setAttribute("sucesso", false);

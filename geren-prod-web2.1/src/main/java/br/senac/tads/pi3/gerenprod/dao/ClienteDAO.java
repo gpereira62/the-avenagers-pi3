@@ -164,7 +164,7 @@ public class ClienteDAO implements CrudInterface<Cliente> {
             System.out.println(sql);
             
             if (!db.executarAlteracao(sql)) {
-                throw new Exception("N�o foi poss�vel atualizar o produto.");
+                throw new Exception("Não foi possivel atualizar o produto.");
             }
 
             db.commit();
@@ -202,7 +202,7 @@ public class ClienteDAO implements CrudInterface<Cliente> {
                     + "true );";
 
             if (!db.executarAlteracao(sql)) {
-                throw new Exception("N�o foi poss�vel cadastrar o produto.");
+                throw new Exception("Não foi possivel cadastrar o produto.");
             }
 
             db.commit();
@@ -229,7 +229,7 @@ public class ClienteDAO implements CrudInterface<Cliente> {
                     + "Where idCliente = " + clienteID + "; ";
 
             if (!db.executarAlteracao(sql)) {
-                throw new Exception("N�o foi poss�vel desativar o produto.");
+                throw new Exception("Não foi possivel desativar o produto.");
             }
 
             db.commit();

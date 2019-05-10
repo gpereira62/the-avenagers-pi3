@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -46,6 +47,10 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
       return;
     }
 
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    String hoje = formato.format(new Date());
+    request.setAttribute("hoje", hoje);
+    
     ArrayList<Produto> produtos = produtoDAO.listarNaoAlugado(u.getIdFilial());
     request.setAttribute("produtos", produtos);
     ArrayList<Cliente> clientes = clienteDAO.listarNaoAlugando(u.getIdFilial());
@@ -57,6 +62,9 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
       int idCliente = Integer.parseInt(idClienteTela);
       Cliente clienteSelecionado = (Cliente) clienteDAO.mostrar(idCliente);
       request.setAttribute("clienteSelecionado", clienteSelecionado);
+      
+      request.setAttribute("sucesso", true);
+      request.setAttribute("mensagem", "Selecionado com sucesso!");
     }
 
     String idProdutoTela = request.getParameter("idProduto");
@@ -65,6 +73,9 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
       int idProduto = Integer.parseInt(idProdutoTela);
       Produto produtoSelecionado = (Produto) produtoDAO.mostrar(idProduto);
       request.setAttribute("produtoSelecionado", produtoSelecionado);
+      
+      request.setAttribute("sucesso", true);
+      request.setAttribute("mensagem", "Selecionado com sucesso!");
     }
 
     request.getRequestDispatcher("/aluguel.jsp").forward(request, response);
@@ -80,8 +91,11 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
       return;
     }
 
-    Aluguel a = new Aluguel();
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    String hoje = formato.format(new Date());
+    request.setAttribute("hoje", hoje);
+    
+    Aluguel a = new Aluguel();
 
     try {
       a.setDataInicial(formato.parse(request.getParameter("date")));

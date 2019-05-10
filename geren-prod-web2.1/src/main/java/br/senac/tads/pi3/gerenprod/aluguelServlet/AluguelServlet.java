@@ -11,7 +11,9 @@ import br.senac.tads.pi3.gerenprod.model.Cliente;
 import br.senac.tads.pi3.gerenprod.model.Produto;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +40,10 @@ public class AluguelServlet extends HttpServlet {
       return;
     }
 
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    String hoje = formato.format(new Date());
+    request.setAttribute("hoje", hoje);
+    
     ArrayList<Produto> produtos = produtoDAO.listarNaoAlugado(u.getIdFilial());
     request.setAttribute("produtos", produtos);
     ArrayList<Cliente> clientes = clienteDAO.listarNaoAlugando(u.getIdFilial());

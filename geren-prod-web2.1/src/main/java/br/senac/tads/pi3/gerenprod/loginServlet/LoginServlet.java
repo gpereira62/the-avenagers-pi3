@@ -55,6 +55,9 @@ public class LoginServlet extends HttpServlet {
       if (BCrypt.checkpw(senhaAberta, usuario.getSenha())) {
         usuario.setSession(request);
         response.sendRedirect(request.getContextPath() + "/bemvindo");
+      } else {
+        request.setAttribute("mensagem", "Email e/ou senha incorretos");
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
       }
       
     } else {

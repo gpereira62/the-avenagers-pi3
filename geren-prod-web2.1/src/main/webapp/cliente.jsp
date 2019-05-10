@@ -51,7 +51,7 @@
           </div>
           <div class="form-group">
             <label for="cpf">CPF:</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" value="${cliente.cpf}" required="true" placeholder="Ex: 419.759.388.xx">
+            <input type="text" class="form-control" id="cpf" name="cpf" value="${cliente.cpf}" required="true" placeholder="Ex: 419759388xx" maxlength="11">
           </div>
           <div class="form-group">
             <label for="email">E-mail:</label>
@@ -67,7 +67,7 @@
           </div>
           <div class="form-group">
             <label for="cep">Cep:</label>
-            <input type="text" class="form-control" name="cep" id="cep" value="${cliente.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 04409-00">
+            <input type="text" class="form-control" name="cep" id="cep" value="${cliente.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 0440900" maxlength="8">
           </div>
           <div class="form-group">
             <label for="rua">Rua:</label>
@@ -131,10 +131,8 @@
       </div>
     </div>
 
-    <!-- Tabela de produtos -->
-    <div class="row justify-content-center mb-3">
-      <div class="col">
-        <table class="table table-hover" id="table-cadastro-produto">
+        <div class="table-responsive">
+          <table class="table table-hover" id="table-cadastro-produto">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -150,15 +148,14 @@
           <tbody id="tb-lista">
             <c:forEach items="${clientes}" var="cliente">
               <tr>
-              <tr>
-                <th scope="row">${cliente.idCliente}</th>
-                <td>${cliente.nomeCliente}</td>
-                <td>${cliente.cpf}</td>
-                <td>${cliente.email}</td>
-                <td>${cliente.cnh}</td>
-                <td>${cliente.telefone}</td>
-                <td>${cliente.cep}</td>
-                <td>
+                <td scope="row" style="white-space: nowrap;">${cliente.idCliente}</td>
+                <td style="white-space: nowrap;">${cliente.nomeCliente}</td>
+                <td style="white-space: nowrap;">${cliente.cpf}</td>
+                <td style="white-space: nowrap;">${cliente.email}</td>
+                <td style="white-space: nowrap;">${cliente.cnh}</td>
+                <td style="white-space: nowrap;">${cliente.telefone}</td>
+                <td style="white-space: nowrap;">${cliente.cep}</td>
+                <td style="white-space: nowrap;">
                   <a href="${pageContext.request.contextPath}/cliente/editar?idCliente=${cliente.idCliente}" class="mr-2">
                     <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>Icon For Edit</title>
@@ -184,10 +181,9 @@
             </c:forEach>
           </tbody>
         </table>
-      </div>
+        </div>
     </div>
 
-  </div>
 </section>
 
 <!-- Não mudar ABAIXO -->

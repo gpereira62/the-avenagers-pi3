@@ -13,7 +13,6 @@ import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,7 +23,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static java.time.temporal.ChronoUnit.DAYS;
-import java.util.Date;
 
 /**
  *
@@ -49,6 +47,9 @@ public class DevolucaoSelecionarServlet extends HttpServlet {
     String idClienteTela = request.getParameter("idCliente");
 
     if (!idClienteTela.equals("")) {
+      request.setAttribute("sucesso", true);
+      request.setAttribute("mensagem", "Cliente selecionado.");
+      
       int idCliente = Integer.parseInt(idClienteTela);
       Aluguel aluguel = aluguelDAO.mostrar(idCliente);
       
@@ -80,8 +81,9 @@ public class DevolucaoSelecionarServlet extends HttpServlet {
     }
 
     String idClienteTela = request.getParameter("idClienteSelecionado");
+    String dataSelecionada = request.getParameter("date");
 
-    if (!idClienteTela.equals("")) {
+    if (!idClienteTela.equals("") && !dataSelecionada.equals("")) {
       int idCliente = Integer.parseInt(idClienteTela);
       Aluguel aluguel = aluguelDAO.mostrar(idCliente);
       
@@ -106,6 +108,12 @@ public class DevolucaoSelecionarServlet extends HttpServlet {
       DecimalFormat format = new DecimalFormat("R$ ###,###.00");
    
       request.setAttribute("valorTotal", format.format(total));
+      
+      request.setAttribute("sucesso", true);
+      request.setAttribute("mensagem", "Valor calculado abaixo.");
+    } else {
+      request.setAttribute("sucesso", false);
+      request.setAttribute("mensagem", "Selecione o cliente e a data de devolução.");
     }
     
     ArrayList<Cliente> clientes = clienteDAO.listarAlugando(u.getIdFilial());

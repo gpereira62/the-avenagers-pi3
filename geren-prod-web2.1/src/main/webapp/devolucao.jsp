@@ -160,7 +160,7 @@
           <input name="precoDiaria" value="${produtoSelecionado.precoDiaria}" type="hidden">
           
           <div>
-            <button class="btn btn-primary-2 mr-2" value="Save" type="submit">Cancelar</button>
+            <a class="btn btn-primary-2 mr-2" href="${pageContext.request.contextPath}/devolucao">Cancelar</a>
             <button class="btn btn-primary" value="Save" type="submit">Devolver veículo</button>
           </div>
         </form>
