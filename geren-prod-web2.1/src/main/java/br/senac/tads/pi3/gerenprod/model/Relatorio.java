@@ -9,7 +9,7 @@ package br.senac.tads.pi3.gerenprod.model;
  *
  * @author mac-ale
  */
-public class Relatorio {
+public class Relatorio extends Object {
     int idAluguel;
     String nomeCliente, NomeProduto;
     double PrecoDiaria;

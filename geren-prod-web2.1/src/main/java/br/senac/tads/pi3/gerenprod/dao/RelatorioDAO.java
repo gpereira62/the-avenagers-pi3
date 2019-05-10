@@ -15,9 +15,8 @@ import java.util.ArrayList;
  *
  * @author mac-ale
  */
-public class RelatorioDAO implements CrudInterface<Relatorio> {
+public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
 
-    @Override
     public ArrayList<Relatorio> listar(int idFilial) {
         DB db = new DB(true);
         try {
@@ -53,7 +52,34 @@ public class RelatorioDAO implements CrudInterface<Relatorio> {
 
     @Override
     public Relatorio mostrar(int ID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DB db = new DB(true);
+        try {
+            String sql = "SELECT\n"
+                    + "idAluguel,\n"
+                    + "Nome,\n"
+                    + "NomeProduto,\n"
+                    + "PrecoDiaria,\n"
+                    + "ValorTotal\n"
+                    + "FROM Aluguel\n"
+                    + "INNER JOIN Cliente ON Cliente.idCliente = Aluguel.idCliente\n"
+                    + "INNER JOIN Produto ON Produto.idProduto = Aluguel.idProduto";
+
+            ResultSet rs = db.executarConsulta(sql);
+            Relatorio relat = new Relatorio();
+            while (rs.next()) {
+                relat.setIdAluguel(rs.getInt("idAluguel"));
+                relat.setNomeCliente(rs.getString("Nome"));
+                relat.setPrecoDiaria(rs.getDouble("PrecoDiaria"));
+                relat.setValorTotal(rs.getDouble("ValorTotal"));
+            }
+
+            db.close();
+            return relat;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            db.close();
+            return null;
+        }
     }
 
     @Override

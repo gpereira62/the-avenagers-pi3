@@ -36,14 +36,14 @@
             </tr>
           </thead>
           <tbody id="tb-lista">
-            <c:forEach items="${produtos}" var="produto">
+            <c:forEach items="${relatorios}" var="relatorio">
               <tr>
-                <th scope="row">${produto.idProduto}</th>
-                <td>${produto.nomeProduto}</td>
-                <td>${produto.ano}</td>
-                <td>${produto.modelo}</td>
-                <td>${produto.marca}</td>
-                <td>${produto.placa}</td>
+                <th scope="row">${relatorio.idAluguel}</th>
+                <td>${relatorio.nomeCliente}</td>
+                <td>${relatorio.NomeProduto}</td>
+                <td>${relatorio.PrecoDiaria}</td>
+                <td>${relatorio.ValorTotal}</td>
+                <!--<td>${relatorio.placa}</td>-->
               </tr>
             </c:forEach>
           </tbody>

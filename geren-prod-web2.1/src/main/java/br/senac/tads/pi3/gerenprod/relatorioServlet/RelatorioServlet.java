@@ -5,8 +5,12 @@
  */
 package br.senac.tads.pi3.gerenprod.relatorioServlet;
 
+import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
+import br.senac.tads.pi3.gerenprod.dao.RelatorioDAO;
+import br.senac.tads.pi3.gerenprod.model.Relatorio;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RelatorioServlet", urlPatterns = {"/relatorio"})
 public class RelatorioServlet extends HttpServlet {
-  
+    private final CrudInterface RelatorioDAO = new RelatorioDAO() {};
+    
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -29,7 +34,9 @@ public class RelatorioServlet extends HttpServlet {
       response.sendRedirect(request.getContextPath() + "/");
       return;
     }
+    ArrayList<Relatorio> relatorios = RelatorioDAO.listar(1);
     
+    request.setAttribute("relatorios", relatorios);
     request.getRequestDispatcher("/relatorio.jsp").forward(request, response);
   }
 }
