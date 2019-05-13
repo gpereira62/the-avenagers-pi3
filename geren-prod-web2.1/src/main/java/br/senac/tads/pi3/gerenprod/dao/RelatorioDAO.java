@@ -24,9 +24,9 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
             String sql = "SELECT\n"
                     + "idAluguel,\n"
                     + "Nome,\n"
-                    + "NomeProduto,\n"
-                    + "PrecoDiaria,\n"
-                    + "ValorTotal\n"
+                    + "nomeProduto,\n"
+                    + "precoDiaria,\n"
+                    + "valorTotal\n"
                     + "FROM Aluguel\n"
                     + "INNER JOIN Cliente ON Cliente.idCliente = Aluguel.idCliente\n"
                     + "INNER JOIN Produto ON Produto.idProduto = Aluguel.idProduto";
@@ -38,8 +38,9 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
                 Relatorio relat = new Relatorio();
                 relat.setIdAluguel(rs.getInt("idAluguel"));
                 relat.setNomeCliente(rs.getString("Nome"));
-                relat.setPrecoDiaria(rs.getDouble("PrecoDiaria"));
-                relat.setValorTotal(rs.getDouble("ValorTotal"));
+                relat.setNomeProduto(rs.getString("nomeProduto"));
+                relat.setPrecoDiaria(rs.getDouble("precoDiaria"));
+                relat.setValorTotal(rs.getDouble("valorTotal"));
                 relatorios.add(relat);
             }
 

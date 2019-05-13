@@ -11,11 +11,19 @@ package br.senac.tads.pi3.gerenprod.model;
  */
 public class Relatorio extends Object {
    private int idAluguel;
-   private String nomeCliente, NomeProduto;
-   private double PrecoDiaria;
-   private double ValorTotal;
-    
-    
+   private String nomeCliente;
+   private String nomeProduto;
+   private double precoDiaria;
+   private double valorTotal;
+   
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
     public Relatorio(){
     }
     
@@ -35,28 +43,20 @@ public class Relatorio extends Object {
         this.nomeCliente = nomeCliente;
     }
 
-    public String getNomeProduto() {
-        return NomeProduto;
-    }
-
-    public void setNomeProduto(String NomeProduto) {
-        this.NomeProduto = NomeProduto;
-    }
-
     public double getPrecoDiaria() {
-        return PrecoDiaria;
+        return precoDiaria;
     }
 
-    public void setPrecoDiaria(double PrecoDiaria) {
-        this.PrecoDiaria = PrecoDiaria;
+    public void setPrecoDiaria(double precoDiaria) {
+        this.precoDiaria = precoDiaria;
     }
 
     public double getValorTotal() {
-        return ValorTotal;
+        return valorTotal;
     }
 
-    public void setValorTotal(double ValorTotal) {
-        this.ValorTotal = ValorTotal;
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
   

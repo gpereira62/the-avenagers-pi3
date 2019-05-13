@@ -38,11 +38,11 @@
           <tbody id="tb-lista">
             <c:forEach items="${relatorios}" var="relatorio">
               <tr>
-                <th scope="row">${relatorios.idAluguel}</th>
+                <th scope="row">${relatorio.idAluguel}</th>
                 <td>${relatorio.nomeCliente}</td>
-                <td>${relatorio.NomeProduto}</td>
-                <td>${relatorio.PrecoDiaria}</td>
-                <td>${relatorio.ValorTotal}</td>
+                <td>${relatorio.nomeProduto}</td>
+                <td>${relatorio.precoDiaria}</td>
+                <td>${relatorio.valorTotal}</td>
               </tr>
             </c:forEach>
           </tbody>
