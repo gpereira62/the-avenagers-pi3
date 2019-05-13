@@ -37,7 +37,7 @@
           <tbody id="tb-lista">
             <c:forEach items="${relatorios}" var="relatorio">
               <tr>
-                <th scope="row">${relatorio.idAluguel}</th>
+                <th scop    e="row">${relatorio.idAluguel}</th>
                 <td>${relatorio.nomeCliente}</td>
                 <td>${relatorio.nomeProduto}</td>
                 <td>${relatorio.precoDiaria}</td>
