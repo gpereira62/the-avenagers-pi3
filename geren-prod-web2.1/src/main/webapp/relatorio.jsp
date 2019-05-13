@@ -31,7 +31,6 @@
               <th scope="col">Cliente</th>
               <th scope="col">Carro</th>
               <th scope="col">Valor diária</th>
-              <th scope="col">Qtde. dias</th>
               <th scope="col">Valor total</th>
             </tr>
           </thead>
