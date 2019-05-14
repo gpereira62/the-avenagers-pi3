@@ -7,6 +7,7 @@ package br.senac.tads.pi3.gerenprod.dao;
 
 import br.senac.tads.pi3.gerenprod.db.DB;
 import br.senac.tads.pi3.gerenprod.model.Relatorio;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
         try {
             String sql = "SELECT\n"
                     + "idAluguel,\n"
+                    + "DataFinal,\n"
                     + "Nome,\n"
                     + "nomeProduto,\n"
                     + "precoDiaria,\n"
@@ -37,6 +39,7 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
             while (rs.next()) {
                 Relatorio relat = new Relatorio();
                 relat.setIdAluguel(rs.getInt("idAluguel"));
+                relat.setDataFinal(rs.getDate("DataFinal"));
                 relat.setNomeCliente(rs.getString("Nome"));
                 relat.setNomeProduto(rs.getString("nomeProduto"));
                 relat.setPrecoDiaria(rs.getDouble("precoDiaria"));
@@ -56,24 +59,34 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
     @Override
     public Relatorio mostrar(int ID) {
         DB db = new DB(true);
+        PreparedStatement stmt = null;
         try {
             String sql = "SELECT\n"
                     + "idAluguel,\n"
+                    + "DataFinal,\n"
                     + "Nome,\n"
                     + "NomeProduto,\n"
                     + "PrecoDiaria,\n"
                     + "ValorTotal\n"
                     + "FROM Aluguel\n"
                     + "INNER JOIN Cliente ON Cliente.idCliente = Aluguel.idCliente\n"
-                    + "INNER JOIN Produto ON Produto.idProduto = Aluguel.idProduto";
+                    + "INNER JOIN Produto ON Produto.idProduto = Aluguel.idProduto\n"
+                    + "WHERE DataFinal BETWEEN '"++"' AND '?' ";
 
+            
+            
+   
+            
             ResultSet rs = db.executarConsulta(sql);
             Relatorio relat = new Relatorio();
             while (rs.next()) {
+                
                 relat.setIdAluguel(rs.getInt("idAluguel"));
+                relat.setDataFinal(rs.getDate("DataFinal"));
                 relat.setNomeCliente(rs.getString("Nome"));
-                relat.setPrecoDiaria(rs.getDouble("PrecoDiaria"));
-                relat.setValorTotal(rs.getDouble("ValorTotal"));
+                relat.setNomeProduto(rs.getString("nomeProduto"));
+                relat.setPrecoDiaria(rs.getDouble("precoDiaria"));
+                relat.setValorTotal(rs.getDouble("valorTotal"));
             }
 
             db.close();

@@ -5,6 +5,8 @@
  */
 package br.senac.tads.pi3.gerenprod.model;
 
+import java.util.Date;
+
 /**
  *
  * @author mac-ale
@@ -13,8 +15,18 @@ public class Relatorio extends Object {
    private int idAluguel;
    private String nomeCliente;
    private String nomeProduto;
+   private Date dataFinal;
    private double precoDiaria;
    private double valorTotal;
+
+    public Date getDataFinal() {
+        return dataFinal;
+    }
+
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
+    }
+   
    
     public String getNomeProduto() {
         return nomeProduto;

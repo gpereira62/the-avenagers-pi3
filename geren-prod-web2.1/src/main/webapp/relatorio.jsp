@@ -31,17 +31,19 @@
               <th scope="col">Cliente</th>
               <th scope="col">Carro</th>
               <th scope="col">Valor diária</th>
+              <th scope="col">Data Devolução</th>
               <th scope="col">Valor total</th>
             </tr>
           </thead>
           <tbody id="tb-lista">
             <c:forEach items="${relatorios}" var="relatorio">
               <tr>
-                <th scop    e="row">${relatorio.idAluguel}</th>
+                <th scope="row">${relatorio.idAluguel}</th>
                 <td>${relatorio.nomeCliente}</td>
                 <td>${relatorio.nomeProduto}</td>
                 <td>${relatorio.precoDiaria}</td>
-                <td>${relatorio.valorTotal}</td>
+                <td name="dataFinal">${relatorio.dataFinal}</td>
+                <td name="valorTotal">${relatorio.valorTotal}</td>
               </tr>
             </c:forEach>
           </tbody>
