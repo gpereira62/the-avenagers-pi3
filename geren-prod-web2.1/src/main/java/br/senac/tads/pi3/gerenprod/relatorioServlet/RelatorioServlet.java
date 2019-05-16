@@ -54,19 +54,23 @@ public class RelatorioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Usuario u = new Usuario(request);
+
+        if (!u.acessaRelatorio()) {
+            response.sendRedirect(request.getContextPath() + "/");
+            return;
+        }
         try {
             ArrayList<Relatorio> relatorios = RelatorioDAO.listar(1);
-            
-            System.out.println(request.getParameter("EndTime"));
-            
+
             Date StartTime = Auxiliar.InputDateToUtilDate(request.getParameter("StartTime"));
             Date EndTime = Auxiliar.InputDateToUtilDate(request.getParameter("EndTime"));
 
             relatorios = RelatorioDAO.getAluguelByDates(StartTime, EndTime);
             request.setAttribute("relatorios", relatorios);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Relatorio.jsp");
-            dispatcher.forward(request, response);
+            request.getRequestDispatcher("/relatorio.jsp").forward(request, response);
+
         } catch (ParseException ex) {
             Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

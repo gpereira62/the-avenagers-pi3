@@ -33,7 +33,8 @@
                     <input class="form-control" id="EndTime" name="EndTime" value="" placeholder="yyyy/mm/dd" type="date">
                 </div>
                 <div class="form-group col-4">
-                    <button class="btn-block btn btn-primary" type="submit">Filtrar</button>
+                    <button class="btn-block btn btn-primary" type="submit" style="margin-top: 10%; width: 100px; 
+                            padding-left: 24px; padding-top: 5px; padding-bottom: 5px; ">Filtrar</button>
                 </div>
             </div>
         </form>

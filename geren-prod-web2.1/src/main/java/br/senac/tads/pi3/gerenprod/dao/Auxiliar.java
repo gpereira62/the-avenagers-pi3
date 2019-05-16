@@ -18,13 +18,28 @@ public class Auxiliar {
     public static Date InputDateToUtilDate(String inputDate)
             throws ParseException {
 
-        SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
 
             Date resultado = format.parse(inputDate);
 
             return resultado;
+
+        } catch (Exception e) {
+            throw new ParseException("Erro ao formatar data de input para util date.", 0);
+        }
+
+    }
+    
+    public static String InputDateToUtilDate(Date inputDate)
+            throws ParseException {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+
+            return format.format(inputDate);
 
         } catch (Exception e) {
             throw new ParseException("Erro ao formatar data de input para util date.", 0);

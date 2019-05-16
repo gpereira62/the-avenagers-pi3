@@ -63,6 +63,12 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
     @Override
     public ArrayList<Relatorio> getAluguelByDates(Date de, Date para) {
         DB db = new DB(true);
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        
+        String dataInicio = sdf.format(de);
+        
+        String dataFim = sdf.format(para);
 
         try {
             String sql = "SELECT\n"
@@ -75,7 +81,7 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
                     + "FROM Aluguel\n"
                     + "INNER JOIN Cliente ON Cliente.idCliente = Aluguel.idCliente\n"
                     + "INNER JOIN Produto ON Produto.idProduto = Aluguel.idProduto\n"
-                    + "WHERE DataFinal BETWEEN '"+de+"' AND '"+para+"' ";
+                    + "WHERE DataFinal BETWEEN '"+dataInicio+"' AND '"+dataFim+"' ";
 
             ResultSet rs = db.executarConsulta(sql);
             ArrayList<Relatorio> resultado = new ArrayList<>();
