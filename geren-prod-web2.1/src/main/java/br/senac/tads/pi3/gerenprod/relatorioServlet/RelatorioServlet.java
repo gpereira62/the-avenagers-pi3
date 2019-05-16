@@ -12,6 +12,7 @@ import br.senac.tads.pi3.gerenprod.model.Relatorio;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,13 +57,14 @@ public class RelatorioServlet extends HttpServlet {
         try {
             ArrayList<Relatorio> relatorios = RelatorioDAO.listar(1);
             
+            System.out.println(request.getParameter("EndTime"));
             
-            Date dataInicial = Auxiliar.InputDateToUtilDate(request.getParameter("dataInicial"));
-            Date dataFinal = Auxiliar.InputDateToUtilDate(request.getParameter("dataFinal"));
+            Date StartTime = Auxiliar.InputDateToUtilDate(request.getParameter("StartTime"));
+            Date EndTime = Auxiliar.InputDateToUtilDate(request.getParameter("EndTime"));
 
-            relatorios = RelatorioDAO.getAluguelByDates(dataInicial, dataFinal);
+            relatorios = RelatorioDAO.getAluguelByDates(StartTime, EndTime);
             request.setAttribute("relatorios", relatorios);
-            
+
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Relatorio.jsp");
             dispatcher.forward(request, response);
         } catch (ParseException ex) {

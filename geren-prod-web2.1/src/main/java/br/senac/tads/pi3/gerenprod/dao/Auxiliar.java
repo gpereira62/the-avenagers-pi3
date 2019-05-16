@@ -18,7 +18,7 @@ public class Auxiliar {
     public static Date InputDateToUtilDate(String inputDate)
             throws ParseException {
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
 
         try {
 

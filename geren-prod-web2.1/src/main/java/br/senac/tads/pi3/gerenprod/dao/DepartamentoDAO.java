@@ -8,9 +8,11 @@ package br.senac.tads.pi3.gerenprod.dao;
 import br.senac.tads.pi3.gerenprod.db.DB;
 import br.senac.tads.pi3.gerenprod.model.Departamento;
 import br.senac.tads.pi3.gerenprod.model.Produto;
+import br.senac.tads.pi3.gerenprod.model.Relatorio;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -59,6 +61,10 @@ public class DepartamentoDAO implements CrudInterface<Departamento> {
   public boolean desativar(int ID) {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
+
+    public ArrayList<Relatorio> getAluguelByDates(Date dataInicial, Date dataFinal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
 
