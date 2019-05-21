@@ -7,14 +7,11 @@ package br.senac.tads.pi3.gerenprod.dao;
 
 import br.senac.tads.pi3.gerenprod.db.DB;
 import br.senac.tads.pi3.gerenprod.model.Relatorio;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  *

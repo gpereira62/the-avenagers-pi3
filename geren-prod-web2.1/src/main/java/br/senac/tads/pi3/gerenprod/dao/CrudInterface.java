@@ -12,6 +12,7 @@ import java.util.Date;
 /**
  *
  * @author Bruna
+ * @param <O>
  */
 public interface CrudInterface<O> {
   
