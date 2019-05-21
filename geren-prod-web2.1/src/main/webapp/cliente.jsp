@@ -47,11 +47,11 @@
           </c:if>
           <div class="form-group">
             <label for="nomeCliente">Nome:</label>
-            <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" value="${cliente.nomeCliente}" required="true" placeholder="Ex: Paola Bracho">
+            <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" value="${cliente.nomeCliente}" required="true" placeholder="Ex: Paola Bracho" maxlength="50">
           </div>
           <div class="form-group">
             <label for="cpf">CPF:</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" value="${cliente.cpf}" required="true" placeholder="Ex: 419759388xx" maxlength="11">
+            <input type="text" class="form-control" id="cpf" name="cpf" value="${cliente.cpf}" required="true" placeholder="Ex: 419759388xx" maxlength="14" onBlur="javascript:validaCPF(this);" onkeypress="maskIt(this,event,'###.###.###-##')">
           </div>
           <div class="form-group">
             <label for="email">E-mail:</label>
@@ -59,15 +59,15 @@
           </div>
           <div class="form-group">
             <label for="cnh">CNH:</label>
-            <input type="text" class="form-control" id="cnh" name="cnh" value="${cliente.cnh}" required="true" placeholder="Ex: 00123456789">
+            <input type="text" class="form-control" id="cnh" name="cnh" value="${cliente.cnh}" required="true" placeholder="Ex: 00123456789" maxlength="11">
           </div>
           <div class="form-group">
             <label for="telefone">Telefone:</label>
-            <input type="text" class="form-control" name="telefone" id="telefone" value="${cliente.telefone}" aria-describedby="input-group-example" required="true" placeholder="Ex: 9 6000-9005">
+            <input type="text" class="form-control" name="telefone" id="telefone" value="${cliente.telefone}" aria-describedby="input-group-example" required="true" placeholder="Ex: (99) 6000-9005" onkeyup="maskIt(this,event,'(##)####-####')">
           </div>
           <div class="form-group">
             <label for="cep">Cep:</label>
-            <input type="text" class="form-control" name="cep" id="cep" value="${cliente.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 0440900" maxlength="8">
+            <input type="text" class="form-control" name="cep" id="cep" value="${cliente.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 0440900" maxlength="10" onkeyup="maskIt(this,event,'#####-###')" >
           </div>
           <div class="form-group">
             <label for="rua">Rua:</label>
@@ -83,7 +83,7 @@
           </div>
           <div class="form-group">
             <label for="estado">Estado:</label>
-            <input type="text" class="form-control" name="estado" id="estado" value="${cliente.estado}" aria-describedby="input-group-example" required="true" placeholder="Ex: SP">
+            <input type="text" class="form-control" name="estado" id="estado" value="${cliente.estado}" aria-describedby="input-group-example" required="true" placeholder="Ex: SP" maxlength="2">
           </div>
           
           <c:if test="${cliente.idCliente ne null}">
@@ -186,6 +186,150 @@
 
 </section>
 
+<script language=javascript>
+function validaCPF() 
+{
+  erro = new String;
+	if (cpf.value.length === 14)
+	{	
+			cpf.value = cpf.value.replace('.', '');
+			cpf.value = cpf.value.replace('.', '');
+			cpf.value = cpf.value.replace('-', '');
+			var nonNumbers = /\D/;
+			if (nonNumbers.test(cpf.value)) 
+			{
+					erro = "A verificacao de CPF suporta apenas números!"; 
+			}
+			else
+			{
+					if (cpf.value == "00000000000" || 
+							cpf.value == "11111111111" || 
+							cpf.value == "22222222222" || 
+							cpf.value == "33333333333" || 
+							cpf.value == "44444444444" || 
+							cpf.value == "55555555555" || 
+							cpf.value == "66666666666" || 
+							cpf.value == "77777777777" || 
+							cpf.value == "88888888888" || 
+							cpf.value == "99999999999") {
+							erro = "Número de CPF inválido!"
+					}
+					var a = [];
+					var b = new Number;
+					var c = 14;
+					for (i=0; i<14; i++){
+							a[i] = cpf.value.charAt(i);
+							if (i < 10) b += (a[i] * --c);
+					}
+					if ((x = b % 14) < 2) { a[10] = 0 } else { a[10] = 14-x }
+					b = 0;
+					c = 14;
+					for (y=0; y<13; y++) b += (a[y] * c--); 
+					if ((x = b % 13) < 2) { a[13] = 0; } else { a[13] = 14-x; }
+					if ((cpf.value.charAt(12) != a[12]) || (cpf.value.charAt(13) != a[13])) {
+						erro = "Número de CPF inválido.";
+					}
+			}
+	}
+	else
+	{
+		if(cpf.value.length === 0)
+			return false;
+		else
+			erro = "Número de CPF inválido.";
+	}
+	if (erro.length > 0) {
+			alert(erro);
+                        cpf.focus();
+			cpf.value = "";
+			return false;
+                        
+	}
+	return true;	
+}
+
+function maskCPF(CPF) {
+	var evt = window.event;
+	kcode=evt.keyCode;
+	if (kcode == 8) return;
+	if (CPF.value.length == 3) { CPF.value = CPF.value + '.'; }
+	if (CPF.value.length == 7) { CPF.value = CPF.value + '.'; }
+	if (CPF.value.length == 11) { CPF.value = CPF.value + '-'; }
+}
+// evento onBlur
+function formataCPF(cpf)
+{
+	with (cpf)
+	{
+		value = value.substr(0, 3) + '.' + 
+				value.substr(3, 3) + '.' + 
+				value.substr(6, 3) + '-' +
+				value.substr(9, 2);
+	}
+}
+
+function maskIt(w,e,m,r,a){
+
+// Cancela se o evento for Backspace
+
+if (!e) var e = window.event
+
+if (e.keyCode) code = e.keyCode;
+
+else if (e.which) code = e.which;
+
+
+
+// Variáveis da função
+
+var txt = (!r) ? w.value.replace(/[^\d]+/gi,'') : w.value.replace(/[^\d]+/gi,'').reverse();
+
+var mask = (!r) ? m : m.reverse();
+
+var pre = (a ) ? a.pre : "";
+
+var pos = (a ) ? a.pos : "";
+
+var ret = "";
+
+
+
+if(code == 9 || code == 8 || txt.length == mask.replace(/[^#]+/g,'').length) return false;
+
+
+
+// Loop na máscara para aplicar os caracteres
+
+for(var x=0,y=0, z=mask.length;x<z && y<txt.length;){
+
+if(mask.charAt(x)!='#'){
+
+ret += mask.charAt(x); x++;
+
+} else{
+
+ret += txt.charAt(y); y++; x++;
+
+}
+
+}
+
+// Retorno da função
+
+ret = (!r) ? ret : ret.reverse()
+
+w.value = pre+ret+pos;
+
+}
+
+// Novo método para o objeto 'String'
+
+String.prototype.reverse = function(){
+
+return this.split('').reverse().join('');
+
+};
+</script>
 <!-- Não mudar ABAIXO -->
 
 <jsp:include page="utilidades/rodape.jsp" />
