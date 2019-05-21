@@ -36,7 +36,7 @@ public class ProdutoServlet extends HttpServlet {
       return;
     }
     
-    ArrayList<ProdutoServlet> produtos = produtoDAO.listar(1);
+    ArrayList<ProdutoServlet> produtos = produtoDAO.listar(u.getIdFilial());
     
     request.setAttribute("produtos", produtos);
     request.getRequestDispatcher("/produto.jsp").forward(request, response);
@@ -60,7 +60,7 @@ public class ProdutoServlet extends HttpServlet {
     p.setMarca(request.getParameter("marca"));
     p.setPlaca(request.getParameter("placa"));
     p.setPrecoDiaria(Double.parseDouble(request.getParameter("precoDiaria")));
-    p.setIdFilial(1);
+    p.setIdFilial(u.getIdFilial());
 
     boolean sucesso = produtoDAO.salvar(p);
     request.setAttribute("sucesso", sucesso);
@@ -71,7 +71,7 @@ public class ProdutoServlet extends HttpServlet {
       request.setAttribute("mensagem", "Não foi possível cadastrar o produto. Por favor, tente novamente!");
     }
     
-    ArrayList<ProdutoServlet> produtos = produtoDAO.listar(1);
+    ArrayList<ProdutoServlet> produtos = produtoDAO.listar(u.getIdFilial());
     request.setAttribute("produtos", produtos);
     request.getRequestDispatcher("/produto.jsp").forward(request, response);
   }

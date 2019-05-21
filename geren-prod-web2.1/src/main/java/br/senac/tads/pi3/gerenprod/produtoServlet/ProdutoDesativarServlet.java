@@ -52,7 +52,7 @@ public class ProdutoDesativarServlet extends HttpServlet {
 
         }
 
-        ArrayList<ProdutoServlet> produtos = produtoDAO.listar(1);
+        ArrayList<ProdutoServlet> produtos = produtoDAO.listar(u.getIdFilial());
 
         request.setAttribute("produtos", produtos);
         request.getRequestDispatcher("/produto.jsp").forward(request, response);
