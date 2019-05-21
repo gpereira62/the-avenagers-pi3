@@ -194,6 +194,7 @@ public class AluguelDAO implements CrudInterface<Aluguel> {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
+  @Override
     public ArrayList<Relatorio> getAluguelByDates(Date dataInicial, Date dataFinal) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
