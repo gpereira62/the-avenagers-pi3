@@ -235,6 +235,7 @@ return this.split('').reverse().join('');
 
 };
 
+</script>
 <!-- Não mudar ABAIXO -->
 
 <jsp:include page="utilidades/rodape.jsp" />
