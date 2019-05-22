@@ -66,7 +66,7 @@
           </div>
           <div class="form-group">
             <label for="precoDiaria">Valor da diária:</label>
-            <input type="text" class="form-control" name="precoDiaria" id="precoDiaria" value="${produto.precoDiaria}" aria-describedby="input-group-example" required="true" placeholder="R$: 70.00" onkeyup="maskIt(this,event,'###,##', '##,##')" maxlength="10">
+            <input type="text" class="form-control" name="precoDiaria" id="precoDiaria" value="${produto.precoDiaria}" aria-describedby="input-group-example" required="true" placeholder="R$: 70.00" onkeyup="maskIt(this,event,'###.##', '##.##')" maxlength="10">
           </div>
           <c:if test="${produto.idProduto ne null}">
             <div class="form-group mt-5">
