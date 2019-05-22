@@ -44,7 +44,7 @@ public class ProdutoEditarServlet extends HttpServlet {
       request.setAttribute("produto", produto);
     }
     
-    ArrayList<ProdutoServlet> produtos = produtoDAO.listar(1);
+    ArrayList<ProdutoServlet> produtos = produtoDAO.listar(u.getIdFilial());
     
     request.setAttribute("produtos", produtos);
     request.getRequestDispatcher("/produto.jsp").forward(request, response);
@@ -79,7 +79,7 @@ public class ProdutoEditarServlet extends HttpServlet {
       request.setAttribute("mensagem", "Não foi possível editar o produto. Por favor, tente novamente!");
     }
     
-    ArrayList<ProdutoServlet> produtos = produtoDAO.listar(1);
+    ArrayList<ProdutoServlet> produtos = produtoDAO.listar(u.getIdFilial());
     request.setAttribute("produtos", produtos);
     request.getRequestDispatcher("/produto.jsp").forward(request, response);
   }

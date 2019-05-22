@@ -42,7 +42,7 @@ public class DB {
     }
     
     /**
-     * Finaliza a alteração do banco de dados.
+     * Finaliza a alteraï¿½ï¿½o do banco de dados.
      */
     public void commit() {
         try {
@@ -53,7 +53,7 @@ public class DB {
     }
     
     /**
-     * Desfaz a alteração do banco de dados.
+     * Desfaz a alteraï¿½ï¿½o do banco de dados.
      */
     public void rollback() {
         try {
@@ -64,7 +64,7 @@ public class DB {
     }
     
     /**
-     * Fecha a conexão com o banco de dados.
+     * Fecha a conexï¿½o com o banco de dados.
      */
     public void close() {
         try {
@@ -75,9 +75,9 @@ public class DB {
     }
 
     /**
-     * Executa as alterações (inserir, excluir e atualizar) no banco de dados.
+     * Executa as alteraï¿½ï¿½es (inserir, excluir e atualizar) no banco de dados.
      *
-     * @param sql código a ser executado no banco de dados.
+     * @param sql cï¿½digo a ser executado no banco de dados.
      * @return TRUE se executar com sucesso e FALSE se houver alguma falha.
      */
     public boolean executarAlteracao(String sql) {
@@ -106,11 +106,12 @@ public class DB {
     /**
      * Executa consultas no banco de dados.
      *
-     * @param sql código a ser executado no banco de dados.
+     * @param sql cï¿½digo a ser executado no banco de dados.
      * @return ResultSet com o resultado da consulta.
      */
     public ResultSet executarConsulta(String sql) {
         try {
+            System.out.println(sql);
             ResultSet rs = comando.executeQuery(sql);
             
             return rs;

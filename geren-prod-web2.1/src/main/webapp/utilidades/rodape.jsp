@@ -66,24 +66,53 @@
     
     <script type="text/javascript">
       var ctx = document.getElementById('myChart').getContext('2d');
+      
+        var aux = document.getElementsByName('valorTotal'); 
+        var aux2 = document.getElementsByName('dataFinal');
+        var textos2 = [];
+        for (var i = 0; i < aux2.length; i++){
+            textos2[i] = {data: aux2[i].innerHTML, valor: aux[i].innerHTML};
+        }
+        
+        textos2.sort(function(a, b) {
+        var dateA = new Date(a.data), dateB = new Date(b.data);
+            return dateA - dateB;
+        });
+      
       var chart = new Chart(ctx, {
           // The type of chart we want to create
           type: 'line',
 
           // The data for our dataset
           data: {
-              labels: ['01/02', '02/02', '03/02', '04/02', '05/02', '06/02', '07/02'],
+              labels: textos2.map(function(x) {return x.data}),
               datasets: [{
                   label: 'Valor total de aluguel por dia (em R$)',
                   backgroundColor: 'rgb(0, 0, 0, 0)',
                   borderColor: '#379d6a',
-                  data: [0, 10, 5, 2, 50, 30, 10]
+                  data: textos2.map(function(x) {return x.valor})
               }]
           },
 
           // Configuration options go here
+              
           options: {}
       });
+      
+       function pega () {
+              var aux = document.getElementsByName('valorTotal');
+              var textos = [];
+              for (var i = 0; i < aux.length; i++){
+                  textos[i] = aux[i].innerHTML;
+              }
+              var textos2 = aux.map(function(x) {
+                  return x.innerHTML;
+              });
+              
+              console.log(textos2);
+              var aux2 = document.getElementsByName('dataFinal');
+          };
+          pega();
     </script>
     
     <script type="text/javascript">

@@ -113,7 +113,7 @@ public class ClienteProdutoSelecionadoServlet extends HttpServlet {
     if (sucesso) {
       request.setAttribute("mensagem", "Aluguel feito com sucesso!");
     } else {
-      request.setAttribute("mensagem", "Não foi poss�vel fazer o aluguel. Por favor, tente novamente!");
+      request.setAttribute("mensagem", "Não foi possível fazer o aluguel. Por favor, tente novamente!");
     }
 
     ArrayList<Produto> produtos = produtoDAO.listarNaoAlugado(u.getIdFilial());
