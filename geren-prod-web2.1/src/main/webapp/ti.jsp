@@ -115,7 +115,7 @@
     </div>
 
     <!-- Tabela de produtos -->
-    <div class="row justify-content-center">
+    <div class="row justify-content-center table-responsive">
       <div class="col">
         <table class="table table-hover" id="table-cadastro-usuario">
           <thead>

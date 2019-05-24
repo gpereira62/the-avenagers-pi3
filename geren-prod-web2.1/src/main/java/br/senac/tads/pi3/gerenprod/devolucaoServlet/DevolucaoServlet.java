@@ -9,7 +9,9 @@ import br.senac.tads.pi3.gerenprod.dao.ClienteDAO;
 import br.senac.tads.pi3.gerenprod.model.Cliente;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +38,10 @@ public class DevolucaoServlet extends HttpServlet {
     }
     
     ArrayList<Cliente> clientes = clienteDAO.listarAlugando(u.getIdFilial());
+    
+      SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+      String date = formato.format(new Date());
+      request.setAttribute("date", date);
     
     request.setAttribute("clientes", clientes);
     request.getRequestDispatcher("/devolucao.jsp").forward(request, response);
