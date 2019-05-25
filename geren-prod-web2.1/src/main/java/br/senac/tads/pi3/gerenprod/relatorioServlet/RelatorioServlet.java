@@ -5,20 +5,19 @@
  */
 package br.senac.tads.pi3.gerenprod.relatorioServlet;
 
+import br.senac.tads.pi3.gerenprod.dao.AdministracaoDAO;
 import br.senac.tads.pi3.gerenprod.dao.Auxiliar;
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
 import br.senac.tads.pi3.gerenprod.dao.RelatorioDAO;
+import br.senac.tads.pi3.gerenprod.model.Administracao;
 import br.senac.tads.pi3.gerenprod.model.Relatorio;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,8 +31,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RelatorioServlet", urlPatterns = {"/relatorio"})
 public class RelatorioServlet extends HttpServlet {
 
-    private final CrudInterface RelatorioDAO = new RelatorioDAO() {
-    };
+    private final CrudInterface RelatorioDAO = new RelatorioDAO();
+    private final CrudInterface filialDAO = new AdministracaoDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,9 +43,18 @@ public class RelatorioServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/");
             return;
         }
-        ArrayList<Relatorio> relatorios = RelatorioDAO.listar(1);
+        
+        if(u.isGlobal()) {
+          request.setAttribute("isGlobal", true);
+        } else {
+          request.setAttribute("isGlobal", false);
+        }
+        
+        ArrayList<Relatorio> relatorios = RelatorioDAO.listar(u.getIdFilial());
+        ArrayList<Administracao> filiais = filialDAO.listar(0);
 
         request.setAttribute("relatorios", relatorios);
+        request.setAttribute("filiais", filiais);
         request.getRequestDispatcher("/relatorio.jsp").forward(request, response);
     }
 
@@ -61,14 +69,23 @@ public class RelatorioServlet extends HttpServlet {
             return;
         }
         try {
-            ArrayList<Relatorio> relatorios = RelatorioDAO.listar(1);
-
             Date StartTime = Auxiliar.InputDateToUtilDate(request.getParameter("StartTime"));
             Date EndTime = Auxiliar.InputDateToUtilDate(request.getParameter("EndTime"));
 
-            relatorios = RelatorioDAO.getAluguelByDates(StartTime, EndTime);
+            int idFilial = u.getIdFilial();
+            
+            if(u.isGlobal()) {
+              request.setAttribute("isGlobal", true);
+              idFilial = Integer.parseInt(request.getParameter("idFilial"));
+            } else {
+              request.setAttribute("isGlobal", false);
+            }
+            
+            ArrayList<Relatorio> relatorios = RelatorioDAO.getAluguelByDates(StartTime, EndTime, idFilial);
             request.setAttribute("relatorios", relatorios);
 
+            ArrayList<Administracao> filiais = filialDAO.listar(0);
+            request.setAttribute("filiais", filiais);
             request.getRequestDispatcher("/relatorio.jsp").forward(request, response);
 
         } catch (ParseException ex) {

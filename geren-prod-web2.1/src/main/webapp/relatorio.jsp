@@ -32,6 +32,17 @@
                     <label class="control-label" for="filtroFinal">Data Final</label>
                     <input class="form-control" id="EndTime" name="EndTime" value="" placeholder="yyyy/mm/dd" type="date">
                 </div>
+                <c:if test="${isGlobal == true}">
+                    <div class="form-group col-4">
+                        <label class="control-label" for="idFilial">Filial</label>
+                        <select class="form-control" name="idFilial" class="custom-select" selected>
+                            <option value="0">Todos</option> 
+                            <c:forEach items="${filiais}" var="filial">
+                                <option value="${filial.idFilial}">${filial.nomeFilial}</option> 
+                            </c:forEach>
+                        </select>
+                    </div>
+                </c:if>
                 <div class="form-group col-4">
                     <button class="btn-block btn btn-primary" type="submit" style="margin-top: 10%; width: 100px; 
                             padding-left: 24px; padding-top: 5px; padding-bottom: 5px; ">Filtrar</button>

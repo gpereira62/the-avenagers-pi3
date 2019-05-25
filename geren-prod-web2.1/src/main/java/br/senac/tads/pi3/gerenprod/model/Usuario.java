@@ -38,6 +38,7 @@ public final class Usuario {
   private boolean acessaRelatorio = false;
   private boolean acessaTi = false;
   private boolean acessaAdministracao = false;
+  private boolean isGlobal = false;
   
   private int idUsuario, idDepartamento, idFilial;
   private String nome, email, senha, nomeFilial, nomeDepartamento;
@@ -116,7 +117,11 @@ public final class Usuario {
   }
   
   private void validaAcessos() {
-  
+
+    if (Arrays.asList(D, GGR, GGV, GGT, GGA).contains(this.nomeDepartamento)) {
+      isGlobal = true;
+    }
+    
     if (Arrays.asList(D, GGR, GRR, FM, FRR).contains(this.nomeDepartamento)) {
       acessaProduto = true;
     }
@@ -242,5 +247,9 @@ public final class Usuario {
 
   public boolean acessaAdministracao() {
     return acessaAdministracao;
+  }
+  
+  public boolean isGlobal() {
+    return isGlobal;
   }
 }

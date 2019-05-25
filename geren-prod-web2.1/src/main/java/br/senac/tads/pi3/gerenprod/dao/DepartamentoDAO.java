@@ -61,16 +61,10 @@ public class DepartamentoDAO implements CrudInterface<Departamento> {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
-  /**
-   *
-   * @param dataInicial
-   * @param dataFinal
-   * @return
-   */
   @Override
-    public ArrayList<Relatorio> getAluguelByDates(Date dataInicial, Date dataFinal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  public ArrayList<Relatorio> getAluguelByDates(Date dataInicial, Date dataFinal, int idFilial) {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
 
 }
 

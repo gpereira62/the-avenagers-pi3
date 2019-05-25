@@ -17,7 +17,7 @@ import java.util.Date;
  *
  * @author mac-ale
  */
-public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
+public class RelatorioDAO implements CrudInterface<Relatorio> {
 
     @Override
     public ArrayList<Relatorio> listar(int idFilial) {
@@ -32,7 +32,11 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
                     + "valorTotal\n"
                     + "FROM Aluguel\n"
                     + "INNER JOIN Cliente ON Cliente.idCliente = Aluguel.idCliente\n"
-                    + "INNER JOIN Produto ON Produto.idProduto = Aluguel.idProduto";
+                    + "INNER JOIN Produto ON Produto.idProduto = Aluguel.idProduto ";
+            
+            if(idFilial != 0) {
+              sql += "WHERE Aluguel.idFilial = " + idFilial;
+            }
 
             ResultSet rs = db.executarConsulta(sql);
 
@@ -58,7 +62,7 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
     }
     
     @Override
-    public ArrayList<Relatorio> getAluguelByDates(Date de, Date para) {
+    public ArrayList<Relatorio> getAluguelByDates(Date de, Date para, int idFilial) {
         DB db = new DB(true);
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -79,6 +83,10 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
                     + "INNER JOIN Cliente ON Cliente.idCliente = Aluguel.idCliente\n"
                     + "INNER JOIN Produto ON Produto.idProduto = Aluguel.idProduto\n"
                     + "WHERE DataFinal BETWEEN '"+dataInicio+"' AND '"+dataFim+"' ";
+
+            if(idFilial != 0) {
+              sql += "AND Aluguel.idFilial = " + idFilial;
+            }
 
             ResultSet rs = db.executarConsulta(sql);
             ArrayList<Relatorio> resultado = new ArrayList<>();
@@ -123,5 +131,4 @@ public abstract class RelatorioDAO implements CrudInterface<Relatorio> {
     public boolean desativar(int ID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

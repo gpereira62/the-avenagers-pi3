@@ -22,5 +22,5 @@ public interface CrudInterface<O> {
   public boolean salvar(O objeto);
   public boolean desativar(int ID);
 
-  public ArrayList<Relatorio> getAluguelByDates(Date dataInicial, Date dataFinal);
+  public ArrayList<Relatorio> getAluguelByDates(Date dataInicial, Date dataFinal, int idFilial);
 }

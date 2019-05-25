@@ -93,8 +93,6 @@ public class TiDAO implements CrudInterface<Ti> {
                       + "idFilial= " + t.getIdFilial()+ " "
               + "Where idUsuario = " + t.getIdUsuario() + ";";
       
-              System.out.println(sql);
-              
       if (!db.executarAlteracao(sql)) {
         throw new Exception("Não foi possivel atualizar os dados de usuário.");
       }
@@ -172,8 +170,8 @@ public class TiDAO implements CrudInterface<Ti> {
   }
 
   @Override
-    public ArrayList<Relatorio> getAluguelByDates(Date dataInicial, Date dataFinal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  public ArrayList<Relatorio> getAluguelByDates(Date dataInicial, Date dataFinal, int idFilial) {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
   
 }
