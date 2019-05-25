@@ -7,6 +7,8 @@
 
 <!-- Não mudar ACIMA -->
 
+</style>
+
 <!-- Cadastro de produtos -->
 <section class="">
   <div class="container">
@@ -45,19 +47,19 @@
             </div>
           </c:if>
           <div class="form-group">
-            <label for="nomeUsuario">Nome:</label>
+            <label for="nomeUsuario">*Nome:</label>
             <input type="text" class="form-control" id="nomeUsuario" name="nomeUsuario" value="${ti.nomeUsuario}" required="true" placeholder="Ex: Mariana da Cruz">
           </div>
           <div class="form-group">
-            <label for="email">E-mail:</label>
+            <label for="email">*E-mail:</label>
             <input type="text" class="form-control" id="email" name="email" value="${ti.email}" required="true" placeholder="Ex: mariana@gmail.com">
           </div>
            <div class="form-group">
-            <label for="senha">Senha:</label>
+            <label for="senha">*Senha:</label>
             <input type="text" class="form-control" id="senha" name="senha" placeholder="Ex: 123">
           </div>
           <div class="form-group mb-0">
-            <label for="departamento">Departamento:</label>
+            <label for="departamento">*Departamento:</label>
           </div>
           <div class="form-group">
             <select name="idDepartamento" class="custom-select">
@@ -70,7 +72,7 @@
             </svg>
           </div>
           <div class="form-group mb-0">
-            <label for="idFilial">Filial:</label>
+            <label for="idFilial">*Filial:</label>
           </div>
           <div class="form-group">
             <select name="idFilial" class="custom-select">

@@ -6,6 +6,74 @@
 </jsp:include>
 
 <!-- Não mudar ACIMA -->
+    <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+                
+    </script>
+        <!-- Adicionando Javascript -->
+    <script type="text/javascript" >
+
+        $(document).ready(function() {
+
+            function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+
+                $("#cidade").val("");
+                $("#estado").val("");
+            }
+            
+            //Quando o campo cep perde o foco.
+            $("#cep").blur(function() {
+
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if(validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+
+
+                        $("#cidade").val("...");
+                        $("#estado").val("...");
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#cidade").val(dados.localidade);
+                                $("#estado").val(dados.uf);
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        alert("Formato de CEP inválido.");
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+        });
+
+    </script>
 
 <!-- Cadastro de filiais -->
 <section class="">
@@ -45,25 +113,26 @@
               </div>
             </c:if>
             <div class="form-group">
-              <label for="nomeFilial">Nome:</label>
+              <label for="nomeFilial">*Nome:</label>
               <input type="text" class="form-control" id="nomeFilial" name="nomeFilial" value="${administracao.nomeFilial}" required="true" placeholder="Ex: Matriz">
             </div>
             <div class="form-group">
-              <label for="ano">CNPJ</label>
-              <input type="text" class="form-control" id="cnpj" name="cnpj" value="${administracao.cnpj}" required="true" placeholder="Ex: 12345678901287" maxlength="14">
+              <label for="ano">*CNPJ</label>
+              <input type="text" class="form-control" id="cnpj" name="cnpj" value="${administracao.cnpj}" required="true" placeholder="Ex: 27.209.673/0001-02" onkeyup="FormataCnpj(this,event)" onblur="if(!validarCNPJ(this.value)){alert('CNPJ Informado é inválido'); this.value='';}" maxlength="18">
             </div>
             <div class="form-group">
-              <label for="modelo">Estado</label>
+              <label for="placa">*CEP:</label>
+              <input type="text" class="form-control" name="cep" id="cep" value="${administracao.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 04679-320" maxlength="9">
+            </div> 
+            <div class="form-group">
+              <label for="modelo">*Estado</label>
               <input type="text" class="form-control" id="estado" name="estado" value="${administracao.estado}" required="true" placeholder="Ex: São Paulo">
             </div>
             <div class="form-group">
-              <label for="marca">Cidade</label>
+              <label for="marca">*Cidade</label>
               <input type="text" class="form-control" id="cidade" name="cidade" value="${administracao.cidade}" required="true" placeholder="Ex: São Paulo">
             </div>
-            <div class="form-group">
-              <label for="placa">CEP:</label>
-              <input type="text" class="form-control" name="cep" id="cep" value="${administracao.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 02203030" maxlength="8">
-            </div> 
+
             <c:if test="${administracao.idFilial ne null}">
               <div class="form-group mt-5">
                 <button class="btn-block btn btn-primary-2" value="Update" type="submit">Editar</button>
@@ -164,6 +233,89 @@
 
   </div>
 </section>
+
+<script>
+    function FormataCnpj(campo, teclapres)
+			{
+				var tecla = teclapres.keyCode;
+				var vr = new String(campo.value);
+				vr = vr.replace(".", "");
+				vr = vr.replace("/", "");
+				vr = vr.replace("-", "");
+				tam = vr.length + 1;
+				if (tecla != 14)
+				{
+					if (tam == 3)
+						campo.value = vr.substr(0, 2) + '.';
+					if (tam == 6)
+						campo.value = vr.substr(0, 2) + '.' + vr.substr(2, 5) + '.';
+					if (tam == 10)
+						campo.value = vr.substr(0, 2) + '.' + vr.substr(2, 3) + '.' + vr.substr(6, 3) + '/';
+					if (tam == 15)
+						campo.value = vr.substr(0, 2) + '.' + vr.substr(2, 3) + '.' + vr.substr(6, 3) + '/' + vr.substr(9, 4) + '-' + vr.substr(13, 2);
+				}
+			}
+
+
+
+function validarCNPJ(cnpj) {
+ 
+    cnpj = cnpj.replace(/[^\d]+/g,'');
+ 
+    if(cnpj == '') return false;
+     
+    if (cnpj.length != 14)
+        return false;
+ 
+    // Elimina CNPJs invalidos conhecidos
+    if (cnpj == "00000000000000" || 
+        cnpj == "11111111111111" || 
+        cnpj == "22222222222222" || 
+        cnpj == "33333333333333" || 
+        cnpj == "44444444444444" || 
+        cnpj == "55555555555555" || 
+        cnpj == "66666666666666" || 
+        cnpj == "77777777777777" || 
+        cnpj == "88888888888888" || 
+        cnpj == "99999999999999")
+        return false;
+         
+    // Valida DVs
+    tamanho = cnpj.length - 2
+    numeros = cnpj.substring(0,tamanho);
+    digitos = cnpj.substring(tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2)
+            pos = 9;
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(0))
+        return false;
+         
+    tamanho = tamanho + 1;
+    numeros = cnpj.substring(0,tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2)
+            pos = 9;
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(1))
+          return false;
+           
+    return true;
+    
+}
+</script>
+
+
+
+
 
 <!-- Não mudar ABAIXO -->
 

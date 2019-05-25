@@ -7,6 +7,7 @@
 
 <!-- Não mudar ACIMA -->
 
+
 <!-- Cadastro de produtos -->
 <section class="">
   <div class="container">
@@ -45,27 +46,27 @@
             </div>
           </c:if>
           <div class="form-group">
-            <label for="nomeProduto">Nome:</label>
+            <label for="nomeProduto">*Nome:</label>
             <input type="text" class="form-control" id="nomeProduto" name="nomeProduto" value="${produto.nomeProduto}" required="true" placeholder="Ex: HB20" onkeyup="trocaCor(this)" maxlength="20">
           </div>
           <div class="form-group">
-            <label for="ano">Ano:</label>
+            <label for="ano">*Ano:</label>
             <input type="text" class="form-control" id="ano" name="ano" value="${produto.ano}" required="true" placeholder="Ex: 2019" maxlength="4">
           </div>
           <div class="form-group">
-            <label for="modelo">Modelo:</label>
+            <label for="modelo">*Modelo:</label>
             <input type="text" class="form-control" id="modelo" name="modelo" value="${produto.modelo}" required="true" placeholder="Ex: 2018" maxlength="4">
           </div>
           <div class="form-group">
-            <label for="marca">Marca:</label>
+            <label for="marca">*Marca:</label>
             <input type="text" class="form-control" id="marca" name="marca" value="${produto.marca}" required="true" placeholder="Ex: Hyundai" maxlength="20">
           </div>
           <div class="form-group">
-            <label for="placa">Placa:</label>
+            <label for="placa">*Placa:</label>
             <input type="text" class="form-control" name="placa" id="placa" value="${produto.placa}" aria-describedby="input-group-example" required="true" placeholder="Ex: GAT0556" onkeyup="maskIt(this,event,'###-####')" maxlength="8">
           </div>
           <div class="form-group">
-            <label for="precoDiaria">Valor da diária:</label>
+            <label for="precoDiaria">*Valor da diária:</label>
             <input type="text" class="form-control" name="precoDiaria" id="precoDiaria" value="${produto.precoDiaria}" aria-describedby="input-group-example" required="true" placeholder="R$: 70.00" onkeyup="maskIt(this,event,'###.##', '##.##')" maxlength="10">
           </div>
           <c:if test="${produto.idProduto ne null}">
@@ -236,6 +237,7 @@ return this.split('').reverse().join('');
 };
 
 </script>
+
 <!-- Não mudar ABAIXO -->
 
 <jsp:include page="utilidades/rodape.jsp" />

@@ -46,43 +46,43 @@
             </div>
           </c:if>
           <div class="form-group">
-            <label for="nomeCliente">Nome:</label>
+            <label for="nomeCliente">*Nome:</label>
             <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" value="${cliente.nomeCliente}" required="true" placeholder="Ex: Paola Bracho" maxlength="50">
           </div>
           <div class="form-group">
-            <label for="cpf">CPF:</label>
+            <label for="cpf">*CPF:</label>
             <input type="text" class="form-control" id="cpf" name="cpf" value="${cliente.cpf}" required="true" placeholder="Ex: 419759388xx" maxlength="14" onBlur="javascript:validaCPF(this);" onkeyup="maskIt(this,event,'###.###.###-##')">
           </div>
           <div class="form-group">
-            <label for="email">E-mail:</label>
+            <label for="email">*E-mail:</label>
             <input type="text" class="form-control" id="email" name="email" value="${cliente.email}" required="email" placeholder="Ex: paola.bracho@gmail.com">
           </div>
           <div class="form-group">
-            <label for="cnh">CNH:</label>
+            <label for="cnh">*CNH:</label>
             <input type="text" class="form-control" id="cnh" name="cnh" value="${cliente.cnh}" required="true" placeholder="Ex: 00123456789" maxlength="11">
           </div>
           <div class="form-group">
-            <label for="telefone">Telefone:</label>
+            <label for="telefone">*Telefone:</label>
             <input type="text" class="form-control" name="telefone" id="telefone" value="${cliente.telefone}" aria-describedby="input-group-example" required="true" placeholder="Ex: (99) 6000-9005" onkeyup="maskIt(this,event,'(##)####-####')">
           </div>
           <div class="form-group">
-            <label for="cep">Cep:</label>
+            <label for="cep">*Cep:</label>
             <input type="text" class="form-control" name="cep" id="cep" value="${cliente.cep}" aria-describedby="input-group-example" required="true" placeholder="Ex: 0440900" maxlength="10" onkeyup="maskIt(this,event,'#####-###')" >
           </div>
           <div class="form-group">
-            <label for="rua">Rua:</label>
+            <label for="rua">*Rua:</label>
             <input type="text" class="form-control" name="rua" id="rua" value="${cliente.rua}" aria-describedby="input-group-example" required="true" placeholder="Ex: Rua mario santana, 50">
           </div>
           <div class="form-group">
-            <label for="bairro">Bairro:</label>
+            <label for="bairro">*Bairro:</label>
             <input type="text" class="form-control" name="bairro" id="bairro" value="${cliente.bairro}" aria-describedby="input-group-example" required="true" placeholder="Ex: Santo Amaro">
           </div>
           <div class="form-group">
-            <label for="cidade">Cidade:</label>
+            <label for="cidade">*Cidade:</label>
             <input type="text" class="form-control" name="cidade" id="cidade" value="${cliente.cidade}" aria-describedby="input-group-example" required="true" placeholder="Ex: São Paulo">
           </div>
           <div class="form-group">
-            <label for="estado">Estado:</label>
+            <label for="estado">*Estado:</label>
             <input type="text" class="form-control" name="estado" id="estado" value="${cliente.estado}" aria-describedby="input-group-example" required="true" placeholder="Ex: SP" maxlength="2">
           </div>
           
