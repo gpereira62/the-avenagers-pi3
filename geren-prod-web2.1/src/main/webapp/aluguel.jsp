@@ -53,7 +53,7 @@
         </div>
 
         <!-- Tabela de produtos -->
-        <div class="row justify-content-center mb-3">
+        <div class="row justify-content-center mb-3 table-responsive">
           <div class="col">
             <table class="table table-hover" id="table-cadastro-produto">
               <thead>
@@ -114,7 +114,7 @@
         </div>
 
         <!-- Tabela de produtos -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center table-responsive">
           <div class="col">
             <table class="table table-hover" id="table-cadastro-produto">
               <thead>
@@ -171,7 +171,7 @@
           <div class="row">
             <div class="form-group col-6"> <!-- Date input -->
               <label class="control-label" for="date">Data de retirada</label>
-              <input class="form-control" id="date" name="date" value="${hoje}" placeholder="dd/mm/yyyy" type="text"/>
+              <input class="form-control" id="date" name="date" value="${hoje}" placeholder="dd/mm/yyyy" type="text" readonly>
               <input name="idProdutoSelecionado" value="${produtoSelecionado.idProduto}" type="hidden">
               <input name="idClienteSelecionado" value="${clienteSelecionado.idCliente}" type="hidden">
             </div>

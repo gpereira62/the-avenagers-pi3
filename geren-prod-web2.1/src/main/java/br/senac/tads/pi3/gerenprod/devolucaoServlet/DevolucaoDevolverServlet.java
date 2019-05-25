@@ -11,10 +11,12 @@ import br.senac.tads.pi3.gerenprod.model.Aluguel;
 import br.senac.tads.pi3.gerenprod.model.Cliente;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +42,11 @@ public class DevolucaoDevolverServlet extends HttpServlet {
       response.sendRedirect(request.getContextPath() + "/");
       return;
     }
-
+    
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    String date = formato.format(new Date());
+    request.setAttribute("date", date);
+    
     String idClienteTela = request.getParameter("idClienteSelecionado");
 
     if (!idClienteTela.equals("")) {

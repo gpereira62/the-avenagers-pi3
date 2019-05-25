@@ -51,7 +51,7 @@
           </div>
           <div class="form-group">
             <label for="cpf">CPF:</label>
-            <input type="text" class="form-control" id="cpf" name="cpf" value="${cliente.cpf}" required="true" placeholder="Ex: 419759388xx" maxlength="14" onBlur="javascript:validaCPF(this);" onkeypress="maskIt(this,event,'###.###.###-##')">
+            <input type="text" class="form-control" id="cpf" name="cpf" value="${cliente.cpf}" required="true" placeholder="Ex: 419759388xx" maxlength="14" onBlur="javascript:validaCPF(this);" onkeyup="maskIt(this,event,'###.###.###-##')">
           </div>
           <div class="form-group">
             <label for="email">E-mail:</label>
@@ -330,6 +330,32 @@ return this.split('').reverse().join('');
 
 };
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-masker/1.1.0/vanilla-masker.min.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+<script>
+  function inputHandler(masks, max, event) {
+	var c = event.target;
+	var v = c.value.replace(/\D/g, '');
+	var m = c.value.length > max ? 1 : 0;
+	VMasker(c).unMask();
+	VMasker(c).maskPattern(masks[m]);
+	c.value = VMasker.toPattern(v, masks[m]);
+}
+
+var telMask = ['(99) 9999-99999', '(99) 99999-9999'];
+var tel = document.querySelector('input[attrname=telephone1]');
+VMasker(tel).maskPattern(telMask[0]);
+tel.addEventListener('input', inputHandler.bind(undefined, telMask, 14), false);
+
+var docMask = ['999.999.999-99', '99.999.999/9999-99'];
+var cpf = document.querySelector('#cpf');
+VMasker(cpf).maskPattern(docMask[0]);
+doc.addEventListener('input', inputHandler.bind(undefined, docMask, 14), false);
+</script>
+
 <!-- Não mudar ABAIXO -->
 
 <jsp:include page="utilidades/rodape.jsp" />

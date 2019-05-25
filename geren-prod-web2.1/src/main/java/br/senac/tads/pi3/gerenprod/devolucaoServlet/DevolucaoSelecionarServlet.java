@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static java.time.temporal.ChronoUnit.DAYS;
+import java.util.Date;
 
 /**
  *
@@ -60,6 +61,10 @@ public class DevolucaoSelecionarServlet extends HttpServlet {
       
       String pattern = "dd/MM/yyyy";
       DateFormat df = new SimpleDateFormat(pattern);
+      
+      SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+      String date = formato.format(new Date());
+      request.setAttribute("date", date);
       
       request.setAttribute("dataRetirada", df.format(aluguel.getDataInicial()));
     }
