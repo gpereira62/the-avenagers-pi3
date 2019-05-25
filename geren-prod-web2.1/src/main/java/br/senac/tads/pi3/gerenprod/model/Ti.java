@@ -13,9 +13,8 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class Ti extends Object {
   
-  
   private int idUsuario, idFilial, idDepartamento;
-  private String nomeUsuario, email, senha, nomeDepartamento;
+  private String nomeUsuario, email, senha, nomeDepartamento, nomeFilial;
   private boolean ativo;
 
   public Ti() {
@@ -105,5 +104,13 @@ public class Ti extends Object {
 
   public void setNomeDepartamento(String nomeDepartamento) {
     this.nomeDepartamento = nomeDepartamento;
+  }
+
+  public String getNomeFilial() {
+    return nomeFilial;
+  }
+
+  public void setNomeFilial(String nomeFilial) {
+    this.nomeFilial = nomeFilial;
   }
 }

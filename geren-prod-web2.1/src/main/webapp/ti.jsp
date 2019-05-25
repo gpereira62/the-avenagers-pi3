@@ -69,6 +69,19 @@
               <path d="M14.4444 8.41358C14.7776 8.2281 15.1875 8.46907 15.1875 8.85048V15.1495C15.1875 15.5309 14.7776 15.7719 14.4444 15.5864L8.78505 12.4369C8.44258 12.2463 8.44258 11.7537 8.78505 11.5631L14.4444 8.41358Z" fill="#212529"></path>
             </svg>
           </div>
+          <div class="form-group mb-0">
+            <label for="idFilial">Filial:</label>
+          </div>
+          <div class="form-group">
+            <select name="idFilial" class="custom-select">
+              <c:forEach items="${filiais}" var="filial">
+                <option value="${filial.idFilial}" <c:if test="${ti.idFilial == filial.idFilial}">selected</c:if> >${filial.nomeFilial}</option> 
+              </c:forEach>
+            </select>
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.4444 8.41358C14.7776 8.2281 15.1875 8.46907 15.1875 8.85048V15.1495C15.1875 15.5309 14.7776 15.7719 14.4444 15.5864L8.78505 12.4369C8.44258 12.2463 8.44258 11.7537 8.78505 11.5631L14.4444 8.41358Z" fill="#212529"></path>
+            </svg>
+          </div>
           <c:if test="${ti.idUsuario ne null}">
             <div class="form-group mt-5">
               <button class="btn-block btn btn-primary-2" value="Update" type="submit">Editar</button>
@@ -124,6 +137,7 @@
               <th scope="col">Nome</th>
               <th scope="col">E-mail</th>       
               <th scope="col">Departamento</th>
+              <th scope="col">Filial</th>
             </tr>
           </thead>
           <tbody id="tb-lista">
@@ -132,7 +146,8 @@
                 <th scope="row">${ti.idUsuario}</th>
                 <td>${ti.nomeUsuario}</td>
                 <td>${ti.email}</td>
-                <td>${ti.nomeDepartamento}</td>             
+                <td>${ti.nomeDepartamento}</td>        
+                <td>${ti.nomeFilial}</td>
                 <td>
                   <a href="${pageContext.request.contextPath}/ti/editar?idUsuario=${ti.idUsuario}" class="mr-2">
                     <svg class="icon bg-primary" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

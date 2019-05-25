@@ -8,9 +8,11 @@ package br.senac.tads.pi3.gerenprod.tiServlet;
 import br.senac.tads.pi3.gerenprod.dao.CrudInterface;
 import br.senac.tads.pi3.gerenprod.dao.DepartamentoDAO;
 import br.senac.tads.pi3.gerenprod.dao.TiDAO;
+import br.senac.tads.pi3.gerenprod.dao.AdministracaoDAO;
 import br.senac.tads.pi3.gerenprod.model.Departamento;
 import br.senac.tads.pi3.gerenprod.model.Ti;
 import br.senac.tads.pi3.gerenprod.model.Usuario;
+import br.senac.tads.pi3.gerenprod.model.Administracao;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -29,6 +31,7 @@ public class TiServlet extends HttpServlet {
   
 private final CrudInterface tiDAO = new TiDAO();
 private final CrudInterface departamentoDAO = new DepartamentoDAO();
+private final CrudInterface filialDAO = new AdministracaoDAO();
   
 @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,9 +45,11 @@ private final CrudInterface departamentoDAO = new DepartamentoDAO();
     
     ArrayList<Departamento> departamentos = departamentoDAO.listar(u.getIdFilial());
     ArrayList<Ti> tis = tiDAO.listar(u.getIdFilial());
+    ArrayList<Administracao> filiais = filialDAO.listar(0);
  
     request.setAttribute("tis", tis); 
     request.setAttribute("departamentos", departamentos); 
+    request.setAttribute("filiais", filiais);
     request.getRequestDispatcher("/ti.jsp").forward(request, response);
   }
   
@@ -65,7 +70,7 @@ private final CrudInterface departamentoDAO = new DepartamentoDAO();
     t.setSenha(request.getParameter("senha"));
     t.criptografarSenha();
     t.setIdDepartamento(Integer.parseInt(request.getParameter("idDepartamento")));
-    t.setIdFilial(u.getIdFilial());
+    t.setIdFilial(Integer.parseInt(request.getParameter("idFilial")));
     
     boolean sucesso = tiDAO.salvar(t);
     request.setAttribute("sucesso", sucesso);
@@ -78,9 +83,11 @@ private final CrudInterface departamentoDAO = new DepartamentoDAO();
     
     ArrayList<Departamento> departamentos = departamentoDAO.listar(u.getIdFilial());
     ArrayList<Ti> tis = tiDAO.listar(u.getIdFilial());
+    ArrayList<Administracao> filiais = filialDAO.listar(0);
  
     request.setAttribute("tis", tis); 
     request.setAttribute("departamentos", departamentos);
+    request.setAttribute("filiais", filiais);
     request.getRequestDispatcher("/ti.jsp").forward(request, response);
   }
 }

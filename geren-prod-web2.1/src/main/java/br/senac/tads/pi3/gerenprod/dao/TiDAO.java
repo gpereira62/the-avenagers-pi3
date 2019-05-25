@@ -24,7 +24,8 @@ public class TiDAO implements CrudInterface<Ti> {
     try {
       String sql = "SELECT * FROM usuario "
               + "INNER JOIN departamento ON usuario.idDepartamento = departamento.idDepartamento "
-              + "WHERE idFilial = " + idFilial + " AND Ativo = true;";
+              + "INNER JOIN filial ON filial.idFilial = usuario.idFilial "
+              + "WHERE usuario.Ativo = true;";
       ResultSet rs = db.executarConsulta(sql);
       ArrayList<Ti> tis = new ArrayList<>();
       while (rs.next()) {
@@ -35,6 +36,7 @@ public class TiDAO implements CrudInterface<Ti> {
         t.setSenha(rs.getString("Senha")); 
         t.setNomeDepartamento(rs.getString("NomeDepartamento")); 
         t.setIdDepartamento(rs.getInt("idDepartamento"));
+        t.setNomeFilial(rs.getString("NomeFilial")); 
         t.setAtivo(rs.getBoolean("Ativo"));
         tis.add(t);
       }
@@ -86,7 +88,9 @@ public class TiDAO implements CrudInterface<Ti> {
                 sql = sql + "Senha = '" + t.getSenha() + "', ";
               }
               
-              sql = sql + "IdDepartamento= " + t.getIdDepartamento() + " "
+              sql = sql 
+                      + "IdDepartamento= " + t.getIdDepartamento() + ", "
+                      + "idFilial= " + t.getIdFilial()+ " "
               + "Where idUsuario = " + t.getIdUsuario() + ";";
       
               System.out.println(sql);
