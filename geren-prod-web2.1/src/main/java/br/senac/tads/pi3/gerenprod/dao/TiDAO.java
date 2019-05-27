@@ -5,7 +5,6 @@
  */
 package br.senac.tads.pi3.gerenprod.dao;
 import br.senac.tads.pi3.gerenprod.db.DB;
-import br.senac.tads.pi3.gerenprod.model.Relatorio;
 import br.senac.tads.pi3.gerenprod.model.Ti;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -169,9 +168,5 @@ public class TiDAO implements CrudInterface<Ti> {
     }
   }
 
-  @Override
-  public ArrayList<Relatorio> getAluguelByDates(Date dataInicial, Date dataFinal, int idFilial) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-  }
   
 }
