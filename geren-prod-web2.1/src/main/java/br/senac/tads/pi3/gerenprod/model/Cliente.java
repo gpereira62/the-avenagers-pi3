@@ -9,16 +9,15 @@ package br.senac.tads.pi3.gerenprod.model;
  *
  * @author Gustavo
  */
-public class Cliente extends Object {
+public class Cliente {
 
   private int idCliente;
-  private String nomeCliente, cpf, email, cnh, telefone, cep, rua, bairro, cidade, estado;
+  private String nomeCliente, email, cnh, telefone, cep, rua, bairro, cidade, estado;
   private boolean ativo;
 
-  public Cliente(int idCliente, String nomeCliente, String cpf, String email, String cnh, String telefone, String cep, String rua, String bairro, String cidade, String estado, boolean ativo) {
+  public Cliente(int idCliente, String nomeCliente, String email, String cnh, String telefone, String cep, String rua, String bairro, String cidade, String estado, boolean ativo) {
     this.idCliente = idCliente;
     this.nomeCliente = nomeCliente;
-    this.cpf = cpf;
     this.email = email;
     this.cnh = cnh;
     this.telefone = telefone;
@@ -33,7 +32,6 @@ public class Cliente extends Object {
   public Cliente() {
     this.idCliente = 0;
     this.nomeCliente = "";
-    this.cpf = "";
     this.email = "";
     this.cnh = "";
     this.telefone = "";
@@ -59,14 +57,6 @@ public class Cliente extends Object {
 
   public void setNomeCliente(String nomeCliente) {
     this.nomeCliente = nomeCliente;
-  }
-
-  public String getCpf() {
-    return cpf;
-  }
-
-  public void setCpf(String cpf) {
-    this.cpf = cpf;
   }
 
   public String getEmail() {
