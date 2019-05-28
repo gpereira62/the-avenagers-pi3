@@ -12,14 +12,13 @@ package br.senac.tads.pi3.gerenprod.model;
 public class Cliente {
 
   private int idCliente;
-  private String nomeCliente, email, cnh, telefone, cep, rua, bairro, cidade, estado;
+  private String nomeCliente, email, telefone, cep, rua, bairro, cidade, estado;
   private boolean ativo;
 
-  public Cliente(int idCliente, String nomeCliente, String email, String cnh, String telefone, String cep, String rua, String bairro, String cidade, String estado, boolean ativo) {
+  public Cliente(int idCliente, String nomeCliente, String email, String telefone, String cep, String rua, String bairro, String cidade, String estado, boolean ativo) {
     this.idCliente = idCliente;
     this.nomeCliente = nomeCliente;
     this.email = email;
-    this.cnh = cnh;
     this.telefone = telefone;
     this.cep = cep;
     this.rua = rua;
@@ -33,7 +32,6 @@ public class Cliente {
     this.idCliente = 0;
     this.nomeCliente = "";
     this.email = "";
-    this.cnh = "";
     this.telefone = "";
     this.cep = "";
     this.rua = "";
@@ -65,14 +63,6 @@ public class Cliente {
 
   public void setEmail(String email) {
     this.email = email;
-  }
-
-  public String getCnh() {
-    return cnh;
-  }
-
-  public void setCnh(String cnh) {
-    this.cnh = cnh;
   }
 
   public String getTelefone() {

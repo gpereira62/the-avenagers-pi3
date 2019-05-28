@@ -3,7 +3,7 @@ package br.senac.tads.pi3.gerenprod.model;
 public class Produto extends Object {
     
     private int idProduto, idFilial;
-    private String nomeProduto, ano, modelo, marca, placa;
+    private String nomeProduto, ano, idioma, autor, editora, numeroPagina;
     private double precoDiaria;
     private boolean alugado, ativo;
 
@@ -12,22 +12,24 @@ public class Produto extends Object {
         this.idFilial = 0;
         this.nomeProduto = "";
         this.ano = "";
-        this.modelo = "";
-        this.marca = "";
-        this.placa = "";
+        this.idioma = "";
+        this.autor = "";
+        this.editora = "";
+        this.numeroPagina = "";
         this.precoDiaria = 0;
         this.alugado = false;
         this.ativo = true;
     }
     
-    public Produto(int idProduto, int idFilial, String nomeProduto, String ano, String modelo, String marca, String placa, double precoDiaria, boolean alugado, boolean ativo) {
+    public Produto(int idProduto, int idFilial, String nomeProduto, String ano, String idioma, String autor, String editora, String numeroPagina, double precoDiaria, boolean alugado, boolean ativo) {
         this.idProduto = idProduto;
         this.idFilial = idFilial;
         this.nomeProduto = nomeProduto;
         this.ano = ano;
-        this.modelo = modelo;
-        this.marca = marca;
-        this.placa = placa;
+        this.idioma = idioma;
+        this.autor = autor;
+        this.editora = editora;
+        this.numeroPagina = numeroPagina;
         this.precoDiaria = precoDiaria;
         this.alugado = alugado;
         this.ativo = ativo;
@@ -65,28 +67,36 @@ public class Produto extends Object {
         this.ano = ano;
     }
 
-    public String getModelo() {
-        return modelo;
+    public String getIdioma() {
+        return idioma;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
     }
 
-    public String getMarca() {
-        return marca;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
-    public String getPlaca() {
-        return placa;
+    public String getEditora() {
+        return editora;
     }
 
-    public void setPlaca(String placa) {
-        this.placa = placa;
+    public void setEditora(String editora) {
+        this.editora = editora;
+    }
+
+    public String getNumeroPagina() {
+        return numeroPagina;
+    }
+
+    public void setNumeroPagina(String numeroPagina) {
+        this.numeroPagina = numeroPagina;
     }
 
     public double getPrecoDiaria() {
